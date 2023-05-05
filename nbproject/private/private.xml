@@ -3,10 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/ProjetoInter/src/ConnectionFromSQL/DTO/UsuarioDTO.java</file>
+            <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/ProjetoInter/src/ConnectionFromSQL/VIEW/InternalTrans.java</file>
+            <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/ProjetoInter/src/ConnectionFromSQL/VIEW/InternalHistorico.java</file>
+            <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/ProjetoInter/src/ConnectionFromSQL/VIEW/InternalChat.java</file>
             <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/ProjetoInter/src/ConnectionFromSQL/VIEW/TelaLogin.java</file>
-            <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/ProjetoInter/src/projetointer/ProjetoInter.java</file>
-            <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/ProjetoInter/src/ConnectionFromSQL/DAO/UsuarioDAO.java</file>
+            <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/ProjetoInter/src/ConnectionFromSQL/VIEW/InternalPerfil.java</file>
+            <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/ProjetoInter/src/ConnectionFromSQL/VIEW/InternalInvest.java</file>
+            <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/ProjetoInter/src/ConnectionFromSQL/VIEW/InternalSaldo.java</file>
+            <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/ProjetoInter/src/ConnectionFromSQL/VIEW/TelaPrincipal.java</file>
         </group>
     </open-files>
 </project-private>
