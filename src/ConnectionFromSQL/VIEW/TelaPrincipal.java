@@ -270,10 +270,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void btnHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoricoActionPerformed
         //Chama O jFrame da historico
         InternalHistorico ih = new InternalHistorico();
-        String userInput = JOptionPane.showInputDialog("Digite novamente o cpf: ");
-
-        ih.listarValoresTabelaPIX(userInput);
-        ih.listarValoresTabelaTED(userInput);
+        UsuarioDTO objUsuarioDTO = new UsuarioDTO();
+        
+        ih.listarValoresTabelaPIX(objUsuarioDTO.getCpf_login());
+        ih.listarValoresTabelaTED(objUsuarioDTO.getCpf_login());
         MainPanel.add(ih);
         ih.setVisible(true);
         

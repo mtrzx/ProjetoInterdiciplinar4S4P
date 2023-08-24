@@ -199,14 +199,16 @@ public class TelaLogin extends javax.swing.JFrame {
             UsuarioDTO objusuariodto = new UsuarioDTO();
             UsuarioDAO objusuariodao = new UsuarioDAO();
         
-            objusuariodto.setId_CPF(cpf_usuario);
+            objusuariodto.setCpf_login(cpf_usuario);
             objusuariodto.setId_senha(senha_usuario);
+            System.out.println(objusuariodto.getId_CPF());
             
             ResultSet rsusuariodao = objusuariodao.autenticacaoUsuario(objusuariodto);
             
             if(rsusuariodao.next()){
                 //Vai chamar a TelaPrincipal
                 TelaPrincipal telaprincipalview = new TelaPrincipal();
+                System.out.println(objusuariodto.getCpf_login());
                 telaprincipalview.setVisible(true);
                 
                 dispose();

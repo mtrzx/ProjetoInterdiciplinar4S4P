@@ -1,7 +1,6 @@
 package ConnectionFromSQL.DTO;
 
 public class UsuarioDTO {
-
     public int id_agencia;
     public int id_conta;
     public String id_senha;
@@ -25,11 +24,20 @@ public class UsuarioDTO {
     public int id_CadastConta;
     public String id_CadastEmail;
     public int idade;
+    public static String cpf_login;
+    
     
     
     
     /////////////////////////////////
-    
+
+    public String getCpf_login() {
+        return cpf_login;
+    }
+
+    public void setCpf_login(String cpf_login) {
+        this.cpf_login = cpf_login;
+    }
     public float getId_saldo() {
         return id_saldo;
     }
@@ -79,7 +87,7 @@ public class UsuarioDTO {
     }
 
     public String getId_CPF() {
-        return id_CPF;
+        return this.id_CPF;
     }
 
     public void setId_CPF(String id_CPF) {

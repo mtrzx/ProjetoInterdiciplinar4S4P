@@ -24,7 +24,7 @@ public class UsuarioDAO {
         try {
             String sql = "select * from grupo4 where CPF = ?  and SENHA = ?";
             PreparedStatement pstm = conn.prepareStatement(sql);
-            pstm.setString(1, objusuariodto.getId_CPF());
+            pstm.setString(1, objusuariodto.getCpf_login());
             pstm.setString(2, objusuariodto.getId_senha());
 
             ResultSet rs = pstm.executeQuery();
@@ -37,8 +37,9 @@ public class UsuarioDAO {
 
     public UsuarioDTO PerfilUser() {
         conn = new Conexao().conectaDB();
-        String userInput = JOptionPane.showInputDialog("Digite novamente o cpf: ");
-        String sql = "select * from grupo4 where CPF = " + userInput;
+        UsuarioDTO userCode = new UsuarioDTO();
+        String sql = "select * from grupo4 where CPF = " + userCode.getCpf_login();
+        System.out.println(userCode.getCpf_login());
         UsuarioDTO objUsuarioDTO = new UsuarioDTO();
         try {
             pstm = conn.prepareStatement(sql);
@@ -61,9 +62,8 @@ public class UsuarioDAO {
 
     public UsuarioDTO PerfilSaldo() {
         conn = new Conexao().conectaDB();
-        String userInput = JOptionPane.showInputDialog("Digite novamente o cpf: ");
-        String sql = "select CPF, NOME, SALDO from grupo4 where CPF = " + userInput;
         UsuarioDTO objUsuarioDTO = new UsuarioDTO();
+        String sql = "select CPF, NOME, SALDO from grupo4 where CPF = " + objUsuarioDTO.getCpf_login();
         try {
             pstm = conn.prepareStatement(sql);
             rs = pstm.executeQuery();
@@ -86,7 +86,7 @@ public class UsuarioDAO {
         try {
             // Obter investimento do banco de dados
             PreparedStatement pstmInvestimento = conn.prepareStatement(sqlInvestimento);
-            pstmInvestimento.setString(1, objUsuarioDTO.getId_CPF());
+            pstmInvestimento.setString(1, objUsuarioDTO.getCpf_login());
             ResultSet investimentoResultado = pstmInvestimento.executeQuery();
             float investimento = 0.0f;
             if (investimentoResultado.next()) {
@@ -107,7 +107,7 @@ public class UsuarioDAO {
         try {
             // Obter saldo do banco de dados
             PreparedStatement pstmSaldo = conn.prepareStatement(sqlSaldo);
-            pstmSaldo.setString(1, objUsuarioDTO.getId_CPF());
+            pstmSaldo.setString(1, objUsuarioDTO.getCpf_login());
             ResultSet saldoResultado = pstmSaldo.executeQuery();
             float saldo = 0.0f;
             if (saldoResultado.next()) {
@@ -123,7 +123,7 @@ public class UsuarioDAO {
                 PreparedStatement pstmAtualizacao = conn.prepareStatement(sql);
                 pstmAtualizacao.setFloat(1, objUsuarioDTO.getId_investimento());
                 pstmAtualizacao.setFloat(2, objUsuarioDTO.getId_investimento());
-                pstmAtualizacao.setString(3, objUsuarioDTO.getId_CPF());
+                pstmAtualizacao.setString(3, objUsuarioDTO.getCpf_login());
                 pstmAtualizacao.execute();
                 pstmAtualizacao.close();
                 JOptionPane.showMessageDialog(null, "Investimento realizado com sucesso!");
@@ -148,7 +148,7 @@ public class UsuarioDAO {
         try {
             // Obter saldo do banco de dados
             PreparedStatement pstmSaldo = conn.prepareStatement(sqlSaldo);
-            pstmSaldo.setString(1, objUsuarioDTO.getId_CPF());
+            pstmSaldo.setString(1, objUsuarioDTO.getCpf_login());
             ResultSet saldoResultado = pstmSaldo.executeQuery();
             float saldo = 0.0f;
             if (saldoResultado.next()) {
@@ -162,14 +162,14 @@ public class UsuarioDAO {
             if (saldo >= valorTED) {
                 // Atualizar saldo e investimento na tabela
                 PreparedStatement pstmAtualizacao = conn.prepareStatement(sql);                
-                pstmAtualizacao.setString(1, objUsuarioDTO.getId_CPF());
+                pstmAtualizacao.setString(1, objUsuarioDTO.getCpf_login());
                 pstmAtualizacao.setFloat(2, objUsuarioDTO.getId_valorTransTED());
                 //////
                 pstmAtualizacao.setInt(3, objUsuarioDTO.getId_contaDestinatario());
                 pstmAtualizacao.setInt(4, objUsuarioDTO.getId_agenciaDestinatario());
                 pstmAtualizacao.setFloat(5, objUsuarioDTO.getId_valorTransTED());
                 /////
-                pstmAtualizacao.setString(6, objUsuarioDTO.getId_CPF());
+                pstmAtualizacao.setString(6, objUsuarioDTO.getCpf_login());
                 pstmAtualizacao.setInt(7, objUsuarioDTO.getId_contaDestinatario());
                 pstmAtualizacao.setInt(8, objUsuarioDTO.getId_agenciaDestinatario());
                 /////
@@ -200,7 +200,7 @@ public class UsuarioDAO {
         try {
             // Obter saldo do banco de dados
             PreparedStatement pstmSaldo = conn.prepareStatement(sqlSaldo);
-            pstmSaldo.setString(1, objUsuarioDTO.getId_CPF());
+            pstmSaldo.setString(1, objUsuarioDTO.getCpf_login());
             ResultSet saldoResultado = pstmSaldo.executeQuery();
             float saldo = 0.0f;
             if (saldoResultado.next()) {
@@ -214,13 +214,13 @@ public class UsuarioDAO {
             if (saldo >= valorpix) {
                 // Atualizar saldo e investimento na tabela
                 PreparedStatement pstmAtualizacao = conn.prepareStatement(sql);                
-                pstmAtualizacao.setString(1, objUsuarioDTO.getId_CPF());
+                pstmAtualizacao.setString(1, objUsuarioDTO.getCpf_login());
                 pstmAtualizacao.setFloat(2, objUsuarioDTO.getId_valorTransPix());
                 //////
                 pstmAtualizacao.setString(3, objUsuarioDTO.getId_cpfDestinatario());
                 pstmAtualizacao.setFloat(4, objUsuarioDTO.getId_valorTransPix());
                 /////
-                pstmAtualizacao.setString(5, objUsuarioDTO.getId_CPF());
+                pstmAtualizacao.setString(5, objUsuarioDTO.getCpf_login());
                 pstmAtualizacao.setString(6, objUsuarioDTO.getId_cpfDestinatario());
                 pstmAtualizacao.execute();
                 pstmAtualizacao.close();        
@@ -249,7 +249,7 @@ public class UsuarioDAO {
         try{
             PreparedStatement pstmArmazenaDados = conn.prepareStatement(sqlArmazena);
             pstmArmazenaDados.setString(1, objUsuarioDTO.getId_tipoPix());
-            pstmArmazenaDados.setString(2, objUsuarioDTO.getId_CPF());                
+            pstmArmazenaDados.setString(2, objUsuarioDTO.getCpf_login());                
             pstmArmazenaDados.setFloat(3, objUsuarioDTO.getId_valorTransPix());
             pstmArmazenaDados.setString(4, objUsuarioDTO.getId_cpfDestinatario());
 
@@ -268,7 +268,7 @@ public class UsuarioDAO {
         
         try{
             PreparedStatement pstmArmazenaDados = conn.prepareStatement(sqlArmazenaTD);
-            pstmArmazenaDados.setString(1, objUsuarioDTO.id_CPF);
+            pstmArmazenaDados.setString(1, objUsuarioDTO.getCpf_login());
             pstmArmazenaDados.setFloat(2, objUsuarioDTO.id_valorTransTED);
             pstmArmazenaDados.setInt(3, objUsuarioDTO.id_conta);
             pstmArmazenaDados.setInt(4, objUsuarioDTO.id_contaDestinatario);            
@@ -293,7 +293,7 @@ public class UsuarioDAO {
             
             while(rs.next()){
                 UsuarioDTO objUsuarioDTO = new UsuarioDTO();
-                objUsuarioDTO.setId_CPF(rs.getString("CPF_REMET"));
+                objUsuarioDTO.setCpf_login(rs.getString("CPF_REMET"));
                 objUsuarioDTO.setId_valorTransPix(rs.getFloat("VALOR"));
                 objUsuarioDTO.setId_cpfDestinatario(rs.getString("CPF_DEST"));
                

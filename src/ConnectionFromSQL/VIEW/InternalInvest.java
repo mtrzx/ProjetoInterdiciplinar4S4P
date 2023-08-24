@@ -231,7 +231,6 @@ public class InternalInvest extends javax.swing.JInternalFrame {
         
         UsuarioDTO objUsuarioDTO = new UsuarioDTO();
         objUsuarioDTO.setId_investimento(registroValorTransf);
-        objUsuarioDTO.setId_CPF(JOptionPane.showInputDialog("Digite seu CPF novamente"));
         
         UsuarioDAO objUsuarioDAO = new UsuarioDAO();
         objUsuarioDAO.RegistraInvestimento(objUsuarioDTO);
@@ -239,7 +238,6 @@ public class InternalInvest extends javax.swing.JInternalFrame {
     
     private void AtualizaIN(){
         UsuarioDTO objUsuarioDTO = new UsuarioDTO();
-        objUsuarioDTO.setId_CPF(JOptionPane.showInputDialog("Digite seu CPF novamente"));
         
         UsuarioDAO objUsuarioDAO = new UsuarioDAO();
         objUsuarioDAO.AtualizaInvest(objUsuarioDTO);

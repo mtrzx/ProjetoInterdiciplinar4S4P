@@ -25,10 +25,10 @@ public class InternalTrans extends javax.swing.JInternalFrame {
     private void RegistrarTransfPix() {
         String cpfDestinatario = chavePix.getText();
         float registroValorTransf = Float.parseFloat(valorPix.getText());
+       
 
         UsuarioDTO objUsuarioDTO = new UsuarioDTO();
         objUsuarioDTO.setId_cpfDestinatario(cpfDestinatario);
-        objUsuarioDTO.setId_CPF(JOptionPane.showInputDialog("Digite o CPF novamente: "));
         objUsuarioDTO.setId_valorTransPix(registroValorTransf);
         
         UsuarioDAO objUsuarioDAO = new UsuarioDAO();
