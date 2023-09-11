@@ -6,6 +6,9 @@ package ConnectionFromSQL.VIEW;
 
 import ConnectionFromSQL.DAO.UsuarioDAO;
 import ConnectionFromSQL.DTO.UsuarioDTO;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -16,11 +19,14 @@ import javax.swing.table.DefaultTableModel;
  */
 public class InternalSaldo extends javax.swing.JInternalFrame {
 
+
+    
     /**
      * Creates new form InternalSaldo
      */
     public InternalSaldo() {
         initComponents();
+        
     }
 
     /**
@@ -33,100 +39,71 @@ public class InternalSaldo extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        campoSaldo = new javax.swing.JTextField();
-        jPanel3 = new javax.swing.JPanel();
         campoNome = new javax.swing.JTextField();
-        campoCPF = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        campoSaldo = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        toggleSaldo = new javax.swing.JToggleButton();
+        campoSaldo1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
-        setPreferredSize(new java.awt.Dimension(633, 500));
+        setMaximumSize(new java.awt.Dimension(990, 766));
+        setMinimumSize(new java.awt.Dimension(990, 766));
+        setPreferredSize(new java.awt.Dimension(990, 766));
 
-        jPanel1.setBackground(new java.awt.Color(75, 75, 75));
-
-        jLabel1.setFont(new java.awt.Font("Impact", 0, 48)); // NOI18N
-        jLabel1.setText("R$");
-
-        campoSaldo.setEditable(false);
-        campoSaldo.setFont(new java.awt.Font("Impact", 0, 48)); // NOI18N
-        campoSaldo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoSaldoActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(campoSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(91, 91, 91))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campoSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(42, Short.MAX_VALUE))
-        );
+        jPanel1.setBackground(new java.awt.Color(20, 26, 38));
+        jPanel1.setMaximumSize(new java.awt.Dimension(990, 766));
+        jPanel1.setMinimumSize(new java.awt.Dimension(990, 766));
+        jPanel1.setPreferredSize(new java.awt.Dimension(990, 766));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         campoNome.setEditable(false);
-        campoNome.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        campoNome.setBackground(new java.awt.Color(232, 246, 248));
+        campoNome.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        campoNome.setForeground(new java.awt.Color(0, 0, 0));
         campoNome.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jPanel1.add(campoNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 22, 978, 40));
 
-        campoCPF.setEditable(false);
-        campoCPF.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 48)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("R$");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 240, -1, 87));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(campoNome, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(campoCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(105, 105, 105))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(campoCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
-        );
+        campoSaldo.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        campoSaldo.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jPanel1.add(campoSaldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 260, 170, 40));
+        campoSaldo.setVisible(false);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(85, 85, 85)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(96, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(52, Short.MAX_VALUE))
-        );
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Saldo bancário");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 978, -1));
+
+        toggleSaldo.setBackground(new java.awt.Color(20, 26, 38));
+        toggleSaldo.setForeground(new java.awt.Color(255, 255, 255));
+        toggleSaldo.setSelected(true);
+        toggleSaldo.setText("Revelar");
+        toggleSaldo.setToolTipText("");
+        toggleSaldo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        toggleSaldo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toggleSaldoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(toggleSaldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 330, 140, 50));
+
+        campoSaldo1.setFont(new java.awt.Font("Arial", 0, 48)); // NOI18N
+        campoSaldo1.setForeground(new java.awt.Color(255, 255, 255));
+        campoSaldo1.setText("****");
+        campoSaldo1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        campoSaldo1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jPanel1.add(campoSaldo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 260, -1, 40));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/projeto/imagens/rubik_bg.png"))); // NOI18N
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 990, 770));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -142,43 +119,63 @@ public class InternalSaldo extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void campoSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoSaldoActionPerformed
+    private void toggleSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggleSaldoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_campoSaldoActionPerformed
+        if(toggleSaldo.isSelected()){
+            campoSaldo.setVisible(false);
+            campoSaldo1.setVisible(true);
+            campoSaldo1.setForeground(Color.WHITE);
+            toggleSaldo.setForeground(Color.black);
+            toggleSaldo.setText("Revelar");
+            
+        }else{            
+            campoSaldo.setVisible(true);
+            campoSaldo1.setVisible(false);
+            campoSaldo.setForeground(Color.white);
+            toggleSaldo.setText("Ocultar");
+            toggleSaldo.setForeground(Color.white);
+        }
+    }//GEN-LAST:event_toggleSaldoActionPerformed
     public void listarSaldo(){        
         /*Método responsavel por imprimir na interface grafica as informações
         recebidas pelo retorno do UsuarioDAO
-        */        
+        */
+        UsuarioDTO user = new UsuarioDTO();
         try {
-            /**chama a classe que guarda mesmo que brevenmente só para comparar
+            /*chama a classe que guarda mesmo que brevenmente só para comparar
             com o banco de dados*/
             UsuarioDAO objUsuarioDAO = new UsuarioDAO();
             
-            /**Cria um Array com os valores retornados pelo UsuarioDAO*/
+            /*Cria um Array com os valores retornados pelo UsuarioDAO*/
             UsuarioDTO UserSaldo = objUsuarioDAO.PerfilSaldo();
-                        
-
                     campoNome.setText(UserSaldo.getId_nome());
-                    campoCPF.setText(UserSaldo.getId_CPF());
                     /* Os campos acima não necessitaram de conversão pois são
                     do tipo String, já o abaixo sofreu conversão para String*/
                     float saldo = UserSaldo.getId_saldo();
                     String saldoString = String.valueOf(saldo);
                     campoSaldo.setText(saldoString);
-
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "Listar erro" 
             + erro);
         }
+        
+         
+           
+              
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField campoCPF;
     private javax.swing.JTextField campoNome;
-    private javax.swing.JTextField campoSaldo;
+    private javax.swing.JLabel campoSaldo;
+    private javax.swing.JLabel campoSaldo1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JToggleButton toggleSaldo;
     // End of variables declaration//GEN-END:variables
+
+    private String toString(float id_saldo) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

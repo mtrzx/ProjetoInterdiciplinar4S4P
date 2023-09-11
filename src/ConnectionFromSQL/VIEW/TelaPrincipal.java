@@ -2,6 +2,7 @@ package ConnectionFromSQL.VIEW;
 
 import ConnectionFromSQL.DAO.UsuarioDAO;
 import ConnectionFromSQL.DTO.UsuarioDTO;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -9,8 +10,10 @@ import javax.swing.JOptionPane;
 public class TelaPrincipal extends javax.swing.JFrame {
     public TelaPrincipal() {
         initComponents();
+        legendaTitle.setText("Tela principal");
+        legendaTitle.setForeground(Color.white);
     }
-
+    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -26,43 +29,53 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnSobre = new javax.swing.JButton();
         sair = new javax.swing.JButton();
         MainPanel = new javax.swing.JPanel();
+        MainPanelContent = new javax.swing.JPanel();
+        Titulo = new javax.swing.JPanel();
+        legendaTitle = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(30, 30, 30));
         setResizable(false);
+        setSize(new java.awt.Dimension(1280, 720));
 
-        jPanel1.setBackground(new java.awt.Color(11, 164, 132));
+        jPanel1.setBackground(new java.awt.Color(84, 124, 140));
+        jPanel1.setPreferredSize(new java.awt.Dimension(280, 411));
 
-        jPanel2.setBackground(new java.awt.Color(35, 117, 99));
+        jPanel2.setBackground(new java.awt.Color(60, 94, 115));
         jPanel2.setAlignmentX(0.0F);
         jPanel2.setAlignmentY(0.0F);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/projeto/imagens/RUBIKHome.png"))); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/projeto/imagens/rubiklogo.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(35, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        btnPerfil.setBackground(new java.awt.Color(11, 164, 132));
-        btnPerfil.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnPerfil.setForeground(new java.awt.Color(51, 51, 51));
-        btnPerfil.setText("Perfil");
+        btnPerfil.setBackground(new java.awt.Color(84, 124, 140));
+        btnPerfil.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        btnPerfil.setForeground(new java.awt.Color(0, 0, 0));
+        btnPerfil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/projeto/imagens/Icons/Perfil.png"))); // NOI18N
+        btnPerfil.setText(" Perfil");
+        btnPerfil.setToolTipText("");
+        btnPerfil.setBorder(null);
         btnPerfil.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnPerfil.setHideActionText(true);
-        btnPerfil.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        btnPerfil.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnPerfil.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnPerfil.setIconTextGap(0);
         btnPerfil.setInheritsPopupMenu(true);
         btnPerfil.addActionListener(new java.awt.event.ActionListener() {
@@ -71,14 +84,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnSaldo.setBackground(new java.awt.Color(11, 164, 132));
-        btnSaldo.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnSaldo.setForeground(new java.awt.Color(51, 51, 51));
-        btnSaldo.setText("Saldo Bancário");
+        btnSaldo.setBackground(new java.awt.Color(84, 124, 140));
+        btnSaldo.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        btnSaldo.setForeground(new java.awt.Color(0, 0, 0));
+        btnSaldo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/projeto/imagens/Icons/Saldo.png"))); // NOI18N
+        btnSaldo.setText(" Saldo Bancário");
         btnSaldo.setToolTipText("");
+        btnSaldo.setBorder(null);
         btnSaldo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSaldo.setHideActionText(true);
-        btnSaldo.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        btnSaldo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnSaldo.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnSaldo.setIconTextGap(0);
         btnSaldo.setInheritsPopupMenu(true);
         btnSaldo.addActionListener(new java.awt.event.ActionListener() {
@@ -87,13 +103,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnTrans.setBackground(new java.awt.Color(11, 164, 132));
-        btnTrans.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnTrans.setForeground(new java.awt.Color(51, 51, 51));
-        btnTrans.setText("Transferência");
+        btnTrans.setBackground(new java.awt.Color(84, 124, 140));
+        btnTrans.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        btnTrans.setForeground(new java.awt.Color(0, 0, 0));
+        btnTrans.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/projeto/imagens/Icons/Transferencia.png"))); // NOI18N
+        btnTrans.setText(" Transferência");
+        btnTrans.setBorder(null);
         btnTrans.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTrans.setHideActionText(true);
-        btnTrans.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        btnTrans.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnTrans.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnTrans.setIconTextGap(0);
         btnTrans.setInheritsPopupMenu(true);
         btnTrans.addActionListener(new java.awt.event.ActionListener() {
@@ -102,13 +121,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnHistorico.setBackground(new java.awt.Color(11, 164, 132));
-        btnHistorico.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnHistorico.setForeground(new java.awt.Color(51, 51, 51));
-        btnHistorico.setText("Histórico");
+        btnHistorico.setBackground(new java.awt.Color(84, 124, 140));
+        btnHistorico.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        btnHistorico.setForeground(new java.awt.Color(0, 0, 0));
+        btnHistorico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/projeto/imagens/Icons/Historico.png"))); // NOI18N
+        btnHistorico.setText(" Histórico");
+        btnHistorico.setBorder(null);
         btnHistorico.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnHistorico.setHideActionText(true);
-        btnHistorico.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        btnHistorico.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnHistorico.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnHistorico.setIconTextGap(0);
         btnHistorico.setInheritsPopupMenu(true);
         btnHistorico.addActionListener(new java.awt.event.ActionListener() {
@@ -117,14 +139,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnInvest.setBackground(new java.awt.Color(11, 164, 132));
-        btnInvest.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnInvest.setForeground(new java.awt.Color(51, 51, 51));
-        btnInvest.setText("Investimentos");
+        btnInvest.setBackground(new java.awt.Color(84, 124, 140));
+        btnInvest.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        btnInvest.setForeground(new java.awt.Color(0, 0, 0));
+        btnInvest.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/projeto/imagens/Icons/Investimento.png"))); // NOI18N
+        btnInvest.setText(" Investimentos");
         btnInvest.setToolTipText("");
+        btnInvest.setBorder(null);
         btnInvest.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnInvest.setHideActionText(true);
-        btnInvest.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        btnInvest.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnInvest.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnInvest.setIconTextGap(0);
         btnInvest.setInheritsPopupMenu(true);
         btnInvest.addActionListener(new java.awt.event.ActionListener() {
@@ -133,35 +158,41 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnChat.setBackground(new java.awt.Color(11, 164, 132));
-        btnChat.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnChat.setForeground(new java.awt.Color(51, 51, 51));
-        btnChat.setText("Atendimento");
+        btnChat.setBackground(new java.awt.Color(84, 124, 140));
+        btnChat.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        btnChat.setForeground(new java.awt.Color(0, 0, 0));
+        btnChat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/projeto/imagens/Icons/Atendimento.png"))); // NOI18N
+        btnChat.setText(" Atendimento");
+        btnChat.setBorder(null);
         btnChat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnChat.setHideActionText(true);
-        btnChat.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        btnChat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnChat.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnChat.setIconTextGap(0);
         btnChat.setInheritsPopupMenu(true);
+        btnChat.setMargin(new java.awt.Insets(3, 14, 3, 14));
         btnChat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnChatActionPerformed(evt);
             }
         });
 
-        btnSobre.setBackground(new java.awt.Color(11, 164, 132));
-        btnSobre.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnSobre.setForeground(new java.awt.Color(51, 51, 51));
-        btnSobre.setText("?");
+        btnSobre.setBackground(new java.awt.Color(60, 94, 115));
+        btnSobre.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnSobre.setForeground(new java.awt.Color(255, 255, 255));
+        btnSobre.setText("!");
+        btnSobre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnSobre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSobreActionPerformed(evt);
             }
         });
 
-        sair.setBackground(new java.awt.Color(11, 146, 164));
-        sair.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        sair.setForeground(new java.awt.Color(51, 51, 51));
+        sair.setBackground(new java.awt.Color(60, 94, 115));
+        sair.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        sair.setForeground(new java.awt.Color(255, 255, 255));
         sair.setText("Sair");
+        sair.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         sair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sairActionPerformed(evt);
@@ -172,57 +203,103 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnPerfil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSaldo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnTrans, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnHistorico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnInvest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnChat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(sair)
+                .addComponent(sair, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSobre)
+                .addComponent(btnSobre, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addComponent(btnPerfil, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnSaldo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnTrans, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnHistorico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnInvest, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnChat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
+                .addGap(30, 30, 30)
                 .addComponent(btnPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
+                .addGap(30, 30, 30)
                 .addComponent(btnSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
+                .addGap(30, 30, 30)
                 .addComponent(btnTrans, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
+                .addGap(30, 30, 30)
                 .addComponent(btnHistorico, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
+                .addGap(30, 30, 30)
                 .addComponent(btnInvest, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
+                .addGap(30, 30, 30)
                 .addComponent(btnChat, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSobre, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(sair, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 252, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(sair, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                    .addComponent(btnSobre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        MainPanel.setBackground(new java.awt.Color(30, 30, 30));
+        MainPanel.setBackground(new java.awt.Color(20, 26, 38));
+
+        MainPanelContent.setBackground(new java.awt.Color(20, 26, 38));
+        MainPanelContent.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout MainPanelContentLayout = new javax.swing.GroupLayout(MainPanelContent);
+        MainPanelContent.setLayout(MainPanelContentLayout);
+        MainPanelContentLayout.setHorizontalGroup(
+            MainPanelContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 988, Short.MAX_VALUE)
+        );
+        MainPanelContentLayout.setVerticalGroup(
+            MainPanelContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 764, Short.MAX_VALUE)
+        );
+
+        Titulo.setBackground(new java.awt.Color(36, 45, 64));
+        Titulo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(45, 58, 81)));
+
+        legendaTitle.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        legendaTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        legendaTitle.setText("Tela principal");
+        legendaTitle.setToolTipText("");
+
+        javax.swing.GroupLayout TituloLayout = new javax.swing.GroupLayout(Titulo);
+        Titulo.setLayout(TituloLayout);
+        TituloLayout.setHorizontalGroup(
+            TituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TituloLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(legendaTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        TituloLayout.setVerticalGroup(
+            TituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TituloLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(legendaTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout MainPanelLayout = new javax.swing.GroupLayout(MainPanel);
         MainPanel.setLayout(MainPanelLayout);
         MainPanelLayout.setHorizontalGroup(
             MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 628, Short.MAX_VALUE)
+            .addGroup(MainPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(MainPanelContent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Titulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         MainPanelLayout.setVerticalGroup(
             MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 487, Short.MAX_VALUE)
+            .addGroup(MainPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(MainPanelContent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -232,12 +309,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(MainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(MainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(MainPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 848, Short.MAX_VALUE)
+            .addComponent(MainPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 848, Short.MAX_VALUE)
         );
 
         pack();
@@ -246,25 +323,32 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void btnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerfilActionPerformed
          //Chama O jFrame do perfil
         InternalPerfil objInternalPerfil = new InternalPerfil();
-        MainPanel.add(objInternalPerfil);
+        MainPanelContent.add(objInternalPerfil);
         objInternalPerfil.setVisible(true);
         objInternalPerfil.listarValores();
+        legendaTitle.setText("Perfil do usuário");
+        legendaTitle.setForeground(Color.white);
     }//GEN-LAST:event_btnPerfilActionPerformed
 
     private void btnSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaldoActionPerformed
         //Chama O jFrame do saldo
         InternalSaldo objInternalSaldo = new InternalSaldo();
+        InternalPerfil objInternalPerfil = new InternalPerfil();
         objInternalSaldo.listarSaldo();
-        MainPanel.add(objInternalSaldo);
+        MainPanelContent.add(objInternalSaldo);
         objInternalSaldo.setVisible(true);
+        legendaTitle.setText("Saldo bancário");
+        legendaTitle.setForeground(Color.white);
+        objInternalPerfil.dispose();
     }//GEN-LAST:event_btnSaldoActionPerformed
 
     private void btnTransActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransActionPerformed
         //Chama O jFrame da transferencia
         InternalTrans objInternalTrans = new InternalTrans();
-        MainPanel.add(objInternalTrans);
+        MainPanelContent.add(objInternalTrans);
         objInternalTrans.setVisible(true);    
-        // Crie um objeto da classe que tem o setter
+        legendaTitle.setText("Transações bancarias");
+        legendaTitle.setForeground(Color.white);
     }//GEN-LAST:event_btnTransActionPerformed
 
     private void btnHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoricoActionPerformed
@@ -274,8 +358,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         
         ih.listarValoresTabelaPIX(objUsuarioDTO.getCpf_login());
         ih.listarValoresTabelaTED(objUsuarioDTO.getCpf_login());
-        MainPanel.add(ih);
+        MainPanelContent.add(ih);
         ih.setVisible(true);
+        legendaTitle.setText("Histórico de transações");
+        legendaTitle.setForeground(Color.white);
         
     
     }//GEN-LAST:event_btnHistoricoActionPerformed
@@ -283,23 +369,29 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void btnInvestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInvestActionPerformed
         //Chama O jFrame da investimento
         InternalInvest objInternalInvestimento = new InternalInvest();
-        MainPanel.add(objInternalInvestimento);
+        MainPanelContent.add(objInternalInvestimento);
         objInternalInvestimento.setVisible(true);
         UsuarioDAO objUsuarioDAO = new UsuarioDAO();
+        legendaTitle.setText("Investimentos bancários");
+        legendaTitle.setForeground(Color.white);
     }//GEN-LAST:event_btnInvestActionPerformed
 
     private void btnChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChatActionPerformed
         //Chama O jFrame da atendimento
         InternalChat objInternalChat = new InternalChat();
-        MainPanel.add(objInternalChat);
+        MainPanelContent.add(objInternalChat);
         objInternalChat.setVisible(true);
+        legendaTitle.setText("Atendimento online");
+        legendaTitle.setForeground(Color.white);
     }//GEN-LAST:event_btnChatActionPerformed
 
     private void btnSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSobreActionPerformed
         // Chama o jFrame do sobre
         InternalSobre objInternalSobre = new InternalSobre();
-        MainPanel.add(objInternalSobre);
+        MainPanelContent.add(objInternalSobre);
         objInternalSobre.setVisible(true);
+        legendaTitle.setText("Sobre");
+        legendaTitle.setForeground(Color.white);
     }//GEN-LAST:event_btnSobreActionPerformed
 
     private void sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairActionPerformed
@@ -345,6 +437,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel MainPanel;
+    private javax.swing.JPanel MainPanelContent;
+    private javax.swing.JPanel Titulo;
     private javax.swing.JButton btnChat;
     private javax.swing.JButton btnHistorico;
     private javax.swing.JButton btnInvest;
@@ -355,6 +449,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel legendaTitle;
     private javax.swing.JButton sair;
     // End of variables declaration//GEN-END:variables
 }

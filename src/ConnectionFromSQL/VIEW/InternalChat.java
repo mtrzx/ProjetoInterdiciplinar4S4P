@@ -7,12 +7,16 @@ package ConnectionFromSQL.VIEW;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import static java.awt.Color.BLUE;
+import static java.awt.Color.black;
+import static java.awt.Color.white;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 
 /**
  *
@@ -37,118 +41,156 @@ public class InternalChat extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        EnviarBTN = new javax.swing.JButton();
+        containerMsg = new javax.swing.JPanel();
+        msgOutPane = new javax.swing.JScrollPane();
+        msgOut = new javax.swing.JTextArea();
+        msgAtendPane = new javax.swing.JScrollPane();
+        msgAtend = new javax.swing.JTextArea();
         jScrollPane1 = new javax.swing.JScrollPane();
-        textInput = new javax.swing.JTextArea();
-        jLabel1 = new javax.swing.JLabel();
-        enviarBTN = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        textOutput = new javax.swing.JTextArea();
+        InputArea = new javax.swing.JTextArea();
 
+        setBorder(null);
         setClosable(true);
-        setPreferredSize(new java.awt.Dimension(633, 500));
+        setMaximumSize(new java.awt.Dimension(990, 750));
+        setMinimumSize(new java.awt.Dimension(990, 750));
+        setNormalBounds(new java.awt.Rectangle(0, 0, 0, 0));
+        setPreferredSize(new java.awt.Dimension(990, 750));
 
-        jPanel1.setBackground(new java.awt.Color(75, 75, 75));
+        jPanel1.setBackground(new java.awt.Color(20, 26, 38));
+        jPanel1.setMaximumSize(new java.awt.Dimension(990, 750));
+        jPanel1.setMinimumSize(new java.awt.Dimension(990, 750));
+        jPanel1.setPreferredSize(new java.awt.Dimension(990, 750));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        textInput.setColumns(20);
-        textInput.setLineWrap(true);
-        textInput.setRows(5);
-        textInput.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jScrollPane1.setViewportView(textInput);
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Aguarde um instante um colaborador ja ira lhe atender...");
-
-        enviarBTN.setBackground(new java.awt.Color(16, 148, 164));
-        enviarBTN.setText("Enviar");
-        enviarBTN.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        enviarBTN.addActionListener(new java.awt.event.ActionListener() {
+        EnviarBTN.setText("Enviar");
+        EnviarBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                enviarBTNActionPerformed(evt);
+                EnviarBTNActionPerformed(evt);
             }
         });
+        jPanel1.add(EnviarBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 625, 130, 50));
 
-        textOutput.setEditable(false);
-        textOutput.setBackground(new java.awt.Color(75, 75, 75));
-        textOutput.setColumns(20);
-        textOutput.setLineWrap(true);
-        textOutput.setRows(4);
-        textOutput.setBorder(null);
-        jScrollPane3.setViewportView(textOutput);
+        containerMsg.setBackground(new java.awt.Color(20, 26, 38));
+        containerMsg.setMaximumSize(new java.awt.Dimension(978, 585));
+        containerMsg.setMinimumSize(new java.awt.Dimension(978, 585));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(121, 121, 121)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(enviarBTN)))
-                .addContainerGap(9, Short.MAX_VALUE))
+        msgOutPane.setBackground(new java.awt.Color(20, 26, 38));
+        msgOutPane.setBorder(null);
+        msgOutPane.setForeground(new java.awt.Color(20, 26, 38));
+
+        msgOut.setEditable(false);
+        msgOut.setBackground(new java.awt.Color(20, 26, 38));
+        msgOut.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        msgOut.setLineWrap(true);
+        msgOut.setTabSize(0);
+        msgOutPane.setViewportView(msgOut);
+
+        msgAtendPane.setBackground(new java.awt.Color(20, 26, 38));
+        msgAtendPane.setBorder(null);
+        msgAtendPane.setForeground(new java.awt.Color(20, 26, 38));
+
+        msgAtend.setEditable(false);
+        msgAtend.setBackground(new java.awt.Color(20, 26, 38));
+        msgAtend.setColumns(20);
+        msgAtend.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        msgAtend.setLineWrap(true);
+        msgAtend.setRows(5);
+        msgAtend.setBorder(null);
+        msgAtendPane.setViewportView(msgAtend);
+
+        javax.swing.GroupLayout containerMsgLayout = new javax.swing.GroupLayout(containerMsg);
+        containerMsg.setLayout(containerMsgLayout);
+        containerMsgLayout.setHorizontalGroup(
+            containerMsgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(containerMsgLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(containerMsgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(containerMsgLayout.createSequentialGroup()
+                        .addComponent(msgAtendPane, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, containerMsgLayout.createSequentialGroup()
+                        .addGap(372, 372, 372)
+                        .addComponent(msgOutPane, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(239, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+        containerMsgLayout.setVerticalGroup(
+            containerMsgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, containerMsgLayout.createSequentialGroup()
+                .addContainerGap(381, Short.MAX_VALUE)
+                .addComponent(msgOutPane, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(16, 16, 16))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(enviarBTN)
-                        .addGap(50, 50, 50))))
+                .addComponent(msgAtendPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
+
+        jPanel1.add(containerMsg, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, -1, 579));
+
+        InputArea.setColumns(20);
+        InputArea.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        InputArea.setLineWrap(true);
+        InputArea.setRows(5);
+        InputArea.setTabSize(1);
+        jScrollPane1.setViewportView(InputArea);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(62, 603, 740, 100));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 728, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void enviarBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarBTNActionPerformed
-        String textoDigitado = textInput.getText();
-        textOutput.setVisible(true);
-        jScrollPane3.setVisible(true);
-        textOutput.setBackground(Color.WHITE);
-        textOutput.setText(textoDigitado);
-        textInput.setText(" ");
-    }//GEN-LAST:event_enviarBTNActionPerformed
+    private void EnviarBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnviarBTNActionPerformed
+        // TODO add your handling code here:
+        String msg = InputArea.getText();
+        msgOut.setText(msg);
+        msgOut.setBackground(new Color(0xCC, 0xE5, 0xFF));
+        msgOut.setForeground(black);
+        Timer timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        msgAtend.setBackground(new Color(0xE6, 0xF2, 0xFF));
+                        msgAtend.setForeground(Color.BLACK);
+                        msgAtend.setText(" Em instantes um colaborador estará à sua disposição para te atender.");
+                    }
+                });
+            }
+        });
+        timer.setRepeats(false); // Execute apenas uma vez após o atraso
+        timer.start();
+        LimpaCampo();
+    }//GEN-LAST:event_EnviarBTNActionPerformed
 
-
+    private void LimpaCampo(){
+        InputArea.setText("");
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton enviarBTN;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton EnviarBTN;
+    private javax.swing.JTextArea InputArea;
+    private javax.swing.JPanel containerMsg;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea textInput;
-    private javax.swing.JTextArea textOutput;
+    private javax.swing.JTextArea msgAtend;
+    private javax.swing.JScrollPane msgAtendPane;
+    private javax.swing.JTextArea msgOut;
+    private javax.swing.JScrollPane msgOutPane;
     // End of variables declaration//GEN-END:variables
 
     /**
      * @return the enviarBTN
      */
-    public javax.swing.JButton getEnviarBTN() {
-        return enviarBTN;
-    }
 }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import ConnectionFromSQL.VIEW.InternalTrans;
 import ConnectionFromSQL.VIEW.TelaLogin;
+import java.awt.Toolkit;
 import java.util.Random;
 
 public class UsuarioDAO {
@@ -63,12 +64,11 @@ public class UsuarioDAO {
     public UsuarioDTO PerfilSaldo() {
         conn = new Conexao().conectaDB();
         UsuarioDTO objUsuarioDTO = new UsuarioDTO();
-        String sql = "select CPF, NOME, SALDO from grupo4 where CPF = " + objUsuarioDTO.getCpf_login();
+        String sql = "select NOME, SALDO from grupo4 where CPF = " + objUsuarioDTO.getCpf_login();
         try {
             pstm = conn.prepareStatement(sql);
             rs = pstm.executeQuery();
             while (rs.next()) {
-                objUsuarioDTO.setId_CPF(rs.getString("CPF"));
                 objUsuarioDTO.setId_nome(rs.getString("NOME"));
                 objUsuarioDTO.setId_saldo(rs.getFloat("SALDO"));
 
@@ -373,5 +373,6 @@ public class UsuarioDAO {
         int[] numeros = {conta, agencia}; // Armazena os números em um array e retorna
         return numeros;
    }
+   
 }
 
