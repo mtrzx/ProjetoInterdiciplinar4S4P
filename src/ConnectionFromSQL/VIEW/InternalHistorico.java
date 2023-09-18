@@ -46,7 +46,6 @@ public class InternalHistorico extends javax.swing.JInternalFrame {
         tabelaTED = new javax.swing.JTable();
 
         setBorder(null);
-        setClosable(true);
         setToolTipText("");
         setMaximumSize(new java.awt.Dimension(990, 766));
         setMinimumSize(new java.awt.Dimension(990, 766));

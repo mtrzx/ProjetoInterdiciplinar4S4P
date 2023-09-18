@@ -47,7 +47,6 @@ public class InternalPerfil extends javax.swing.JInternalFrame {
 
         setBackground(new java.awt.Color(75, 75, 75));
         setBorder(null);
-        setClosable(true);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMaximumSize(new java.awt.Dimension(990, 766));
         setMinimumSize(new java.awt.Dimension(990, 766));
@@ -71,6 +70,11 @@ public class InternalPerfil extends javax.swing.JInternalFrame {
         cpfTxt.setBackground(new java.awt.Color(232, 246, 248));
         cpfTxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         cpfTxt.setForeground(new java.awt.Color(0, 0, 0));
+        cpfTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cpfTxtActionPerformed(evt);
+            }
+        });
         jPanel4.add(cpfTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 199, 500, 40));
 
         agenciaTxt.setEditable(false);
@@ -111,7 +115,7 @@ public class InternalPerfil extends javax.swing.JInternalFrame {
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/projeto/imagens/rubik_bg.png"))); // NOI18N
-        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 990, 740));
+        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 990, 740));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -130,6 +134,10 @@ public class InternalPerfil extends javax.swing.JInternalFrame {
     private void nomeTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeTxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nomeTxtActionPerformed
+
+    private void cpfTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpfTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cpfTxtActionPerformed
 
     public void listarValores() {
 

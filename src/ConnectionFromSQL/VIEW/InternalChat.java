@@ -51,7 +51,6 @@ public class InternalChat extends javax.swing.JInternalFrame {
         InputArea = new javax.swing.JTextArea();
 
         setBorder(null);
-        setClosable(true);
         setMaximumSize(new java.awt.Dimension(990, 750));
         setMinimumSize(new java.awt.Dimension(990, 750));
         setNormalBounds(new java.awt.Rectangle(0, 0, 0, 0));
@@ -106,9 +105,7 @@ public class InternalChat extends javax.swing.JInternalFrame {
             .addGroup(containerMsgLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(containerMsgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(containerMsgLayout.createSequentialGroup()
-                        .addComponent(msgAtendPane, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(msgAtendPane, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, containerMsgLayout.createSequentialGroup()
                         .addGap(372, 372, 372)
                         .addComponent(msgOutPane, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)))

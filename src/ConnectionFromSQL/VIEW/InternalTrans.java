@@ -89,7 +89,6 @@ public class InternalTrans extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setBorder(null);
-        setClosable(true);
         setMaximumSize(new java.awt.Dimension(990, 740));
         setMinimumSize(new java.awt.Dimension(990, 740));
         setPreferredSize(new java.awt.Dimension(990, 766));

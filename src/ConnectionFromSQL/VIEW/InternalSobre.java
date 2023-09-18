@@ -35,7 +35,6 @@ public class InternalSobre extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
 
         setBorder(null);
-        setClosable(true);
         setMaximumSize(new java.awt.Dimension(990, 766));
         setMinimumSize(new java.awt.Dimension(990, 766));
         setPreferredSize(new java.awt.Dimension(990, 766));

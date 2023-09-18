@@ -6,6 +6,7 @@ package ConnectionFromSQL.VIEW;
 
 import ConnectionFromSQL.DAO.UsuarioDAO;
 import ConnectionFromSQL.DTO.UsuarioDTO;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 
 /**
@@ -47,10 +48,12 @@ public class InternalCadastro extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         btnVoltar = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro");
+        setUndecorated(true);
         setResizable(false);
         setSize(new java.awt.Dimension(1270, 650));
 
@@ -89,9 +92,18 @@ public class InternalCadastro extends javax.swing.JFrame {
         txtSenha.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         btnCadastrar.setBackground(new java.awt.Color(232, 246, 248));
-        btnCadastrar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnCadastrar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnCadastrar.setForeground(new java.awt.Color(51, 51, 51));
         btnCadastrar.setText("Cadastrar");
+        btnCadastrar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 255)));
+        btnCadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCadastrarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCadastrarMouseExited(evt);
+            }
+        });
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadastrarActionPerformed(evt);
@@ -160,10 +172,6 @@ public class InternalCadastro extends javax.swing.JFrame {
                             .addComponent(txtNome, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtCpf, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtEmail)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(144, 144, 144))
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -172,6 +180,10 @@ public class InternalCadastro extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(152, 152, 152))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,9 +210,9 @@ public class InternalCadastro extends javax.swing.JFrame {
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12))
+                .addGap(21, 21, 21))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(298, 132, 407, 470));
@@ -210,15 +222,28 @@ public class InternalCadastro extends javax.swing.JFrame {
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(298, 0, 407, 126));
 
         btnVoltar.setBackground(new java.awt.Color(232, 246, 248));
-        btnVoltar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnVoltar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnVoltar.setForeground(new java.awt.Color(51, 51, 51));
         btnVoltar.setText("Voltar");
+        btnVoltar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 255)));
+        btnVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnVoltarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnVoltarMouseExited(evt);
+            }
+        });
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVoltarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 614, -1, 34));
+        jPanel1.add(btnVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 620, 50, 20));
+
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/projeto/imagens/degradeTransf.png"))); // NOI18N
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 650));
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/projeto/imagens/rubikCadastro.png"))); // NOI18N
@@ -236,6 +261,7 @@ public class InternalCadastro extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
@@ -278,6 +304,29 @@ public class InternalCadastro extends javax.swing.JFrame {
         tl.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    // <editor-fold defaultstate="collapsed" desc="Hovers">
+    private void btnCadastrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCadastrarMouseExited
+        Color hover = new Color(232, 246,248);
+        btnCadastrar.setBackground(hover);
+    }//GEN-LAST:event_btnCadastrarMouseExited
+
+    private void btnCadastrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCadastrarMouseEntered
+        Color hover = new Color(168, 187, 196);
+        btnCadastrar.setBackground(hover);
+    }//GEN-LAST:event_btnCadastrarMouseEntered
+
+    private void btnVoltarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVoltarMouseEntered
+        Color hover = new Color(168, 187, 196);
+        btnVoltar.setBackground(hover);
+    }//GEN-LAST:event_btnVoltarMouseEntered
+
+    private void btnVoltarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVoltarMouseExited
+        Color hover = new Color(232, 246,248);
+        btnVoltar.setBackground(hover);
+    }//GEN-LAST:event_btnVoltarMouseExited
+    
+    // </editor-fold>
     
     private void LimparCampo (){
         txtCpf.setText("");
@@ -286,6 +335,7 @@ public class InternalCadastro extends javax.swing.JFrame {
         txtEmail.setText("");
         txtNome.setText("");
     }
+       
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -332,6 +382,7 @@ public class InternalCadastro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField txtCpf;

@@ -39,8 +39,7 @@ public class UsuarioDAO {
     public UsuarioDTO PerfilUser() {
         conn = new Conexao().conectaDB();
         UsuarioDTO userCode = new UsuarioDTO();
-        String sql = "select * from grupo4 where CPF = " + userCode.getCpf_login();
-        System.out.println(userCode.getCpf_login());
+        String sql = "select * from grupo4 where CPF = " + userCode.getCpf_login();        
         UsuarioDTO objUsuarioDTO = new UsuarioDTO();
         try {
             pstm = conn.prepareStatement(sql);
@@ -81,7 +80,7 @@ public class UsuarioDAO {
     }
 
     public void AtualizaInvest(UsuarioDTO objUsuarioDTO) {
-        String sqlInvestimento = "SELECT INVESTIMENTO FROM `grupo4` WHERE CPF = ?;";
+        String sqlInvestimento = "SELECT TOTAL_INVESTIDO FROM `grupo4` WHERE CPF = ?;";
         conn = new Conexao().conectaDB();
         try {
             // Obter investimento do banco de dados
@@ -90,18 +89,17 @@ public class UsuarioDAO {
             ResultSet investimentoResultado = pstmInvestimento.executeQuery();
             float investimento = 0.0f;
             if (investimentoResultado.next()) {
-                investimento = investimentoResultado.getFloat("INVESTIMENTO");
+                investimento = investimentoResultado.getFloat("TOTAL_INVESTIDO");
             }
             objUsuarioDTO.setId_InvestTotal(investimento);
             investimentoResultado.close();
             pstmInvestimento.close();
         } catch (SQLException erro) {
-            System.out.println("Catch do AtualizaInvest");
         }
     }
 
     public void RegistraInvestimento(UsuarioDTO objUsuarioDTO) {
-        String sql = "UPDATE grupo4 SET SALDO = SALDO - ?, INVESTIMENTO = INVESTIMENTO + ? WHERE CPF = ?;";
+        String sql = "UPDATE grupo4 SET SALDO = SALDO - ?, TOTAL_INVESTIDO = TOTAL_INVESTIDO + ? WHERE CPF = ?;";
         String sqlSaldo = "SELECT SALDO FROM `grupo4` WHERE CPF = ?;";
         conn = new Conexao().conectaDB();
         try {
@@ -373,6 +371,354 @@ public class UsuarioDAO {
         int[] numeros = {conta, agencia}; // Armazena os números em um array e retorna
         return numeros;
    }
+     
+   public void RegistraCDB(UsuarioDTO objUsuarioDTO) {
+        String sql = "UPDATE grupo4 SET SALDO = SALDO - ?, CDB = CDB + ? WHERE CPF = ?;";
+        String sqlSaldo = "SELECT SALDO FROM `grupo4` WHERE CPF = ?;";
+        String sqlAtualizaTotalBD = "UPDATE grupo4 SET TOTAL_INVESTIDO = TOTAL_INVESTIDO + ? WHERE CPF = ?;";
+        String sqlAtualizaCDB = "SELECT CDB FROM grupo4 WHERE CPF = ?";
+        conn = new Conexao().conectaDB();
+        try {
+            // Obter saldo do banco de dados
+            PreparedStatement pstmSaldo = conn.prepareStatement(sqlSaldo);
+            pstmSaldo.setString(1, objUsuarioDTO.getCpf_login());
+            ResultSet saldoResultado = pstmSaldo.executeQuery();
+            float saldo = 0.0f;
+            if (saldoResultado.next()) {
+                saldo = saldoResultado.getFloat("SALDO");
+            }
+            saldoResultado.close();
+            pstmSaldo.close();
+            float investimento = objUsuarioDTO.getId_investimento();
+            float CDB = 0.0f;
+
+            // Verificar se o saldo é menor ou igual ao investimento
+            if (saldo >= investimento) {
+                // Atualizar saldo e investimento na tabela
+                PreparedStatement pstmAtualizacao = conn.prepareStatement(sql);
+                pstmAtualizacao.setFloat(1, objUsuarioDTO.getId_investimento());
+                pstmAtualizacao.setFloat(2, objUsuarioDTO.getId_investimento());
+                pstmAtualizacao.setString(3, objUsuarioDTO.getCpf_login());
+                pstmAtualizacao.execute();
+                pstmAtualizacao.close();
+                
+                PreparedStatement ptsmAtualiza = conn.prepareCall(sqlAtualizaTotalBD);
+                ptsmAtualiza.setFloat(1, objUsuarioDTO.getId_investimento());
+                ptsmAtualiza.setString(2, objUsuarioDTO.getCpf_login());
+                ptsmAtualiza.execute();
+                ptsmAtualiza.close();
+                
+                PreparedStatement ptsmSqlAtualizaCDB = conn.prepareCall(sqlAtualizaCDB);
+                ptsmSqlAtualizaCDB.setString(1, objUsuarioDTO.getCpf_login());
+                ResultSet cDBResultado = ptsmSqlAtualizaCDB.executeQuery();
+                if (cDBResultado.next()) {
+                CDB = cDBResultado.getFloat("CDB");
+                cDBResultado.close();
+                ptsmSqlAtualizaCDB.close();
+                objUsuarioDTO.setCdbInvest(CDB);
+                
+            }
+                JOptionPane.showMessageDialog(null, "Investimento realizado com sucesso!");
+            } else {
+                // Saldo é maior que o investimento, portanto, cancelar o Investimento
+                throw new Exception("Saldo insuficiente para realizar o Investimento.");
+            }
+            
+            if(saldo >= investimento){
+                
+            }else{
+                throw new Exception("Falha ao atualizar");
+            }
+            
+            conn.close();
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "RegistrarInvestimento: " + erro);
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Investimento cancelada: " + erro);
+        }
+    }
    
+   public void AtualizaInterfaceCDB (UsuarioDTO objUsuarioDTO) throws SQLException{
+       String sqlAtualizaCDB = "SELECT CDB FROM grupo4 WHERE CPF = ?";
+       conn = new Conexao().conectaDB();
+       float CDB = 0.0f;
+       PreparedStatement ptsmSqlAtualizaCDB = conn.prepareCall(sqlAtualizaCDB);
+       ptsmSqlAtualizaCDB.setString(1, objUsuarioDTO.getCpf_login());
+       ResultSet cDBResultado = ptsmSqlAtualizaCDB.executeQuery();
+       try {
+           
+           if (cDBResultado.next()) {
+               CDB = cDBResultado.getFloat("CDB");
+               cDBResultado.close();
+               ptsmSqlAtualizaCDB.close();
+               objUsuarioDTO.setCdbInvest(CDB);
+
+       }
+       } catch (Exception e) {
+           JOptionPane.showMessageDialog(null, "Investimento cancelada: " );
+        }
+    }
+   
+   public void RegistraCDI(UsuarioDTO objUsuarioDTO) {
+        String sql = "UPDATE grupo4 SET SALDO = SALDO - ?, CDI = CDI + ? WHERE CPF = ?;";
+        String sqlSaldo = "SELECT SALDO FROM `grupo4` WHERE CPF = ?;";
+        String sqlAtualizaTotalBD = "UPDATE grupo4 SET TOTAL_INVESTIDO = TOTAL_INVESTIDO + ? WHERE CPF = ?;";
+        String sqlAtualizaCDI = "SELECT CDI FROM grupo4 WHERE CPF = ?";
+        conn = new Conexao().conectaDB();
+        try {
+            // Obter saldo do banco de dados
+            PreparedStatement pstmSaldo = conn.prepareStatement(sqlSaldo);
+            pstmSaldo.setString(1, objUsuarioDTO.getCpf_login());
+            ResultSet saldoResultado = pstmSaldo.executeQuery();
+            float saldo = 0.0f;
+            if (saldoResultado.next()) {
+                saldo = saldoResultado.getFloat("SALDO");
+            }
+            saldoResultado.close();
+            pstmSaldo.close();
+            float investimento = objUsuarioDTO.getId_investimento();
+            float CDI = 0.0f;
+
+            // Verificar se o saldo é menor ou igual ao investimento
+            if (saldo >= investimento) {
+                // Atualizar saldo e investimento na tabela
+                PreparedStatement pstmAtualizacao = conn.prepareStatement(sql);
+                pstmAtualizacao.setFloat(1, objUsuarioDTO.getId_investimento());
+                pstmAtualizacao.setFloat(2, objUsuarioDTO.getId_investimento());
+                pstmAtualizacao.setString(3, objUsuarioDTO.getCpf_login());
+                pstmAtualizacao.execute();
+                pstmAtualizacao.close();
+                
+                PreparedStatement ptsmAtualiza = conn.prepareCall(sqlAtualizaTotalBD);
+                ptsmAtualiza.setFloat(1, objUsuarioDTO.getId_investimento());
+                ptsmAtualiza.setString(2, objUsuarioDTO.getCpf_login());
+                ptsmAtualiza.execute();
+                ptsmAtualiza.close();
+                
+                PreparedStatement ptsmSqlAtualizaCDI = conn.prepareCall(sqlAtualizaCDI);
+                ptsmSqlAtualizaCDI.setString(1, objUsuarioDTO.getCpf_login());
+                ResultSet cDIResultado = ptsmSqlAtualizaCDI.executeQuery();
+                if (cDIResultado.next()) {
+                CDI = cDIResultado.getFloat("CDI");
+                cDIResultado.close();
+                ptsmSqlAtualizaCDI.close();
+                objUsuarioDTO.setCdiInvest(CDI);
+                
+            }
+                JOptionPane.showMessageDialog(null, "Investimento realizado com sucesso!");
+            } else {
+                // Saldo é maior que o investimento, portanto, cancelar o Investimento
+                throw new Exception("Saldo insuficiente para realizar o Investimento.");
+            }
+            
+            if(saldo >= investimento){
+                
+            }else{
+                throw new Exception("Falha ao atualizar");
+            }
+            
+            conn.close();
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "RegistrarInvestimento: " + erro);
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Investimento cancelada: " + erro);
+        }
+    }
+   
+   public void AtualizaInterfaceCDI (UsuarioDTO objUsuarioDTO) throws SQLException{
+       String sqlAtualizaCDI = "SELECT CDI FROM grupo4 WHERE CPF = ?";
+       conn = new Conexao().conectaDB();
+       float CDI = 0.0f;
+       PreparedStatement ptsmSqlAtualizaCDI = conn.prepareCall(sqlAtualizaCDI);
+       ptsmSqlAtualizaCDI.setString(1, objUsuarioDTO.getCpf_login());
+       ResultSet cDIResultado = ptsmSqlAtualizaCDI.executeQuery();
+       try {
+           
+           if (cDIResultado.next()) {
+               CDI = cDIResultado.getFloat("CDI");
+               cDIResultado.close();
+               ptsmSqlAtualizaCDI.close();
+               objUsuarioDTO.setCdiInvest(CDI);
+
+       }
+       } catch (Exception e) {
+           JOptionPane.showMessageDialog(null, "Investimento cancelada: " );
+        }
+    }
+   
+   public void RegistraLCA(UsuarioDTO objUsuarioDTO) {
+        String sql = "UPDATE grupo4 SET SALDO = SALDO - ?, LCA = LCA + ? WHERE CPF = ?;";
+        String sqlSaldo = "SELECT SALDO FROM `grupo4` WHERE CPF = ?;";
+        String sqlAtualizaTotalBD = "UPDATE grupo4 SET TOTAL_INVESTIDO = TOTAL_INVESTIDO + ? WHERE CPF = ?;";
+        String sqlAtualizaLCA = "SELECT LCA FROM grupo4 WHERE CPF = ?";
+        conn = new Conexao().conectaDB();
+        try {
+            // Obter saldo do banco de dados
+            PreparedStatement pstmSaldo = conn.prepareStatement(sqlSaldo);
+            pstmSaldo.setString(1, objUsuarioDTO.getCpf_login());
+            ResultSet saldoResultado = pstmSaldo.executeQuery();
+            float saldo = 0.0f;
+            if (saldoResultado.next()) {
+                saldo = saldoResultado.getFloat("SALDO");
+            }
+            saldoResultado.close();
+            pstmSaldo.close();
+            float investimento = objUsuarioDTO.getId_investimento();
+            float LCA = 0.0f;
+
+            // Verificar se o saldo é menor ou igual ao investimento
+            if (saldo >= investimento) {
+                // Atualizar saldo e investimento na tabela
+                PreparedStatement pstmAtualizacao = conn.prepareStatement(sql);
+                pstmAtualizacao.setFloat(1, objUsuarioDTO.getId_investimento());
+                pstmAtualizacao.setFloat(2, objUsuarioDTO.getId_investimento());
+                pstmAtualizacao.setString(3, objUsuarioDTO.getCpf_login());
+                pstmAtualizacao.execute();
+                pstmAtualizacao.close();
+                
+                PreparedStatement ptsmAtualiza = conn.prepareCall(sqlAtualizaTotalBD);
+                ptsmAtualiza.setFloat(1, objUsuarioDTO.getId_investimento());
+                ptsmAtualiza.setString(2, objUsuarioDTO.getCpf_login());
+                ptsmAtualiza.execute();
+                ptsmAtualiza.close();
+                
+                PreparedStatement ptsmSqlAtualizaLCA = conn.prepareCall(sqlAtualizaLCA);
+                ptsmSqlAtualizaLCA.setString(1, objUsuarioDTO.getCpf_login());
+                ResultSet lCAResultado = ptsmSqlAtualizaLCA.executeQuery();
+                if (lCAResultado.next()) {
+                LCA = lCAResultado.getFloat("LCA");
+                lCAResultado.close();
+                ptsmSqlAtualizaLCA.close();
+                objUsuarioDTO.setLcaInvest(LCA);
+                
+            }
+                JOptionPane.showMessageDialog(null, "Investimento realizado com sucesso!");
+            } else {
+                // Saldo é maior que o investimento, portanto, cancelar o Investimento
+                throw new Exception("Saldo insuficiente para realizar o Investimento.");
+            }
+            
+            if(saldo >= investimento){
+                
+            }else{
+                throw new Exception("Falha ao atualizar");
+            }
+            
+            conn.close();
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "RegistrarInvestimento: " + erro);
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Investimento cancelada: " + erro);
+        }
+    }
+   
+   public void AtualizaInterfaceLCA (UsuarioDTO objUsuarioDTO) throws SQLException{
+       String sqlAtualizaLCA = "SELECT LCA FROM grupo4 WHERE CPF = ?";
+       conn = new Conexao().conectaDB();
+       float LCA = 0.0f;
+       PreparedStatement ptsmSqlAtualizaLCA = conn.prepareCall(sqlAtualizaLCA);
+       ptsmSqlAtualizaLCA.setString(1, objUsuarioDTO.getCpf_login());
+       ResultSet lCAResultado = ptsmSqlAtualizaLCA.executeQuery();
+       try {
+           
+           if (lCAResultado.next()) {
+               LCA = lCAResultado.getFloat("LCA");
+               lCAResultado.close();
+               ptsmSqlAtualizaLCA.close();
+               objUsuarioDTO.setLcaInvest(LCA);
+
+       }
+       } catch (Exception e) {
+           JOptionPane.showMessageDialog(null, "Investimento cancelada: " );
+        }
+    }
+   
+   public void RegistraRendaFixa(UsuarioDTO objUsuarioDTO) {
+        String sql = "UPDATE grupo4 SET SALDO = SALDO - ?, RENDA_FIXA = RENDA_FIXA + ? WHERE CPF = ?;";
+        String sqlSaldo = "SELECT SALDO FROM `grupo4` WHERE CPF = ?;";
+        String sqlAtualizaTotalBD = "UPDATE grupo4 SET TOTAL_INVESTIDO = TOTAL_INVESTIDO + ? WHERE CPF = ?;";
+        String sqlAtualizaRENDA_FIXA = "SELECT RENDA_FIXA FROM grupo4 WHERE CPF = ?";
+        conn = new Conexao().conectaDB();
+        try {
+            // Obter saldo do banco de dados
+            PreparedStatement pstmSaldo = conn.prepareStatement(sqlSaldo);
+            pstmSaldo.setString(1, objUsuarioDTO.getCpf_login());
+            ResultSet saldoResultado = pstmSaldo.executeQuery();
+            float saldo = 0.0f;
+            if (saldoResultado.next()) {
+                saldo = saldoResultado.getFloat("SALDO");
+            }
+            saldoResultado.close();
+            pstmSaldo.close();
+            float investimento = objUsuarioDTO.getId_investimento();
+            float RENDA_FIXA = 0.0f;
+
+            // Verificar se o saldo é menor ou igual ao investimento
+            if (saldo >= investimento) {
+                // Atualizar saldo e investimento na tabela
+                PreparedStatement pstmAtualizacao = conn.prepareStatement(sql);
+                pstmAtualizacao.setFloat(1, objUsuarioDTO.getId_investimento());
+                pstmAtualizacao.setFloat(2, objUsuarioDTO.getId_investimento());
+                pstmAtualizacao.setString(3, objUsuarioDTO.getCpf_login());
+                pstmAtualizacao.execute();
+                pstmAtualizacao.close();
+                
+                PreparedStatement ptsmAtualiza = conn.prepareCall(sqlAtualizaTotalBD);
+                ptsmAtualiza.setFloat(1, objUsuarioDTO.getId_investimento());
+                ptsmAtualiza.setString(2, objUsuarioDTO.getCpf_login());
+                ptsmAtualiza.execute();
+                ptsmAtualiza.close();
+                
+                PreparedStatement ptsmSqlAtualizaRENDA_FIXA = conn.prepareCall(sqlAtualizaRENDA_FIXA);
+                ptsmSqlAtualizaRENDA_FIXA.setString(1, objUsuarioDTO.getCpf_login());
+                ResultSet rENDA_FIXAResultado = ptsmSqlAtualizaRENDA_FIXA.executeQuery();
+                if (rENDA_FIXAResultado.next()) {
+                RENDA_FIXA = rENDA_FIXAResultado.getFloat("RENDA_FIXA");
+                rENDA_FIXAResultado.close();
+                ptsmSqlAtualizaRENDA_FIXA.close();
+                objUsuarioDTO.setRendaF(RENDA_FIXA);
+                
+            }
+                JOptionPane.showMessageDialog(null, "Investimento realizado com sucesso!");
+            } else {
+                // Saldo é maior que o investimento, portanto, cancelar o Investimento
+                throw new Exception("Saldo insuficiente para realizar o Investimento.");
+            }
+            
+            if(saldo >= investimento){
+                
+            }else{
+                throw new Exception("Falha ao atualizar");
+            }
+            
+            conn.close();
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "RegistrarInvestimento: " + erro);
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Investimento cancelada: " + erro);
+        }
+    }
+   
+   public void AtualizaInterfaceRENDA_FIXA (UsuarioDTO objUsuarioDTO) throws SQLException{
+       String sqlAtualizaRENDA_FIXA = "SELECT RENDA_FIXA FROM grupo4 WHERE CPF = ?";
+       conn = new Conexao().conectaDB();
+       float RENDA_FIXA = 0.0f;
+       PreparedStatement ptsmSqlAtualizaRENDA_FIXA = conn.prepareCall(sqlAtualizaRENDA_FIXA);
+       ptsmSqlAtualizaRENDA_FIXA.setString(1, objUsuarioDTO.getCpf_login());
+       ResultSet rENDA_FIXAResultado = ptsmSqlAtualizaRENDA_FIXA.executeQuery();
+       try {
+           
+           if (rENDA_FIXAResultado.next()) {
+               RENDA_FIXA = rENDA_FIXAResultado.getFloat("RENDA_FIXA");
+               rENDA_FIXAResultado.close();
+               ptsmSqlAtualizaRENDA_FIXA.close();
+               objUsuarioDTO.setRendaF(RENDA_FIXA);
+
+       }
+       } catch (Exception e) {
+           JOptionPane.showMessageDialog(null, "Investimento cancelada: " );
+        }
+    }
+         
 }
 

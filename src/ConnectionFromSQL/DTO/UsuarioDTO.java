@@ -3,29 +3,32 @@ package ConnectionFromSQL.DTO;
 public class UsuarioDTO {
     public int id_agencia;
     public int id_conta;
-    public String id_senha;
-    public String id_CPF;
-    public String id_nome;
-    public String id_email;
-    public float id_saldo;
-    public float id_investimento;
-    public float id_InvestTotal;
+    private static String id_senha;
+    private String id_CPF;
+    private String id_nome;
+    private String id_email;
+    private float id_saldo;
+    private float id_investimento;
+    private float id_InvestTotal;
     public float id_valorTransTED;
-    public float id_valorTransPix;
-    public String id_cpfDestinatario;
+    private float id_valorTransPix;
+    private String id_cpfDestinatario;
     public int id_contaDestinatario;
-    public int id_agenciaDestinatario;
-    public String id_tipoPix = "PIX";
-    public String id_TipoTD = "TED/DOC";
-    public String id_CadastCPF;
-    public String id_CadastSenha;
-    public String id_CadastNome;
-    public int id_CadastAgencia;
-    public int id_CadastConta;
-    public String id_CadastEmail;
-    public int idade;
-    public static String cpf_login;
-    
+    private int id_agenciaDestinatario;
+    private String id_tipoPix = "PIX";
+    private String id_TipoTD = "TED/DOC";
+    private String id_CadastCPF;
+    private String id_CadastSenha;
+    private String id_CadastNome;
+    private int id_CadastAgencia;
+    private int id_CadastConta;
+    private String id_CadastEmail;
+    private int idade;
+    private static String cpf_login;
+    public float cdiInvest;
+    public float cdbInvest;
+    public float lcaInvest;
+    public float rendaF;
     
     
     
@@ -298,5 +301,60 @@ public class UsuarioDTO {
         this.idade = idade;
     }
 
+    /**
+     * @return the cdiInvest
+     */
+    public float getCdiInvest() {
+        return cdiInvest;
+    }
+
+    /**
+     * @param cdiInvest the cdiInvest to set
+     */
+    public void setCdiInvest(float cdiInvest) {
+        this.cdiInvest = cdiInvest;
+    }
+
+    /**
+     * @return the cdbInvest
+     */
+    public float getCdbInvest() {
+        return cdbInvest;
+    }
+
+    /**
+     * @param cdbInvest the cdbInvest to set
+     */
+    public void setCdbInvest(float cdbInvest) {
+        this.cdbInvest = cdbInvest;
+    }
+
+    /**
+     * @return the lcaInvest
+     */
+    public float getLcaInvest() {
+        return lcaInvest;
+    }
+
+    /**
+     * @param lcaInvest the lcaInvest to set
+     */
+    public void setLcaInvest(float lcaInvest) {
+        this.lcaInvest = lcaInvest;
+    }
+
+    /**
+     * @return the rendaF
+     */
+    public float getRendaF() {
+        return rendaF;
+    }
+
+    /**
+     * @param rendaF the rendaF to set
+     */
+    public void setRendaF(float rendaF) {
+        this.rendaF = rendaF;
+    }
 }
 

@@ -6,6 +6,7 @@ package ConnectionFromSQL.VIEW;
 
 import ConnectionFromSQL.DAO.UsuarioDAO;
 import ConnectionFromSQL.DTO.UsuarioDTO;
+import java.awt.Color;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
@@ -39,20 +40,23 @@ public class TelaLogin extends javax.swing.JFrame {
         txtCpf = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtSenha = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        entrarBtn = new javax.swing.JButton();
+        cadastrarBtn = new javax.swing.JButton();
+        sairBtn = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
         setBackground(new java.awt.Color(255, 255, 255));
         setBounds(new java.awt.Rectangle(0, 0, 1270, 650));
-        setMaximumSize(new java.awt.Dimension(1000, 600));
-        setMinimumSize(new java.awt.Dimension(1000, 600));
+        setMaximumSize(new java.awt.Dimension(1000, 650));
+        setMinimumSize(new java.awt.Dimension(1000, 650));
+        setUndecorated(true);
         setResizable(false);
-        setSize(new java.awt.Dimension(1000, 600));
+        setSize(new java.awt.Dimension(1000, 650));
 
         jPanel1.setBackground(new java.awt.Color(84, 124, 140));
         jPanel1.setPreferredSize(new java.awt.Dimension(1282, 848));
@@ -90,26 +94,42 @@ public class TelaLogin extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(232, 246, 248));
-        jButton1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(51, 51, 51));
-        jButton1.setText("Entrar");
-        jButton1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        entrarBtn.setBackground(new java.awt.Color(232, 246, 248));
+        entrarBtn.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        entrarBtn.setForeground(new java.awt.Color(51, 51, 51));
+        entrarBtn.setText("Entrar");
+        entrarBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 255)));
+        entrarBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        entrarBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                entrarBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                entrarBtnMouseExited(evt);
+            }
+        });
+        entrarBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                entrarBtnActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(232, 246, 248));
-        jButton2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(51, 51, 51));
-        jButton2.setText("Cadastrar");
-        jButton2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        cadastrarBtn.setBackground(new java.awt.Color(232, 246, 248));
+        cadastrarBtn.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        cadastrarBtn.setForeground(new java.awt.Color(51, 51, 51));
+        cadastrarBtn.setText("Cadastrar");
+        cadastrarBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 255)));
+        cadastrarBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cadastrarBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cadastrarBtnMouseExited(evt);
+            }
+        });
+        cadastrarBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                cadastrarBtnActionPerformed(evt);
             }
         });
 
@@ -121,9 +141,9 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(entrarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cadastrarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel2)
                     .addComponent(jLabel1)
                     .addComponent(txtSenha)
@@ -143,14 +163,35 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cadastrarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(entrarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16))
         );
 
         txtSenha.getAccessibleContext().setAccessibleDescription("Senha da sua conta");
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(307, 208, 356, -1));
+
+        sairBtn.setBackground(new java.awt.Color(232, 246, 248));
+        sairBtn.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        sairBtn.setForeground(new java.awt.Color(51, 51, 51));
+        sairBtn.setText("Sair");
+        sairBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 255)));
+        sairBtn.setPreferredSize(new java.awt.Dimension(39, 19));
+        sairBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                sairBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                sairBtnMouseExited(evt);
+            }
+        });
+        sairBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sairBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(sairBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 620, 50, 20));
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/projeto/imagens/rubiklog0login.png"))); // NOI18N
@@ -165,6 +206,10 @@ public class TelaLogin extends javax.swing.JFrame {
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/projeto/imagens/rubik2overlayLogin.png"))); // NOI18N
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 600));
 
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/projeto/imagens/degradeTransf.png"))); // NOI18N
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, -4, 1000, 660));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -173,13 +218,16 @@ public class TelaLogin extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 650, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void entrarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarBtnActionPerformed
 
         try{
             String senha_usuario, cpf_usuario;
@@ -192,14 +240,12 @@ public class TelaLogin extends javax.swing.JFrame {
         
             objusuariodto.setCpf_login(cpf_usuario);
             objusuariodto.setId_senha(senha_usuario);
-            System.out.println(objusuariodto.getId_CPF());
             
             ResultSet rsusuariodao = objusuariodao.autenticacaoUsuario(objusuariodto);
             
             if(rsusuariodao.next()){
                 //Vai chamar a TelaPrincipal
                 TelaPrincipal telaprincipalview = new TelaPrincipal();
-                System.out.println(objusuariodto.getCpf_login());
                 telaprincipalview.setVisible(true);
                 
                 dispose();
@@ -213,23 +259,58 @@ public class TelaLogin extends javax.swing.JFrame {
         
         LimparCampo();
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_entrarBtnActionPerformed
 
     private void txtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenhaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSenhaActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void cadastrarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarBtnActionPerformed
         // TODO add your handling code here:
         InternalCadastro ic = new InternalCadastro();
         ic.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_cadastrarBtnActionPerformed
 
     private void txtCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCpfActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCpfActionPerformed
 
+    private void sairBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairBtnActionPerformed
+        dispose();
+    }//GEN-LAST:event_sairBtnActionPerformed
+    
+    // <editor-fold defaultstate="collapsed" desc="Hovers">
+    private void entrarBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entrarBtnMouseEntered
+        Color hover = new Color(168, 187, 196);
+        entrarBtn.setBackground(hover);
+    }//GEN-LAST:event_entrarBtnMouseEntered
+
+    private void entrarBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entrarBtnMouseExited
+        Color hover = new Color(232, 246,248);
+        entrarBtn.setBackground(hover);
+    }//GEN-LAST:event_entrarBtnMouseExited
+
+    private void cadastrarBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cadastrarBtnMouseEntered
+        Color hover = new Color(168, 187, 196);
+        cadastrarBtn.setBackground(hover);
+    }//GEN-LAST:event_cadastrarBtnMouseEntered
+
+    private void cadastrarBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cadastrarBtnMouseExited
+        Color hover = new Color(232, 246,248);
+        cadastrarBtn.setBackground(hover);
+    }//GEN-LAST:event_cadastrarBtnMouseExited
+
+    private void sairBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairBtnMouseEntered
+        Color hover = new Color(168, 187, 196);
+        sairBtn.setBackground(hover);
+    }//GEN-LAST:event_sairBtnMouseEntered
+
+    private void sairBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairBtnMouseExited
+        Color hover = new Color(232, 246,248);
+        sairBtn.setBackground(hover);
+    }//GEN-LAST:event_sairBtnMouseExited
+    // </editor-fold>
     /**
      * @param args the command line arguments
      */
@@ -271,15 +352,17 @@ public class TelaLogin extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton cadastrarBtn;
+    private javax.swing.JButton entrarBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton sairBtn;
     private javax.swing.JTextField txtCpf;
     private javax.swing.JPasswordField txtSenha;
     // End of variables declaration//GEN-END:variables
