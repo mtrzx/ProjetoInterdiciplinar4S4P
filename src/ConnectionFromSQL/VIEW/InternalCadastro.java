@@ -7,7 +7,7 @@ package ConnectionFromSQL.VIEW;
 import ConnectionFromSQL.DAO.UsuarioDAO;
 import ConnectionFromSQL.DTO.UsuarioDTO;
 import java.awt.Color;
-import javax.swing.JOptionPane;
+import java.awt.Toolkit;
 
 /**
  *
@@ -20,6 +20,7 @@ public class InternalCadastro extends javax.swing.JFrame {
      */
     public InternalCadastro() {
         initComponents();
+        setIconImage();
     }
 
     /**
@@ -390,4 +391,8 @@ public class InternalCadastro extends javax.swing.JFrame {
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtSenha;
     // End of variables declaration//GEN-END:variables
+
+    private void setIconImage() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("logorubikicon.png")));
+    }
 }

@@ -1,7 +1,8 @@
 package projetointer;
 
 import ConnectionFromSQL.VIEW.TelaLogin;
-import com.bulenkov.darcula.DarculaLaf;
+import javax.swing.Icon;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
@@ -14,6 +15,11 @@ public class ProjetoInter {
         TelaLogin objtelalogin = new TelaLogin();
         
         objtelalogin.setVisible(true);
+        
+    }
+    
+    
+    public void Icon (Icon icon){
         
     }
 }

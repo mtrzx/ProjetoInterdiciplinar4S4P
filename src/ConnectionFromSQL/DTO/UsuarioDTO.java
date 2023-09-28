@@ -3,11 +3,11 @@ package ConnectionFromSQL.DTO;
 public class UsuarioDTO {
     public int id_agencia;
     public int id_conta;
-    private static String id_senha;
+    private String id_senha;
     private String id_CPF;
     private String id_nome;
     private String id_email;
-    private float id_saldo;
+    private static float id_saldo;
     private float id_investimento;
     private float id_InvestTotal;
     public float id_valorTransTED;
@@ -25,11 +25,12 @@ public class UsuarioDTO {
     private String id_CadastEmail;
     private int idade;
     private static String cpf_login;
-    public float cdiInvest;
-    public float cdbInvest;
-    public float lcaInvest;
-    public float rendaF;
-    
+    public static float cdiInvest;
+    public static float cdbInvest;
+    public static float lcaInvest;
+    public static float rendaF;
+    public float resgateCDI;
+    public static float inputResgate;
     
     
     /////////////////////////////////
@@ -356,5 +357,34 @@ public class UsuarioDTO {
     public void setRendaF(float rendaF) {
         this.rendaF = rendaF;
     }
+
+    /**
+     * @return the resgateInvestimento
+     */
+    public float getResgateCDI() {
+        return resgateCDI;
+    }
+
+    /**
+     * @param resgateInvestimento the resgateInvestimento to set
+     */
+    public void setResgateCDI(float resgateInvestimento) {
+        this.resgateCDI = resgateInvestimento;
+    }
+
+    /**
+     * @return the inputResgate
+     */
+    public float getInputResgate() {
+        return inputResgate;
+    }
+
+    /**
+     * @param inputResgate the inputResgate to set
+     */
+    public void setInputResgate(float inputResgate) {
+        this.inputResgate = inputResgate;
+    }
+
 }
 

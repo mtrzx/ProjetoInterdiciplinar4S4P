@@ -26,6 +26,8 @@ public class InternalInvest extends javax.swing.JInternalFrame {
         UsuarioDTO objUsuarioDTO = new UsuarioDTO();
         UsuarioDAO objUsuarioDAO = new UsuarioDAO();
         AtualizaIN();
+        listarSaldo();
+
     }
 
     /**
@@ -47,8 +49,8 @@ public class InternalInvest extends javax.swing.JInternalFrame {
         lblFrase = new javax.swing.JLabel();
         lblTotalInvestAtivo = new javax.swing.JLabel();
         lblInvest1 = new javax.swing.JLabel();
-        investInput1 = new javax.swing.JTextField();
-        btnInvestir1 = new javax.swing.JButton();
+        inputResgate = new javax.swing.JTextField();
+        btnResgate = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         rendaFixaBtn = new javax.swing.JRadioButton();
         cdiBtn = new javax.swing.JRadioButton();
@@ -59,6 +61,12 @@ public class InternalInvest extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         totalInvest = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        toggleSaldo = new javax.swing.JToggleButton();
+        campoSaldo = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        campoSaldo1 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setBorder(null);
@@ -69,8 +77,10 @@ public class InternalInvest extends javax.swing.JInternalFrame {
         jPanel1.setBackground(new java.awt.Color(20, 26, 38));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        mainPanelInvest.setBackground(new java.awt.Color(200, 200, 200));
+        mainPanelInvest.setBackground(new java.awt.Color(235, 235, 235));
         mainPanelInvest.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        mainPanelInvest.setForeground(new java.awt.Color(200, 200, 200));
+        mainPanelInvest.setToolTipText("");
 
         lblInvest.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblInvest.setForeground(new java.awt.Color(51, 51, 51));
@@ -78,7 +88,7 @@ public class InternalInvest extends javax.swing.JInternalFrame {
         lblInvest.setText("Quanto deseja investir?");
         lblInvest.setToolTipText("");
 
-        investInput.setBackground(new java.awt.Color(255, 255, 255));
+        investInput.setBackground(new java.awt.Color(207, 233, 236));
         investInput.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         investInput.setForeground(new java.awt.Color(51, 51, 51));
         investInput.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -123,25 +133,25 @@ public class InternalInvest extends javax.swing.JInternalFrame {
         lblInvest1.setText("Quanto deseja investir?");
         lblInvest1.setToolTipText("");
 
-        investInput1.setBackground(new java.awt.Color(255, 255, 255));
-        investInput1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        investInput1.setForeground(new java.awt.Color(51, 51, 51));
-        investInput1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        investInput1.setToolTipText("");
-        investInput1.addActionListener(new java.awt.event.ActionListener() {
+        inputResgate.setBackground(new java.awt.Color(210, 237, 228));
+        inputResgate.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        inputResgate.setForeground(new java.awt.Color(51, 51, 51));
+        inputResgate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        inputResgate.setToolTipText("");
+        inputResgate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                investInput1ActionPerformed(evt);
+                inputResgateActionPerformed(evt);
             }
         });
 
-        btnInvestir1.setBackground(new java.awt.Color(16, 148, 164));
-        btnInvestir1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        btnInvestir1.setForeground(new java.awt.Color(51, 51, 51));
-        btnInvestir1.setText("Resgatar");
-        btnInvestir1.setToolTipText("");
-        btnInvestir1.addActionListener(new java.awt.event.ActionListener() {
+        btnResgate.setBackground(new java.awt.Color(105, 196, 168));
+        btnResgate.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        btnResgate.setForeground(new java.awt.Color(51, 51, 51));
+        btnResgate.setText("Resgatar");
+        btnResgate.setToolTipText("");
+        btnResgate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnInvestir1ActionPerformed(evt);
+                btnResgateActionPerformed(evt);
             }
         });
 
@@ -167,8 +177,8 @@ public class InternalInvest extends javax.swing.JInternalFrame {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainPanelInvestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnInvestir1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(investInput1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnResgate, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputResgate, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(108, 108, 108))
             .addGroup(mainPanelInvestLayout.createSequentialGroup()
                 .addGroup(mainPanelInvestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,9 +213,9 @@ public class InternalInvest extends javax.swing.JInternalFrame {
                     .addGroup(mainPanelInvestLayout.createSequentialGroup()
                         .addGroup(mainPanelInvestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(investInput1))
+                            .addComponent(inputResgate))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnInvestir1)
+                        .addComponent(btnResgate)
                         .addContainerGap())))
         );
 
@@ -272,7 +282,9 @@ public class InternalInvest extends javax.swing.JInternalFrame {
         });
         jPanel1.add(lcaBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 331, 204, 76));
 
-        descPanel.setBackground(new java.awt.Color(187, 187, 187));
+        descPanel.setBackground(new java.awt.Color(235, 235, 235));
+        descPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        descPanel.setForeground(new java.awt.Color(200, 200, 200));
         descPanel.setPreferredSize(new java.awt.Dimension(710, 53));
 
         descricaoLbl.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -293,14 +305,14 @@ public class InternalInvest extends javax.swing.JInternalFrame {
         descPanelLayout.setVerticalGroup(
             descPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, descPanelLayout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
+                .addContainerGap(12, Short.MAX_VALUE)
                 .addComponent(descricaoLbl)
                 .addGap(15, 15, 15))
         );
 
         jPanel1.add(descPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 16, 720, -1));
 
-        jPanel2.setBackground(new java.awt.Color(200, 200, 200));
+        jPanel2.setBackground(new java.awt.Color(235, 235, 235));
         jPanel2.setMaximumSize(new java.awt.Dimension(710, 488));
         jPanel2.setMinimumSize(new java.awt.Dimension(710, 488));
 
@@ -313,16 +325,24 @@ public class InternalInvest extends javax.swing.JInternalFrame {
         jLabel3.setText("Total investido atravez das opções:");
         jLabel3.setToolTipText("");
 
+        jButton1.setBackground(new java.awt.Color(102, 102, 255));
+        jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Histórico");
+        jButton1.setToolTipText("Histórico de investimentos");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
+                .addContainerGap(15, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(totalInvest, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addComponent(totalInvest, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -330,11 +350,45 @@ public class InternalInvest extends javax.swing.JInternalFrame {
                 .addGap(37, 37, 37)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(totalInvest, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(totalInvest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(35, 35, 35))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 580, 720, 100));
+
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("R$");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 30, 40));
+
+        toggleSaldo.setSelected(true);
+        toggleSaldo.setText("Revelar");
+        toggleSaldo.setToolTipText("");
+        toggleSaldo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toggleSaldoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(toggleSaldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, -1, -1));
+
+        campoSaldo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        campoSaldo.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jPanel1.add(campoSaldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 80, 40));
+        campoSaldo.setVisible(false);
+
+        jLabel11.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setText("Saldo bancário");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 160, 20));
+
+        campoSaldo1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        campoSaldo1.setForeground(new java.awt.Color(255, 255, 255));
+        campoSaldo1.setText("****");
+        campoSaldo1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jPanel1.add(campoSaldo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, -1, 30));
 
         jLabel1.setBackground(new java.awt.Color(200, 200, 200));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -356,20 +410,34 @@ public class InternalInvest extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInvestirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInvestirActionPerformed
-        
-        if(cdiBtn.isSelected()) {
-            RegistraCDI();
-        }else if (cdbBtn.isSelected()){
-            RegistraCDB();
-        }else if (lcaBtn.isSelected()){
-            RegistraLCA();
-        }else if (rendaFixaBtn.isSelected()){
-            RegistraRendaF();
-        }else{
-            JOptionPane.showMessageDialog(null, "Nenhuma forma de investimento foi selecionada.");
+        if (investInput.getText().toString().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Nenhum valor foi inserido");
+        } else {
+            if (cdiBtn.isSelected()) {
+                RegistraCDI();
+                LimparCampo();
+                AtualizaCDI();
+            } else if (cdbBtn.isSelected()) {
+                RegistraCDB();
+                LimparCampo();
+                AtualizaCDB();
+            } else if (lcaBtn.isSelected()) {
+                RegistraLCA();
+                LimparCampo();
+                AtualizaLCA();
+            } else if (rendaFixaBtn.isSelected()) {
+                RegistraRendaF();
+                LimparCampo();
+                AtualizaRendaFixa();
+            } else if (investInput.getText().toString().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Nenhum valor foi inserido");
+            } else {
+                JOptionPane.showMessageDialog(null, "Nenhuma forma de investimento foi selecionada.");
+            }
         }
-        
         LimparCampo();
+        AtualizaIN();        
+        listarSaldo();
     }//GEN-LAST:event_btnInvestirActionPerformed
     
     
@@ -377,7 +445,7 @@ public class InternalInvest extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_investInputActionPerformed
 
-    private void cdiBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cdiBtnActionPerformed
+    private void AtualizaCDI(){
         UsuarioDTO userDto = new UsuarioDTO();
         UsuarioDAO userDao = new UsuarioDAO();
         descricaoLbl.setText("CDI");
@@ -391,11 +459,15 @@ public class InternalInvest extends javax.swing.JInternalFrame {
         } catch (SQLException ex) {
             Logger.getLogger(InternalInvest.class.getName()).log(Level.SEVERE, null, ex);
         }
-        lblFrase.setText("O valor investido em seu nome no ativo CDi esta exibido abaixo.");
+        lblFrase.setText("O valor investido em seu nome no ativo CDI esta exibido abaixo.");
         lblTotalInvestAtivo.setText("R$ " + userDto.getCdiInvest());
+    }
+    
+    private void cdiBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cdiBtnActionPerformed
+        AtualizaCDI();
     }//GEN-LAST:event_cdiBtnActionPerformed
 
-    private void cdbBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cdbBtnActionPerformed
+    private void AtualizaCDB(){
         UsuarioDTO userDto = new UsuarioDTO();
         UsuarioDAO userDao = new UsuarioDAO();
         descricaoLbl.setText("CDB");
@@ -411,9 +483,13 @@ public class InternalInvest extends javax.swing.JInternalFrame {
         }
         lblFrase.setText("O valor investido em seu nome no ativo CDB esta exibido abaixo.");
         lblTotalInvestAtivo.setText("R$ " + userDto.getCdbInvest());
+    }
+    
+    private void cdbBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cdbBtnActionPerformed
+        AtualizaCDB();
     }//GEN-LAST:event_cdbBtnActionPerformed
 
-    private void lcaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lcaBtnActionPerformed
+    private void AtualizaLCA (){
         UsuarioDTO userDto = new UsuarioDTO();
         UsuarioDAO userDao = new UsuarioDAO();
         descricaoLbl.setText("LCA");
@@ -429,9 +505,13 @@ public class InternalInvest extends javax.swing.JInternalFrame {
         }
         lblFrase.setText("O valor investido em seu nome no ativo LCA esta exibido abaixo.");
         lblTotalInvestAtivo.setText("R$ " + userDto.getLcaInvest());
+    }
+    
+    private void lcaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lcaBtnActionPerformed
+        AtualizaLCA();
     }//GEN-LAST:event_lcaBtnActionPerformed
-
-    private void rendaFixaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rendaFixaBtnActionPerformed
+    
+    private void AtualizaRendaFixa(){
         UsuarioDTO userDto = new UsuarioDTO();
         UsuarioDAO userDao = new UsuarioDAO();
         descricaoLbl.setText("Renda fixa");
@@ -445,18 +525,70 @@ public class InternalInvest extends javax.swing.JInternalFrame {
         } catch (SQLException ex) {
             Logger.getLogger(InternalInvest.class.getName()).log(Level.SEVERE, null, ex);
         }
-        lblFrase.setText("O valor investido em seu nome no ativo RENDA_FIXA esta exibido abaixo.");
+        lblFrase.setText("O valor investido em seu nome no ativo Renda fixa esta exibido abaixo.");
         lblTotalInvestAtivo.setText("R$ " + userDto.getRendaF());
+    }
+    
+    private void rendaFixaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rendaFixaBtnActionPerformed
+        AtualizaRendaFixa();
     }//GEN-LAST:event_rendaFixaBtnActionPerformed
 
-    private void investInput1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_investInput1ActionPerformed
+    private void inputResgateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputResgateActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_investInput1ActionPerformed
+    }//GEN-LAST:event_inputResgateActionPerformed
 
-    private void btnInvestir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInvestir1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnInvestir1ActionPerformed
+    private void btnResgateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResgateActionPerformed
+        if (inputResgate.getText().toString().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Nenhum valor foi inserido");
+        } else {
 
+            if (cdiBtn.isSelected()) {
+                ResgataCDI();
+                LimparCampo();
+                AtualizaCDI();
+            } else if (cdbBtn.isSelected()) {
+                ResgataCDB();
+                LimparCampo();
+                AtualizaCDB();
+            } else if (lcaBtn.isSelected()) {
+                ResgataLCA();
+                LimparCampo();
+                AtualizaLCA();
+            } else if (rendaFixaBtn.isSelected()) {
+                ResgataRendaF();
+                LimparCampo();
+                AtualizaRendaFixa();
+            } else {
+                JOptionPane.showMessageDialog(null, "Nenhuma forma de investimento foi selecionada.");
+            }
+        }
+        
+        LimparCampo();
+        AtualizaIN();
+        listarSaldo();
+    }//GEN-LAST:event_btnResgateActionPerformed
+
+    private void toggleSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggleSaldoActionPerformed
+
+        if(toggleSaldo.isSelected()){
+            campoSaldo.setVisible(false);
+            campoSaldo1.setVisible(true);
+            campoSaldo1.setForeground(Color.WHITE);
+            toggleSaldo.setForeground(Color.black);
+            toggleSaldo.setText("Revelar");
+
+        }else{
+            campoSaldo.setVisible(true);
+            campoSaldo1.setVisible(false);
+            campoSaldo.setForeground(Color.white);
+            toggleSaldo.setText("Ocultar");
+            toggleSaldo.setForeground(Color.white);
+        }
+    }//GEN-LAST:event_toggleSaldoActionPerformed
+    
+    //////////////////// Registra ////////////////
+//<editor-fold defaultstate="collapsed" desc="Registradore-de-Investimento">
+     
     private void RegistraCDI(){
         float registroValorTransf = Float.parseFloat(investInput.getText());
         
@@ -497,6 +629,8 @@ public class InternalInvest extends javax.swing.JInternalFrame {
         objUsuarioDAO.RegistraRendaFixa(objUsuarioDTO);
     }
     
+    //</editor-fold>
+    
     private void AtualizaIN(){
         UsuarioDTO objUsuarioDTO = new UsuarioDTO();
         
@@ -506,23 +640,105 @@ public class InternalInvest extends javax.swing.JInternalFrame {
         
     }
     
+    
+//<editor-fold defaultstate="collapsed" desc="Resgate-de-Investimento">            
+    private void ResgataCDI() {
+        UsuarioDAO objUsuarioDAO = new UsuarioDAO();
+        UsuarioDTO objUsuarioDTO = new UsuarioDTO();
+        float resgataInput = Float.parseFloat(inputResgate.getText());
+        
+       
+        objUsuarioDTO.setInputResgate(resgataInput);
+               
+        objUsuarioDAO.ResgataCDI();
+        
+        System.out.println(objUsuarioDTO.getInputResgate());
+    }
+    
+    private void ResgataCDB() {
+        UsuarioDAO objUsuarioDAO = new UsuarioDAO();
+        UsuarioDTO objUsuarioDTO = new UsuarioDTO();
+        float resgataInput = Float.parseFloat(inputResgate.getText());
+        
+       
+        objUsuarioDTO.setInputResgate(resgataInput);
+               
+        objUsuarioDAO.ResgataCDB();
+        
+        System.out.println(objUsuarioDTO.getInputResgate());
+    }
+    
+    private void ResgataLCA() {
+        UsuarioDAO objUsuarioDAO = new UsuarioDAO();
+        UsuarioDTO objUsuarioDTO = new UsuarioDTO();
+        float resgataInput = Float.parseFloat(inputResgate.getText());
+        
+       
+        objUsuarioDTO.setInputResgate(resgataInput);
+               
+        objUsuarioDAO.ResgataCDI();
+        
+        System.out.println(objUsuarioDTO.getInputResgate());
+    }
+    
+    private void ResgataRendaF() {
+        UsuarioDAO objUsuarioDAO = new UsuarioDAO();
+        UsuarioDTO objUsuarioDTO = new UsuarioDTO();
+        float resgataInput = Float.parseFloat(inputResgate.getText());
+        
+       
+        objUsuarioDTO.setInputResgate(resgataInput);
+               
+        objUsuarioDAO.ResgataCDI();
+        
+    }
+    //</editor-fold>
+    
+    
+    public void listarSaldo(){        
+        /*Método responsavel por imprimir na interface grafica as informações
+        recebidas pelo retorno do UsuarioDAO
+        */
+        UsuarioDTO user = new UsuarioDTO();
+        try {
+            UsuarioDAO objUsuarioDAO = new UsuarioDAO();
+            
+            UsuarioDTO UserSaldo = objUsuarioDAO.PerfilSaldoTrnasacoes();       
+            float saldo = UserSaldo.getId_saldo();
+            String saldoString = String.valueOf(saldo);
+            campoSaldo.setText(saldoString);
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Listar erro" 
+            + erro);
+        }
+    }
+    
+    
     private void LimparCampo (){
         investInput.setText("");
+        inputResgate.setText("");
     }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup btnGrupoInvest;
     private javax.swing.JButton btnInvestir;
-    private javax.swing.JButton btnInvestir1;
+    private javax.swing.JButton btnResgate;
+    private javax.swing.JLabel campoSaldo;
+    private javax.swing.JLabel campoSaldo1;
     private javax.swing.JRadioButton cdbBtn;
     private javax.swing.JRadioButton cdiBtn;
     private javax.swing.JPanel descPanel;
     private javax.swing.JLabel descricaoLbl;
+    private javax.swing.JTextField inputResgate;
     private javax.swing.JTextField investInput;
-    private javax.swing.JTextField investInput1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblFrase;
@@ -532,6 +748,8 @@ public class InternalInvest extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton lcaBtn;
     private javax.swing.JPanel mainPanelInvest;
     private javax.swing.JRadioButton rendaFixaBtn;
+    private javax.swing.JToggleButton toggleSaldo;
     private javax.swing.JLabel totalInvest;
     // End of variables declaration//GEN-END:variables
+
 }

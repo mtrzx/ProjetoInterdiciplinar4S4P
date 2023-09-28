@@ -4,34 +4,31 @@
  */
 package ConnectionFromSQL.VIEW;
 
-import java.util.Random;
-
+import java.awt.BorderLayout;
+import java.awt.Color;
+import static java.awt.Color.BLUE;
+import static java.awt.Color.black;
+import static java.awt.Color.white;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 
 /**
  *
  * @author mathe
  */
-public class InternalMain extends javax.swing.JInternalFrame {
+public class InternalFAQ extends javax.swing.JInternalFrame {
     
     /**
      * Creates new form InternalChat
      */
-    public InternalMain() {
+    public InternalFAQ() {
         initComponents();
-        Frases();
-    }    
-    
-    private void Frases(){        
-        Random random = new Random();
-        int randomNum = random.nextInt(5);
-        String[] arrayDeFrases;
-        arrayDeFrases = new String[5];
-        arrayDeFrases[0] = "Bem-vindo ao Rubik, o banco que descomplica sua vida financeira!";
-        arrayDeFrases[1] = "Bem-vindo ao Rubik seu banco, sua solução.";
-        arrayDeFrases[2] = "Bem-vindo ao Rubik onde sua jornada financeira começa.";
-        arrayDeFrases[3] = "Bem-vindo ao Rubik nós sempre simplificando sua vida financeira.";
-        arrayDeFrases[4] = "Bem-vindo ao Rubik aonde sua solução bancária,sempre à mão.";
-        boasVindas.setText(arrayDeFrases[randomNum]);
     }
     
     /**
@@ -44,25 +41,18 @@ public class InternalMain extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        boasVindas = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setBorder(null);
-        setMaximumSize(new java.awt.Dimension(990, 766));
-        setMinimumSize(new java.awt.Dimension(990, 766));
-        setPreferredSize(new java.awt.Dimension(990, 766));
+        setMaximumSize(new java.awt.Dimension(990, 750));
+        setMinimumSize(new java.awt.Dimension(990, 750));
+        setPreferredSize(new java.awt.Dimension(990, 750));
 
         jPanel1.setBackground(new java.awt.Color(20, 26, 38));
-        jPanel1.setMaximumSize(new java.awt.Dimension(990, 766));
-        jPanel1.setMinimumSize(new java.awt.Dimension(990, 766));
-        jPanel1.setPreferredSize(new java.awt.Dimension(990, 766));
+        jPanel1.setMaximumSize(new java.awt.Dimension(990, 750));
+        jPanel1.setMinimumSize(new java.awt.Dimension(990, 750));
+        jPanel1.setPreferredSize(new java.awt.Dimension(990, 750));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        boasVindas.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        boasVindas.setForeground(new java.awt.Color(255, 255, 255));
-        boasVindas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        boasVindas.setToolTipText("");
-        jPanel1.add(boasVindas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 970, 240));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/projeto/imagens/rubik_bg.png"))); // NOI18N
@@ -76,15 +66,15 @@ public class InternalMain extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 728, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 728, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel boasVindas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

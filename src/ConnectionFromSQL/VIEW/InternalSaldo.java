@@ -45,7 +45,7 @@ public class InternalSaldo extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         toggleSaldo = new javax.swing.JToggleButton();
         campoSaldo1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setMaximumSize(new java.awt.Dimension(990, 766));
@@ -99,10 +99,11 @@ public class InternalSaldo extends javax.swing.JInternalFrame {
         campoSaldo1.setText("****");
         campoSaldo1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         campoSaldo1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        jPanel1.add(campoSaldo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 260, -1, 40));
+        jPanel1.add(campoSaldo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 260, -1, 40));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/projeto/imagens/rubik_bg.png"))); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 990, 770));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/projeto/imagens/rubik_bg.png"))); // NOI18N
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 990, 730));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -112,7 +113,9 @@ public class InternalSaldo extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 728, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -169,7 +172,7 @@ public class InternalSaldo extends javax.swing.JInternalFrame {
     private javax.swing.JLabel campoSaldo1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToggleButton toggleSaldo;
     // End of variables declaration//GEN-END:variables

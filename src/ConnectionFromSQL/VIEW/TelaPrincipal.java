@@ -3,6 +3,7 @@ package ConnectionFromSQL.VIEW;
 import ConnectionFromSQL.DAO.UsuarioDAO;
 import ConnectionFromSQL.DTO.UsuarioDTO;
 import java.awt.Color;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -10,6 +11,7 @@ import javax.swing.JOptionPane;
 public class TelaPrincipal extends javax.swing.JFrame {
     public TelaPrincipal() {
         initComponents();
+        setIconImage();
         legendaTitle.setText("Tela principal");
         legendaTitle.setForeground(Color.white);
         AdicionaInicio();
@@ -19,8 +21,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        Home = new javax.swing.JLabel();
+        homeBTNBG = new javax.swing.JPanel();
+        homeBTN = new javax.swing.JLabel();
         Oculto = new javax.swing.JButton();
         btnSaldo = new javax.swing.JButton();
         btnTrans = new javax.swing.JButton();
@@ -44,32 +46,38 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(84, 124, 140));
         jPanel1.setPreferredSize(new java.awt.Dimension(280, 411));
 
-        jPanel2.setBackground(new java.awt.Color(60, 94, 115));
-        jPanel2.setAlignmentX(0.0F);
-        jPanel2.setAlignmentY(0.0F);
+        homeBTNBG.setBackground(new java.awt.Color(60, 94, 115));
+        homeBTNBG.setAlignmentX(0.0F);
+        homeBTNBG.setAlignmentY(0.0F);
 
-        Home.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Home.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/projeto/imagens/rubiklogo.png"))); // NOI18N
-        Home.addMouseListener(new java.awt.event.MouseAdapter() {
+        homeBTN.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        homeBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/projeto/imagens/rubiklogo.png"))); // NOI18N
+        homeBTN.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                HomeMouseClicked(evt);
+                homeBTNMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                homeBTNMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                homeBTNMouseExited(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Home, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
-                .addContainerGap())
+        javax.swing.GroupLayout homeBTNBGLayout = new javax.swing.GroupLayout(homeBTNBG);
+        homeBTNBG.setLayout(homeBTNBGLayout);
+        homeBTNBGLayout.setHorizontalGroup(
+            homeBTNBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(homeBTNBGLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(homeBTN, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Home, javax.swing.GroupLayout.PREFERRED_SIZE, 68, Short.MAX_VALUE)
+        homeBTNBGLayout.setVerticalGroup(
+            homeBTNBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, homeBTNBGLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(homeBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -200,7 +208,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnChat.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         btnChat.setForeground(new java.awt.Color(0, 0, 0));
         btnChat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/projeto/imagens/Icons/Atendimento.png"))); // NOI18N
-        btnChat.setText(" Atendimento");
+        btnChat.setText(" FAQ");
         btnChat.setBorder(null);
         btnChat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnChat.setHideActionText(true);
@@ -284,7 +292,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(homeBTNBG, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnSaldo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnTrans, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnHistorico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -304,8 +312,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(homeBTNBG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Oculto, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -319,7 +327,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addComponent(btnInvest, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(btnChat, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 247, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(sair, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
                     .addComponent(btnSobre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -466,7 +474,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChatActionPerformed
         //Chama O jFrame da atendimento
-        InternalChat objInternalChat = new InternalChat();
+        InternalFAQ objInternalChat = new InternalFAQ();
         MainPanelContent.add(objInternalChat);
         objInternalChat.setVisible(true);
         legendaTitle.setText("Atendimento online");
@@ -576,14 +584,25 @@ public class TelaPrincipal extends javax.swing.JFrame {
         sair.setBackground(hover);
     }//GEN-LAST:event_sairMouseEntered
 
-    private void HomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeMouseClicked
+    private void homeBTNMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeBTNMouseClicked
         legendaTitle.setText("Tela Principal");
         legendaTitle.setForeground(Color.white);
         InternalMain im = new InternalMain();
         MainPanelContent.add(im);
         im.setVisible(true);
         MainPanelContent.remove(0);
-    }//GEN-LAST:event_HomeMouseClicked
+    }//GEN-LAST:event_homeBTNMouseClicked
+
+    private void homeBTNMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeBTNMouseEntered
+        Color color = new Color(95,141,159);
+        homeBTNBG.setBackground(color);
+        
+    }//GEN-LAST:event_homeBTNMouseEntered
+
+    private void homeBTNMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeBTNMouseExited
+        Color color = new Color(60,94,115);
+        homeBTNBG.setBackground(color);
+    }//GEN-LAST:event_homeBTNMouseExited
     
     
 // </editor-fold>
@@ -624,9 +643,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
     }
     
+    private void setIconImage() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("logorubikicon.png")));
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Home;
     private javax.swing.JPanel MainPanel;
     private javax.swing.JPanel MainPanelContent;
     private javax.swing.JButton Oculto;
@@ -638,8 +659,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnSaldo;
     private javax.swing.JButton btnSobre;
     private javax.swing.JButton btnTrans;
+    private javax.swing.JLabel homeBTN;
+    private javax.swing.JPanel homeBTNBG;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel legendaTitle;
     private javax.swing.JButton sair;
     // End of variables declaration//GEN-END:variables

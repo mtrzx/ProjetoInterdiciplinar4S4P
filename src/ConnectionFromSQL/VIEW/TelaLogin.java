@@ -7,6 +7,7 @@ package ConnectionFromSQL.VIEW;
 import ConnectionFromSQL.DAO.UsuarioDAO;
 import ConnectionFromSQL.DTO.UsuarioDTO;
 import java.awt.Color;
+import java.awt.Toolkit;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
@@ -23,6 +24,7 @@ public class TelaLogin extends javax.swing.JFrame {
      */
     public TelaLogin() {
         initComponents();
+        setIconImage();
     }
 
     /**
@@ -349,6 +351,10 @@ public class TelaLogin extends javax.swing.JFrame {
     private void LimparCampo (){
         txtCpf.setText("");
         txtSenha.setText("");
+    }
+    
+    private void setIconImage() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("logorubikicon.png")));
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

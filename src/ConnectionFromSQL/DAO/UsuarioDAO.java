@@ -78,6 +78,23 @@ public class UsuarioDAO {
         }
         return objUsuarioDTO;
     }
+    
+    public UsuarioDTO PerfilSaldoTrnasacoes() {
+        conn = new Conexao().conectaDB();
+        UsuarioDTO objUsuarioDTO = new UsuarioDTO();
+        String sql = "select SALDO from grupo4 where CPF = " + objUsuarioDTO.getCpf_login();
+        try {
+            pstm = conn.prepareStatement(sql);
+            rs = pstm.executeQuery();
+            if (rs.next()) {
+                objUsuarioDTO.setId_saldo(rs.getFloat("SALDO"));
+            }
+            pstm.close();
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Erro no UsuarioDAO saldo" + erro);
+        }
+        return objUsuarioDTO;
+    }
 
     public void AtualizaInvest(UsuarioDTO objUsuarioDTO) {
         String sqlInvestimento = "SELECT TOTAL_INVESTIDO FROM `grupo4` WHERE CPF = ?;";
@@ -187,8 +204,7 @@ public class UsuarioDAO {
             JOptionPane.showMessageDialog(null, "Transferência cancelada: " + erro);
         }               
     }
-    
-    
+        
     public void RegistrarTransfPIX(UsuarioDTO objUsuarioDTO){
         
         String sql = "UPDATE grupo4 SET SALDO = CASE WHEN CPF = ? THEN SALDO - ? WHEN CPF = ? THEN SALDO + ? ELSE SALDO END WHERE CPF IN (?, ?);";
@@ -238,8 +254,7 @@ public class UsuarioDAO {
         }
         
     }
-    
-    
+        
     public void ImprimeBDPIX(UsuarioDTO objUsuarioDTO){
         String sqlArmazena = "INSERT INTO `grupo4historico` (TIPO_TRANS, CPF_REMET, VALOR, CPF_DEST) VALUES (?, ?, ?, ?);";
         conn = new Conexao().conectaDB();
@@ -257,8 +272,7 @@ public class UsuarioDAO {
             JOptionPane.showMessageDialog(null, "Erro ao armazenar dados: " + erro.getMessage());
         }
     }
-    
-    
+        
     public void ImprimeBDTD(UsuarioDTO objUsuarioDTO){
         
         String sqlArmazenaTD = "INSERT INTO `grupo4historico` (`CPF_REMET`,`VALOR`, `CONTA_REMET`, `CONTA_DEST`, `AGENCIA_REMET`, `AGENCIA_DEST`, `TIPO_TRANS`) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -303,7 +317,6 @@ public class UsuarioDAO {
         }
         return lista;
     }
-
 
     public ArrayList<UsuarioDTO> HistoricoTEDDOC(String cpf){ 
         
@@ -360,7 +373,7 @@ public class UsuarioDAO {
         
     }   
    
-   public int[] GeraNum(){
+    public int[] GeraNum(){
         // Gerar número aleatório de conta e agência
         Random random = new Random();
         // Gera um número de 6 dígitos entre 1000 e 9999
@@ -371,6 +384,8 @@ public class UsuarioDAO {
         int[] numeros = {conta, agencia}; // Armazena os números em um array e retorna
         return numeros;
    }
+   
+// <editor-fold defaultstate="collapsed" desc="Investimento">
      
    public void RegistraCDB(UsuarioDTO objUsuarioDTO) {
         String sql = "UPDATE grupo4 SET SALDO = SALDO - ?, CDB = CDB + ? WHERE CPF = ?;";
@@ -719,6 +734,105 @@ public class UsuarioDAO {
            JOptionPane.showMessageDialog(null, "Investimento cancelada: " );
         }
     }
-         
+   // </editor-fold> 
+   
+   /////Divisor/////
+   
+//<editor-fold defaultstate="collapsed" desc="Rsgate-de-Investimento">
+    public void ResgataCDI(){
+        UsuarioDTO objUsuarioDTO = new UsuarioDTO();
+        String sql = "UPDATE grupo4 SET SALDO = SALDO + ?, CDI = CDI - ? WHERE CPF = ?;";
+        String sqlAtualizaTotalBD = "UPDATE grupo4 SET TOTAL_INVESTIDO = TOTAL_INVESTIDO - ? WHERE CPF = ?;";
+        String sqlVerificaInvestimento = "SELECT CDI FROM grupo4 WHERE  CPF = ?;";
+        conn = new Conexao().conectaDB();
+        
+        float resgate = objUsuarioDTO.getInputResgate();
+        
+        try {            
+            PreparedStatement pstmsqlVerificaInvestimento = conn.prepareStatement(sqlVerificaInvestimento);
+            pstmsqlVerificaInvestimento.setString(1, objUsuarioDTO.getCpf_login());
+            ResultSet CDISaldo = pstmsqlVerificaInvestimento.executeQuery();
+            float cdiSaldoRetorno = 0.0f;
+            float inputResgate = objUsuarioDTO.getInputResgate();
+            if (CDISaldo.next()) {
+                cdiSaldoRetorno = CDISaldo.getFloat("CDI");
+            }
+            CDISaldo.close();
+            pstmsqlVerificaInvestimento.close();
+                        
+            if (inputResgate <= cdiSaldoRetorno) {
+                PreparedStatement pstmSQL = conn.prepareStatement(sql);
+                pstmSQL.setFloat(1, resgate);
+                pstmSQL.setFloat(2, resgate);
+                pstmSQL.setString(3, objUsuarioDTO.getCpf_login());
+                pstmSQL.execute();
+                pstmSQL.close();
+
+                PreparedStatement ptsmAtualiza = conn.prepareCall(sqlAtualizaTotalBD);
+                ptsmAtualiza.setFloat(1, resgate);
+                ptsmAtualiza.setString(2, objUsuarioDTO.getCpf_login());
+                ptsmAtualiza.execute();
+                ptsmAtualiza.close();
+
+                JOptionPane.showMessageDialog(null, "Investimento resgatado com sucesso!");
+            }else if (inputResgate > cdiSaldoRetorno){
+                JOptionPane.showMessageDialog(null, "Você esta tentando resgatar um valor acima do que está disponivel.");
+            }else{
+                System.out.println("Error");
+            }
+        } catch (Exception e) {
+            System.out.println("erro: " + e);
+        }
+        
+    }
+    
+    public void ResgataCDB(){
+        UsuarioDTO objUsuarioDTO = new UsuarioDTO();
+        String sql = "UPDATE grupo4 SET SALDO = SALDO + ?, CDB = CDB - ? WHERE CPF = ?;";
+        String sqlAtualizaTotalBD = "UPDATE grupo4 SET TOTAL_INVESTIDO = TOTAL_INVESTIDO - ? WHERE CPF = ?;";
+        String sqlVerificaInvestimento = "SELECT CDB FROM grupo4 WHERE  CPF = ?;";
+        conn = new Conexao().conectaDB();
+        
+        float resgate = objUsuarioDTO.getInputResgate();
+        
+        try {            
+            PreparedStatement pstmsqlVerificaInvestimento = conn.prepareStatement(sqlVerificaInvestimento);
+            pstmsqlVerificaInvestimento.setString(1, objUsuarioDTO.getCpf_login());
+            ResultSet CDBSaldo = pstmsqlVerificaInvestimento.executeQuery();
+            float cdbSaldoRetorno = 0.0f;
+            float inputResgate = objUsuarioDTO.getInputResgate();
+            if (CDBSaldo.next()) {
+                cdbSaldoRetorno = CDBSaldo.getFloat("CDB");
+            }
+            CDBSaldo.close();
+            pstmsqlVerificaInvestimento.close();
+                        
+            if (inputResgate <= cdbSaldoRetorno) {
+                PreparedStatement pstmSQL = conn.prepareStatement(sql);
+                pstmSQL.setFloat(1, resgate);
+                pstmSQL.setFloat(2, resgate);
+                pstmSQL.setString(3, objUsuarioDTO.getCpf_login());
+                pstmSQL.execute();
+                pstmSQL.close();
+
+                PreparedStatement ptsmAtualiza = conn.prepareCall(sqlAtualizaTotalBD);
+                ptsmAtualiza.setFloat(1, resgate);
+                ptsmAtualiza.setString(2, objUsuarioDTO.getCpf_login());
+                ptsmAtualiza.execute();
+                ptsmAtualiza.close();
+
+                JOptionPane.showMessageDialog(null, "Investimento resgatado com sucesso!");
+            }else if (inputResgate > cdbSaldoRetorno){
+                JOptionPane.showMessageDialog(null, "Você esta tentando resgatar um valor acima do que está disponivel.");
+            }else{
+                System.out.println("Error");
+            }
+        } catch (Exception e) {
+            System.out.println("erro: " + e);
+        }
+    }
+    
+    //</editor-fold>
 }
+    
 

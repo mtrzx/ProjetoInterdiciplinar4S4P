@@ -6,6 +6,7 @@ package ConnectionFromSQL.VIEW;
 
 import ConnectionFromSQL.DAO.UsuarioDAO;
 import ConnectionFromSQL.DTO.UsuarioDTO;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,6 +21,7 @@ public class InternalTrans extends javax.swing.JInternalFrame {
      */
     public InternalTrans() {
         initComponents();
+        listarSaldo();
         
     }
     
@@ -56,6 +58,7 @@ public class InternalTrans extends javax.swing.JInternalFrame {
         contaTrans.setText("");
         agenciaTrans.setText("");
         valorTD.setText("");
+        
     }
     
     /**
@@ -87,10 +90,15 @@ public class InternalTrans extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        toggleSaldo = new javax.swing.JToggleButton();
+        campoSaldo = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        campoSaldo1 = new javax.swing.JLabel();
+        background = new javax.swing.JLabel();
 
         setBorder(null);
-        setMaximumSize(new java.awt.Dimension(990, 740));
-        setMinimumSize(new java.awt.Dimension(990, 740));
+        setMaximumSize(new java.awt.Dimension(990, 766));
+        setMinimumSize(new java.awt.Dimension(990, 766));
         setPreferredSize(new java.awt.Dimension(990, 766));
 
         jPanel1.setBackground(new java.awt.Color(20, 26, 38));
@@ -202,12 +210,45 @@ public class InternalTrans extends javax.swing.JInternalFrame {
 
         jPanel1.add(PainelTEDDOC, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 130, 450, 450));
 
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/projeto/imagens/rubik_bg.png"))); // NOI18N
-        jLabel1.setMaximumSize(new java.awt.Dimension(990, 766));
-        jLabel1.setMinimumSize(new java.awt.Dimension(990, 766));
-        jLabel1.setPreferredSize(new java.awt.Dimension(990, 766));
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 740));
+        jLabel1.setText("R$");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 40, 30, 30));
+
+        toggleSaldo.setSelected(true);
+        toggleSaldo.setText("Revelar");
+        toggleSaldo.setToolTipText("");
+        toggleSaldo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toggleSaldoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(toggleSaldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 80, -1, -1));
+
+        campoSaldo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        campoSaldo.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jPanel1.add(campoSaldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 40, 80, 30));
+        campoSaldo.setVisible(false);
+
+        jLabel11.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setText("Saldo bancário");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 978, 20));
+
+        campoSaldo1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        campoSaldo1.setForeground(new java.awt.Color(255, 255, 255));
+        campoSaldo1.setText("****");
+        campoSaldo1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jPanel1.add(campoSaldo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 50, -1, 20));
+
+        background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/projeto/imagens/rubik_bg.png"))); // NOI18N
+        background.setMaximumSize(new java.awt.Dimension(990, 766));
+        background.setMinimumSize(new java.awt.Dimension(990, 766));
+        background.setPreferredSize(new java.awt.Dimension(990, 766));
+        jPanel1.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 740));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -227,25 +268,67 @@ public class InternalTrans extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         RegistrarTransfTed();
         LimparCampo();
+        listarSaldo();
     }//GEN-LAST:event_enviarBtnTDActionPerformed
 
     private void enviarBtnPixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarBtnPixActionPerformed
         // TODO add your handling code here:
         RegistrarTransfPix();
-        LimparCampo();
+        LimparCampo();        
+        listarSaldo();
     }//GEN-LAST:event_enviarBtnPixActionPerformed
 
-
+    private void toggleSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggleSaldoActionPerformed
+        
+        if(toggleSaldo.isSelected()){
+            campoSaldo.setVisible(false);
+            campoSaldo1.setVisible(true);
+            campoSaldo1.setForeground(Color.WHITE);
+            toggleSaldo.setForeground(Color.black);
+            toggleSaldo.setText("Revelar");
+            
+        }else{            
+            campoSaldo.setVisible(true);
+            campoSaldo1.setVisible(false);
+            campoSaldo.setForeground(Color.white);
+            toggleSaldo.setText("Ocultar");
+            toggleSaldo.setForeground(Color.white);
+        }
+    }//GEN-LAST:event_toggleSaldoActionPerformed
+                                        
+    public void listarSaldo(){        
+        /*Método responsavel por imprimir na interface grafica as informações
+        recebidas pelo retorno do UsuarioDAO
+        */
+        UsuarioDTO user = new UsuarioDTO();
+        try {
+            UsuarioDAO objUsuarioDAO = new UsuarioDAO();
+            
+            UsuarioDTO UserSaldo = objUsuarioDAO.PerfilSaldoTrnasacoes();       
+            float saldo = UserSaldo.getId_saldo();
+            String saldoString = String.valueOf(saldo);
+            campoSaldo.setText(saldoString);
+            System.out.println(saldoString);
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Listar erro" 
+            + erro);
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PainelPix;
     private javax.swing.JPanel PainelTEDDOC;
     private javax.swing.JTextField agenciaTrans;
+    private javax.swing.JLabel background;
+    private javax.swing.JLabel campoSaldo;
+    private javax.swing.JLabel campoSaldo1;
     private javax.swing.JTextField chavePix;
     private javax.swing.JTextField contaTrans;
     private javax.swing.JButton enviarBtnPix;
     private javax.swing.JButton enviarBtnTD;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -255,6 +338,7 @@ public class InternalTrans extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JToggleButton toggleSaldo;
     private javax.swing.JTextField valorPix;
     private javax.swing.JTextField valorTD;
     // End of variables declaration//GEN-END:variables
