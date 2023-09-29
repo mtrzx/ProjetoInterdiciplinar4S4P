@@ -8,9 +8,11 @@ import ConnectionFromSQL.DAO.UsuarioDAO;
 import ConnectionFromSQL.DTO.UsuarioDTO;
 import java.awt.Color;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -23,8 +25,6 @@ public class InternalInvest extends javax.swing.JInternalFrame {
      */
     public InternalInvest() {
         initComponents();
-        UsuarioDTO objUsuarioDTO = new UsuarioDTO();
-        UsuarioDAO objUsuarioDAO = new UsuarioDAO();
         AtualizaIN();
         listarSaldo();
 
@@ -40,6 +40,11 @@ public class InternalInvest extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         btnGrupoInvest = new javax.swing.ButtonGroup();
+        popUpHist = new javax.swing.JDialog();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabelaInvest = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabelaResgate = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         mainPanelInvest = new javax.swing.JPanel();
         lblInvest = new javax.swing.JLabel();
@@ -68,6 +73,70 @@ public class InternalInvest extends javax.swing.JInternalFrame {
         jLabel11 = new javax.swing.JLabel();
         campoSaldo1 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+
+        popUpHist.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        popUpHist.setTitle("Histórico de insvestomentos");
+        popUpHist.setMaximumSize(new java.awt.Dimension(980, 730));
+        popUpHist.setMinimumSize(new java.awt.Dimension(980, 730));
+        popUpHist.setName("Historico"); // NOI18N
+        popUpHist.setPreferredSize(new java.awt.Dimension(980, 730));
+
+        tabelaInvest.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Tipo de insvestimento", " Valor investido", "Data e hora"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tabelaInvest);
+
+        tabelaResgate.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Tipo de insvestimento", "Valor resgatado", "Data e hora"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tabelaResgate);
+
+        javax.swing.GroupLayout popUpHistLayout = new javax.swing.GroupLayout(popUpHist.getContentPane());
+        popUpHist.getContentPane().setLayout(popUpHistLayout);
+        popUpHistLayout.setHorizontalGroup(
+            popUpHistLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(popUpHistLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(popUpHistLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 968, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        popUpHistLayout.setVerticalGroup(
+            popUpHistLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(popUpHistLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(11, Short.MAX_VALUE))
+        );
 
         setBorder(null);
         setMaximumSize(new java.awt.Dimension(990, 766));
@@ -330,6 +399,11 @@ public class InternalInvest extends javax.swing.JInternalFrame {
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Histórico");
         jButton1.setToolTipText("Histórico de investimentos");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -409,7 +483,31 @@ public class InternalInvest extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    public void AtualizaTabelaInvest() {
+        try {
+            UsuarioDAO objUsuarioDAO = new UsuarioDAO();
+
+            DefaultTableModel model = (DefaultTableModel) tabelaInvest.getModel();
+
+            ArrayList<UsuarioDTO> lista = objUsuarioDAO.HistoricoInvestimento();
+
+            for (int i = 0; i < lista.size(); i++) {
+                model.addRow(new Object[]{
+                    lista.get(i).getTipoAtivo(),
+                    lista.get(i).getValorAtivo(),
+                    lista.get(i).getDataAtivo()
+                });
+            }
+
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Erro no listavaloresTED" + erro);
+        }
+
+    }
+    
     private void btnInvestirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInvestirActionPerformed
+        UsuarioDAO userDAO = new UsuarioDAO();
         if (investInput.getText().toString().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Nenhum valor foi inserido");
         } else {
@@ -417,6 +515,8 @@ public class InternalInvest extends javax.swing.JInternalFrame {
                 RegistraCDI();
                 LimparCampo();
                 AtualizaCDI();
+                userDAO.BDInvestimentoCDI();
+                AtualizaTabelaInvest();
             } else if (cdbBtn.isSelected()) {
                 RegistraCDB();
                 LimparCampo();
@@ -585,6 +685,10 @@ public class InternalInvest extends javax.swing.JInternalFrame {
             toggleSaldo.setForeground(Color.white);
         }
     }//GEN-LAST:event_toggleSaldoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        popUpHist.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
     
     //////////////////// Registra ////////////////
 //<editor-fold defaultstate="collapsed" desc="Registradore-de-Investimento">
@@ -712,8 +816,8 @@ public class InternalInvest extends javax.swing.JInternalFrame {
             + erro);
         }
     }
-    
-    
+        
+        
     private void LimparCampo (){
         investInput.setText("");
         inputResgate.setText("");
@@ -741,13 +845,18 @@ public class InternalInvest extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblFrase;
     private javax.swing.JLabel lblInvest;
     private javax.swing.JLabel lblInvest1;
     private javax.swing.JLabel lblTotalInvestAtivo;
     private javax.swing.JRadioButton lcaBtn;
     private javax.swing.JPanel mainPanelInvest;
+    private javax.swing.JDialog popUpHist;
     private javax.swing.JRadioButton rendaFixaBtn;
+    private javax.swing.JTable tabelaInvest;
+    private javax.swing.JTable tabelaResgate;
     private javax.swing.JToggleButton toggleSaldo;
     private javax.swing.JLabel totalInvest;
     // End of variables declaration//GEN-END:variables

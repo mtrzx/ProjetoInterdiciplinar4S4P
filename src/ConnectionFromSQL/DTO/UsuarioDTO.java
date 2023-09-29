@@ -1,6 +1,8 @@
 package ConnectionFromSQL.DTO;
 
 public class UsuarioDTO {
+
+    
     public int id_agencia;
     public int id_conta;
     private String id_senha;
@@ -8,7 +10,7 @@ public class UsuarioDTO {
     private String id_nome;
     private String id_email;
     private static float id_saldo;
-    private float id_investimento;
+    private static float id_investimento;
     private float id_InvestTotal;
     public float id_valorTransTED;
     private float id_valorTransPix;
@@ -17,6 +19,10 @@ public class UsuarioDTO {
     private int id_agenciaDestinatario;
     private String id_tipoPix = "PIX";
     private String id_TipoTD = "TED/DOC";
+    public String tipo_CDI = "CDI";
+    public String tipo_CDB = "CDB";
+    public String tipo_LCA = "LCA";
+    public String tipo_RendaFixa = "RENDA_FIXA";
     private String id_CadastCPF;
     private String id_CadastSenha;
     private String id_CadastNome;
@@ -29,8 +35,11 @@ public class UsuarioDTO {
     public static float cdbInvest;
     public static float lcaInvest;
     public static float rendaF;
-    public float resgateCDI;
     public static float inputResgate;
+    public static String dataDto;
+    public String tipoAtivo;
+    public float valorAtivo;
+    public String dataAtivo;
     
     
     /////////////////////////////////
@@ -359,20 +368,6 @@ public class UsuarioDTO {
     }
 
     /**
-     * @return the resgateInvestimento
-     */
-    public float getResgateCDI() {
-        return resgateCDI;
-    }
-
-    /**
-     * @param resgateInvestimento the resgateInvestimento to set
-     */
-    public void setResgateCDI(float resgateInvestimento) {
-        this.resgateCDI = resgateInvestimento;
-    }
-
-    /**
      * @return the inputResgate
      */
     public float getInputResgate() {
@@ -385,6 +380,89 @@ public class UsuarioDTO {
     public void setInputResgate(float inputResgate) {
         this.inputResgate = inputResgate;
     }
+    
+    /**
+     * @return the dataDto
+     */
+    public static String getDataDto() {
+        return dataDto;
+    }
 
+    /**
+     * @param aDataDto the dataDto to set
+     */
+    public static void setDataDto(String aDataDto) {
+        dataDto = aDataDto;
+    }   
+
+    /**
+     * @return the tipo_CDI
+     */
+    public String getTipo_CDI() {
+        return tipo_CDI;
+    }
+
+    /**
+     * @return the tipo_CDB
+     */
+    public String getTipo_CDB() {
+        return tipo_CDB;
+    }
+
+    /**
+     * @return the tipo_LCA
+     */
+    public String getTipo_LCA() {
+        return tipo_LCA;
+    }
+
+    /**
+     * @return the tipo_RendaFixa
+     */
+    public String getTipo_RendaFixa() {
+        return tipo_RendaFixa;
+    }
+
+    /**
+     * @return the tipoAtivo
+     */
+    public String getTipoAtivo() {
+        return tipoAtivo;
+    }
+
+    /**
+     * @param tipoAtivo the tipoAtivo to set
+     */
+    public void setTipoAtivo(String tipoAtivo) {
+        this.tipoAtivo = tipoAtivo;
+    }
+
+    /**
+     * @return the valorAtivo
+     */
+    public float getValorAtivo() {
+        return valorAtivo;
+    }
+
+    /**
+     * @param valorAtivo the valorAtivo to set
+     */
+    public void setValorAtivo(float valorAtivo) {
+        this.valorAtivo = valorAtivo;
+    }
+
+    /**
+     * @return the dataAtivo
+     */
+    public String getDataAtivo() {
+        return dataAtivo;
+    }
+
+    /**
+     * @param dataAtivo the dataAtivo to set
+     */
+    public void setDataAtivo(String dataAtivo) {
+        this.dataAtivo = dataAtivo;
+    }
 }
 

@@ -9,7 +9,10 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import ConnectionFromSQL.VIEW.InternalTrans;
 import ConnectionFromSQL.VIEW.TelaLogin;
+import com.mysql.cj.xdevapi.PreparableStatement;
 import java.awt.Toolkit;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
 public class UsuarioDAO {
@@ -384,6 +387,64 @@ public class UsuarioDAO {
         int[] numeros = {conta, agencia}; // Armazena os números em um array e retorna
         return numeros;
    }
+    
+    public ArrayList<UsuarioDTO> HistoricoInvestimento(){ 
+        
+        UsuarioDTO objUsuarioDTO = new UsuarioDTO();
+        conn = new Conexao().conectaDB();
+        String sql = "SELECT TIPO_INVEST, VALOR, DATA_REG FROM grupo4investimento WHERE CPF_REMET =" + objUsuarioDTO.getCpf_login();
+        try{        
+            pstm = conn.prepareStatement(sql);
+            rs = pstm.executeQuery();
+            
+            while(rs.next()){
+                objUsuarioDTO.setTipoAtivo(rs.getString("TIPO_INVEST"));
+                objUsuarioDTO.setValorAtivo(rs.getFloat("VALOR"));
+                objUsuarioDTO.setDataAtivo(rs.getString("DATA_REG"));
+                
+                lista.add(objUsuarioDTO);
+            }
+        }catch(SQLException erro){            
+            JOptionPane.showMessageDialog(null, "Erro pesquisar Historico" + erro);
+        }
+        return lista;
+    }
+        
+    
+    public void RegistraData (){
+        
+        UsuarioDTO userdto = new UsuarioDTO();
+        
+        DateTimeFormatter dataFormatada = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");  
+        LocalDateTime now = LocalDateTime.now();
+        
+        //Formata a data pra ser recebida no banco de dados
+        String dataFormatadaString = now.format(dataFormatada);
+        
+        userdto.setDataDto(dataFormatadaString);
+                
+    }
+    
+    public void BDInvestimentoCDI(){
+        UsuarioDTO objUsuarioDTO = new UsuarioDTO();
+        String sql = "INSERT INTO `grupo4investimento` (`CPF_REMET`, `VALOR`, `DATA_REG`, `TIPO_INVEST`) VALUES (?,?,?,?);";
+        conn = new Conexao().conectaDB();
+        RegistraData();
+        try {
+            PreparedStatement pstmArmazenaDados = conn.prepareStatement(sql);
+            pstmArmazenaDados.setString(1, objUsuarioDTO.getCpf_login());
+            pstmArmazenaDados.setFloat(2, objUsuarioDTO.getId_investimento());
+            pstmArmazenaDados.setString(3, objUsuarioDTO.getDataDto());
+            pstmArmazenaDados.setString(4, objUsuarioDTO.getTipo_CDI());
+            pstmArmazenaDados.execute();
+            pstmArmazenaDados.close();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao armazenar dados: " + e.getMessage());
+        }
+        System.out.println(objUsuarioDTO.getCpf_login() + objUsuarioDTO.getId_investimento() + objUsuarioDTO.getDataDto() + " " + 
+                    objUsuarioDTO.getTipo_CDI());
+    }
    
 // <editor-fold defaultstate="collapsed" desc="Investimento">
      
