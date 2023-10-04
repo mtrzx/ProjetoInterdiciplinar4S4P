@@ -27,7 +27,6 @@ public class InternalInvest extends javax.swing.JInternalFrame {
         initComponents();
         AtualizaIN();
         listarSaldo();
-
     }
 
     /**
@@ -66,7 +65,7 @@ public class InternalInvest extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         totalInvest = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        historicoBtn = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         toggleSaldo = new javax.swing.JToggleButton();
         campoSaldo = new javax.swing.JLabel();
@@ -394,14 +393,14 @@ public class InternalInvest extends javax.swing.JInternalFrame {
         jLabel3.setText("Total investido atravez das opções:");
         jLabel3.setToolTipText("");
 
-        jButton1.setBackground(new java.awt.Color(102, 102, 255));
-        jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Histórico");
-        jButton1.setToolTipText("Histórico de investimentos");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        historicoBtn.setBackground(new java.awt.Color(102, 102, 255));
+        historicoBtn.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        historicoBtn.setForeground(new java.awt.Color(255, 255, 255));
+        historicoBtn.setText("Histórico");
+        historicoBtn.setToolTipText("Histórico de investimentos");
+        historicoBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                historicoBtnActionPerformed(evt);
             }
         });
 
@@ -415,7 +414,7 @@ public class InternalInvest extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addComponent(totalInvest, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(historicoBtn)
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -425,7 +424,7 @@ public class InternalInvest extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(totalInvest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(historicoBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(35, 35, 35))
         );
 
@@ -499,6 +498,28 @@ public class InternalInvest extends javax.swing.JInternalFrame {
                     lista.get(i).getDataAtivo()
                 });
             }
+            
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Erro no listavaloresTED" + erro);
+        }      
+        
+    }
+    
+    public void AtualizaTabelaResgate() {
+        try {
+            UsuarioDAO objUsuarioDAO = new UsuarioDAO();
+
+            DefaultTableModel model = (DefaultTableModel) tabelaResgate.getModel();
+
+            ArrayList<UsuarioDTO> lista = objUsuarioDAO.HistoricoInvestimentoResgate();
+
+            for (int i = 0; i < lista.size(); i++) {
+                model.addRow(new Object[]{
+                    lista.get(i).getTipoAtivoResgtate(),
+                    lista.get(i).getValorAtivoResgate(),
+                    lista.get(i).getDataAtivoResgate()
+                });
+            }
 
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "Erro no listavaloresTED" + erro);
@@ -516,19 +537,21 @@ public class InternalInvest extends javax.swing.JInternalFrame {
                 LimparCampo();
                 AtualizaCDI();
                 userDAO.BDInvestimentoCDI();
-                AtualizaTabelaInvest();
             } else if (cdbBtn.isSelected()) {
                 RegistraCDB();
                 LimparCampo();
                 AtualizaCDB();
+                userDAO.BDInvestimentoCDB();
             } else if (lcaBtn.isSelected()) {
                 RegistraLCA();
                 LimparCampo();
                 AtualizaLCA();
+                userDAO.BDInvestimentoLCA();
             } else if (rendaFixaBtn.isSelected()) {
                 RegistraRendaF();
                 LimparCampo();
-                AtualizaRendaFixa();
+                AtualizaRendaFixa();                
+                userDAO.BDInvestimentoRF();
             } else if (investInput.getText().toString().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Nenhum valor foi inserido");
             } else {
@@ -638,6 +661,7 @@ public class InternalInvest extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_inputResgateActionPerformed
 
     private void btnResgateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResgateActionPerformed
+        UsuarioDAO userDAO = new UsuarioDAO();
         if (inputResgate.getText().toString().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Nenhum valor foi inserido");
         } else {
@@ -645,19 +669,23 @@ public class InternalInvest extends javax.swing.JInternalFrame {
             if (cdiBtn.isSelected()) {
                 ResgataCDI();
                 LimparCampo();
-                AtualizaCDI();
+                AtualizaCDI(); 
+                userDAO.BDResgataCDI();
             } else if (cdbBtn.isSelected()) {
                 ResgataCDB();
                 LimparCampo();
                 AtualizaCDB();
+                userDAO.BDResgataCDB();
             } else if (lcaBtn.isSelected()) {
                 ResgataLCA();
                 LimparCampo();
                 AtualizaLCA();
+                userDAO.BDResgataLCA();
             } else if (rendaFixaBtn.isSelected()) {
                 ResgataRendaF();
                 LimparCampo();
                 AtualizaRendaFixa();
+                userDAO.BDResgataRF();
             } else {
                 JOptionPane.showMessageDialog(null, "Nenhuma forma de investimento foi selecionada.");
             }
@@ -686,9 +714,11 @@ public class InternalInvest extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_toggleSaldoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void historicoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historicoBtnActionPerformed
         popUpHist.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        AtualizaTabelaInvest();
+        AtualizaTabelaResgate();
+    }//GEN-LAST:event_historicoBtnActionPerformed
     
     //////////////////// Registra ////////////////
 //<editor-fold defaultstate="collapsed" desc="Registradore-de-Investimento">
@@ -780,7 +810,7 @@ public class InternalInvest extends javax.swing.JInternalFrame {
        
         objUsuarioDTO.setInputResgate(resgataInput);
                
-        objUsuarioDAO.ResgataCDI();
+        objUsuarioDAO.ResgataLCA();
         
         System.out.println(objUsuarioDTO.getInputResgate());
     }
@@ -793,7 +823,7 @@ public class InternalInvest extends javax.swing.JInternalFrame {
        
         objUsuarioDTO.setInputResgate(resgataInput);
                
-        objUsuarioDAO.ResgataCDI();
+        objUsuarioDAO.ResgataRF();
         
     }
     //</editor-fold>
@@ -834,9 +864,9 @@ public class InternalInvest extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton cdiBtn;
     private javax.swing.JPanel descPanel;
     private javax.swing.JLabel descricaoLbl;
+    private javax.swing.JButton historicoBtn;
     private javax.swing.JTextField inputResgate;
     private javax.swing.JTextField investInput;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;

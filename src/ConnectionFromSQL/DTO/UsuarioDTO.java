@@ -22,10 +22,11 @@ public class UsuarioDTO {
     public String tipo_CDI = "CDI";
     public String tipo_CDB = "CDB";
     public String tipo_LCA = "LCA";
-    public String tipo_RendaFixa = "RENDA_FIXA";
+    public String tipo_RendaFixa = "RENDA FIXA";
     private String id_CadastCPF;
     private String id_CadastSenha;
     private String id_CadastNome;
+    public String id_CadastEndereco;
     private int id_CadastAgencia;
     private int id_CadastConta;
     private String id_CadastEmail;
@@ -37,9 +38,15 @@ public class UsuarioDTO {
     public static float rendaF;
     public static float inputResgate;
     public static String dataDto;
-    public String tipoAtivo;
-    public float valorAtivo;
-    public String dataAtivo;
+    public static String tipoAtivo;
+    public static float valorAtivo;
+    public static String dataAtivo;
+    public static float ValorAtivoResgate;
+    public static String tipoAtivoResgtate;
+    public static String dataAtivoResgate;
+    public String tipoInvestimento = "INVESTIMENTO";
+    public String tipoResgate = "RESGATE";
+    
     
     
     /////////////////////////////////
@@ -296,6 +303,20 @@ public class UsuarioDTO {
     public void setId_CadastEmail(String id_CadastEmail) {
         this.id_CadastEmail = id_CadastEmail;
     }
+
+    /**
+     * @return the id_CadastEndereco
+     */
+    public String getId_CadastEndereco() {
+        return id_CadastEndereco;
+    }
+
+    /**
+     * @param id_CadastEndereco the id_CadastEndereco to set
+     */
+    public void setId_CadastEndereco(String id_CadastEndereco) {
+        this.id_CadastEndereco = id_CadastEndereco;
+    }
     
     /**
      * @return the idade
@@ -464,5 +485,62 @@ public class UsuarioDTO {
     public void setDataAtivo(String dataAtivo) {
         this.dataAtivo = dataAtivo;
     }
+
+    /**
+     * @return the getValorAtivoResgate
+     */
+    public float getValorAtivoResgate() {
+        return ValorAtivoResgate;
+    }
+
+    /**
+     * @param getValorAtivoResgate the getValorAtivoResgate to set
+     */
+    public void setValorAtivoResgate(float getValorAtivoResgate) {
+        this.ValorAtivoResgate = getValorAtivoResgate;
+    }
+
+    /**
+     * @return the tipoAtivoResgtate
+     */
+    public String getTipoAtivoResgtate() {
+        return tipoAtivoResgtate;
+    }
+
+    /**
+     * @param tipoAtivoResgtate the tipoAtivoResgtate to set
+     */
+    public void setTipoAtivoResgtate(String tipoAtivoResgtate) {
+        this.tipoAtivoResgtate = tipoAtivoResgtate;
+    }
+
+    /**
+     * @return the dataAtivoResgate
+     */
+    public String getDataAtivoResgate() {
+        return dataAtivoResgate;
+    }
+
+    /**
+     * @param dataAtivoResgate the dataAtivoResgate to set
+     */
+    public void setDataAtivoResgate(String dataAtivoResgate) {
+        this.dataAtivoResgate = dataAtivoResgate;
+    }
+
+    /**
+     * @return the tipoInvestimento
+     */
+    public String getTipoInvestimento() {
+        return tipoInvestimento;
+    }
+
+    /**
+     * @return the tipoResgate
+     */
+    public String getTipoResgate() {
+        return tipoResgate;
+    }
+
 }
 

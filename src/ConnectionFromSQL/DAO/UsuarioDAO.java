@@ -346,7 +346,8 @@ public class UsuarioDAO {
     }
     
     public void CadastrarUsuario(UsuarioDTO objUsuarioDTO) {
-        String sql = "insert into grupo4 (CPF, SENHA, NOME, AGENCIA, CONTA, EMAIL, SALDO, INVESTIMENTO) values (?, ?, ?, ?, ?, ?, 0.0, 0.0)";
+        String sql = "INSERT INTO grupo4 (CPF, SENHA, NOME, AGENCIA, CONTA, EMAIL, ENDERECO, SALDO, TOTAL_INVESTIDO, LCA, RENDA_FIXA, "
+                + "CDI, CDB) VALUES (?, ?, ?, ?, ?, ?, ?, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)";
 
         GeraNum();
         
@@ -366,6 +367,7 @@ public class UsuarioDAO {
             pstm.setInt(4, agenciaGerada);
             pstm.setInt(5, contaGerada);
             pstm.setString(6, objUsuarioDTO.getId_CadastEmail());
+            pstm.setString(7, objUsuarioDTO.getId_CadastEndereco());
 
             pstm.execute();
             pstm.close();
@@ -392,7 +394,9 @@ public class UsuarioDAO {
         
         UsuarioDTO objUsuarioDTO = new UsuarioDTO();
         conn = new Conexao().conectaDB();
-        String sql = "SELECT TIPO_INVEST, VALOR, DATA_REG FROM grupo4investimento WHERE CPF_REMET =" + objUsuarioDTO.getCpf_login();
+        String sql = "SELECT TIPO_INVEST, VALOR, DATA_REG FROM grupo4investimento WHERE CPF_REMET = '" + objUsuarioDTO.getCpf_login() +
+                "' AND TIPO_TRANS LIKE '" + objUsuarioDTO.getTipoInvestimento() + "'";
+
         try{        
             pstm = conn.prepareStatement(sql);
             rs = pstm.executeQuery();
@@ -409,7 +413,30 @@ public class UsuarioDAO {
         }
         return lista;
     }
+    
+    public ArrayList<UsuarioDTO> HistoricoInvestimentoResgate(){ 
         
+        UsuarioDTO objUsuarioDTO = new UsuarioDTO();
+        conn = new Conexao().conectaDB();
+        String sql = "SELECT TIPO_INVEST, VALOR, DATA_REG FROM grupo4investimento WHERE CPF_REMET = '" + objUsuarioDTO.getCpf_login() + 
+                "' AND TIPO_TRANS LIKE '" + objUsuarioDTO.getTipoResgate() + "'";
+
+        try{        
+            pstm = conn.prepareStatement(sql);
+            rs = pstm.executeQuery();
+            
+            while(rs.next()){
+                objUsuarioDTO.setTipoAtivoResgtate(rs.getString("TIPO_INVEST"));
+                objUsuarioDTO.setValorAtivoResgate(rs.getFloat("VALOR"));
+                objUsuarioDTO.setDataAtivoResgate(rs.getString("DATA_REG"));
+                
+                lista.add(objUsuarioDTO);
+            }
+        }catch(SQLException erro){            
+            JOptionPane.showMessageDialog(null, "Erro pesquisar Historico" + erro);
+        }
+        return lista;
+    }
     
     public void RegistraData (){
         
@@ -425,9 +452,11 @@ public class UsuarioDAO {
                 
     }
     
+// <editor-fold defaultstate="collapsed" desc="Registra Investimento Historico BD">
+    
     public void BDInvestimentoCDI(){
         UsuarioDTO objUsuarioDTO = new UsuarioDTO();
-        String sql = "INSERT INTO `grupo4investimento` (`CPF_REMET`, `VALOR`, `DATA_REG`, `TIPO_INVEST`) VALUES (?,?,?,?);";
+        String sql = "INSERT INTO `grupo4investimento` (CPF_REMET, VALOR, DATA_REG, TIPO_INVEST, TIPO_TRANS) VALUES (?,?,?,?,?);";
         conn = new Conexao().conectaDB();
         RegistraData();
         try {
@@ -436,15 +465,160 @@ public class UsuarioDAO {
             pstmArmazenaDados.setFloat(2, objUsuarioDTO.getId_investimento());
             pstmArmazenaDados.setString(3, objUsuarioDTO.getDataDto());
             pstmArmazenaDados.setString(4, objUsuarioDTO.getTipo_CDI());
+            pstmArmazenaDados.setString(5, objUsuarioDTO.getTipoInvestimento());
             pstmArmazenaDados.execute();
             pstmArmazenaDados.close();
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao armazenar dados: " + e.getMessage());
         }
-        System.out.println(objUsuarioDTO.getCpf_login() + objUsuarioDTO.getId_investimento() + objUsuarioDTO.getDataDto() + " " + 
-                    objUsuarioDTO.getTipo_CDI());
     }
+    
+    public void BDInvestimentoCDB(){
+        UsuarioDTO objUsuarioDTO = new UsuarioDTO();
+        String sql = "INSERT INTO `grupo4investimento` (CPF_REMET, VALOR, DATA_REG, TIPO_INVEST, TIPO_TRANS) VALUES (?,?,?,?,?);";
+        conn = new Conexao().conectaDB();
+        RegistraData();
+        try {
+            PreparedStatement pstmArmazenaDados = conn.prepareStatement(sql);
+            pstmArmazenaDados.setString(1, objUsuarioDTO.getCpf_login());
+            pstmArmazenaDados.setFloat(2, objUsuarioDTO.getId_investimento());
+            pstmArmazenaDados.setString(3, objUsuarioDTO.getDataDto());
+            pstmArmazenaDados.setString(4, objUsuarioDTO.getTipo_CDB());
+            pstmArmazenaDados.setString(5, objUsuarioDTO.getTipoInvestimento());
+            pstmArmazenaDados.execute();
+            pstmArmazenaDados.close();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao armazenar dados: " + e.getMessage());
+        }
+    }
+    
+    public void BDInvestimentoLCA(){
+        UsuarioDTO objUsuarioDTO = new UsuarioDTO();
+        String sql = "INSERT INTO `grupo4investimento` (CPF_REMET, VALOR, DATA_REG, TIPO_INVEST, TIPO_TRANS) VALUES (?,?,?,?,?);";
+        conn = new Conexao().conectaDB();
+        RegistraData();
+        try {
+            PreparedStatement pstmArmazenaDados = conn.prepareStatement(sql);
+            pstmArmazenaDados.setString(1, objUsuarioDTO.getCpf_login());
+            pstmArmazenaDados.setFloat(2, objUsuarioDTO.getId_investimento());
+            pstmArmazenaDados.setString(3, objUsuarioDTO.getDataDto());
+            pstmArmazenaDados.setString(4, objUsuarioDTO.getTipo_LCA());
+            pstmArmazenaDados.setString(5, objUsuarioDTO.getTipoInvestimento());
+            pstmArmazenaDados.execute();
+            pstmArmazenaDados.close();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao armazenar dados: " + e.getMessage());
+        }
+    }
+    
+    public void BDInvestimentoRF(){
+        UsuarioDTO objUsuarioDTO = new UsuarioDTO();
+        String sql = "INSERT INTO `grupo4investimento` (CPF_REMET, VALOR, DATA_REG, TIPO_INVEST, TIPO_TRANS) VALUES (?,?,?,?,?);";
+        conn = new Conexao().conectaDB();
+        RegistraData();
+        try {
+            PreparedStatement pstmArmazenaDados = conn.prepareStatement(sql);
+            pstmArmazenaDados.setString(1, objUsuarioDTO.getCpf_login());
+            pstmArmazenaDados.setFloat(2, objUsuarioDTO.getId_investimento());
+            pstmArmazenaDados.setString(3, objUsuarioDTO.getDataDto());
+            pstmArmazenaDados.setString(4, objUsuarioDTO.getTipo_RendaFixa());
+            pstmArmazenaDados.setString(5, objUsuarioDTO.getTipoInvestimento());
+            pstmArmazenaDados.execute();
+            pstmArmazenaDados.close();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao armazenar dados: " + e.getMessage());
+        }
+    }
+    
+   // </editor-fold> 
+    
+    // <editor-fold defaultstate="collapsed" desc="Registra Resgate Historico BD">
+    
+    public void BDResgataCDI(){
+        UsuarioDTO objUsuarioDTO = new UsuarioDTO();
+        String sql = "INSERT INTO `grupo4investimento` (CPF_REMET, VALOR, DATA_REG, TIPO_INVEST, TIPO_TRANS) VALUES (?,?,?,?,?);";
+        conn = new Conexao().conectaDB();
+        RegistraData();
+        try {
+            PreparedStatement pstmArmazenaDados = conn.prepareStatement(sql);
+            pstmArmazenaDados.setString(1, objUsuarioDTO.getCpf_login());
+            pstmArmazenaDados.setFloat(2, objUsuarioDTO.getInputResgate());
+            pstmArmazenaDados.setString(3, objUsuarioDTO.getDataDto());
+            pstmArmazenaDados.setString(4, objUsuarioDTO.getTipo_CDI());
+            pstmArmazenaDados.setString(5, objUsuarioDTO.getTipoResgate());
+            pstmArmazenaDados.execute();
+            pstmArmazenaDados.close();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao armazenar dados: " + e.getMessage());
+        }
+    }
+    
+    public void BDResgataCDB(){
+        UsuarioDTO objUsuarioDTO = new UsuarioDTO();
+        String sql = "INSERT INTO `grupo4investimento` (CPF_REMET, VALOR, DATA_REG, TIPO_INVEST, TIPO_TRANS) VALUES (?,?,?,?,?);";
+        conn = new Conexao().conectaDB();
+        RegistraData();
+        try {
+            PreparedStatement pstmArmazenaDados = conn.prepareStatement(sql);
+            pstmArmazenaDados.setString(1, objUsuarioDTO.getCpf_login());
+            pstmArmazenaDados.setFloat(2, objUsuarioDTO.getInputResgate());
+            pstmArmazenaDados.setString(3, objUsuarioDTO.getDataDto());
+            pstmArmazenaDados.setString(4, objUsuarioDTO.getTipo_CDB());
+            pstmArmazenaDados.setString(5, objUsuarioDTO.getTipoResgate());
+            pstmArmazenaDados.execute();
+            pstmArmazenaDados.close();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao armazenar dados: " + e.getMessage());
+        }
+    }
+    
+    public void BDResgataLCA(){
+        UsuarioDTO objUsuarioDTO = new UsuarioDTO();
+        String sql = "INSERT INTO `grupo4investimento` (CPF_REMET, VALOR, DATA_REG, TIPO_INVEST, TIPO_TRANS) VALUES (?,?,?,?,?);";
+        conn = new Conexao().conectaDB();
+        RegistraData();
+        try {
+            PreparedStatement pstmArmazenaDados = conn.prepareStatement(sql);
+            pstmArmazenaDados.setString(1, objUsuarioDTO.getCpf_login());
+            pstmArmazenaDados.setFloat(2, objUsuarioDTO.getInputResgate());
+            pstmArmazenaDados.setString(3, objUsuarioDTO.getDataDto());
+            pstmArmazenaDados.setString(4, objUsuarioDTO.getTipo_LCA());
+            pstmArmazenaDados.setString(5, objUsuarioDTO.getTipoResgate());
+            pstmArmazenaDados.execute();
+            pstmArmazenaDados.close();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao armazenar dados: " + e.getMessage());
+        }
+    }
+    
+    public void BDResgataRF(){
+        UsuarioDTO objUsuarioDTO = new UsuarioDTO();
+        String sql = "INSERT INTO `grupo4investimento` (CPF_REMET, VALOR, DATA_REG, TIPO_INVEST, TIPO_TRANS) VALUES (?,?,?,?,?);";
+        conn = new Conexao().conectaDB();
+        RegistraData();
+        try {
+            PreparedStatement pstmArmazenaDados = conn.prepareStatement(sql);
+            pstmArmazenaDados.setString(1, objUsuarioDTO.getCpf_login());
+            pstmArmazenaDados.setFloat(2, objUsuarioDTO.getInputResgate());
+            pstmArmazenaDados.setString(3, objUsuarioDTO.getDataDto());
+            pstmArmazenaDados.setString(4, objUsuarioDTO.getTipo_RendaFixa());
+            pstmArmazenaDados.setString(5, objUsuarioDTO.getTipoResgate());
+            pstmArmazenaDados.execute();
+            pstmArmazenaDados.close();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao armazenar dados: " + e.getMessage());
+        }
+    }
+    
+   // </editor-fold> 
    
 // <editor-fold defaultstate="collapsed" desc="Investimento">
      
@@ -799,7 +973,7 @@ public class UsuarioDAO {
    
    /////Divisor/////
    
-//<editor-fold defaultstate="collapsed" desc="Rsgate-de-Investimento">
+//<editor-fold defaultstate="collapsed" desc="Resgate-de-Investimento">
     public void ResgataCDI(){
         UsuarioDTO objUsuarioDTO = new UsuarioDTO();
         String sql = "UPDATE grupo4 SET SALDO = SALDO + ?, CDI = CDI - ? WHERE CPF = ?;";
@@ -890,7 +1064,99 @@ public class UsuarioDAO {
             }
         } catch (Exception e) {
             System.out.println("erro: " + e);
-        }
+        }       
+    }
+    
+    public void ResgataLCA(){
+        UsuarioDTO objUsuarioDTO = new UsuarioDTO();
+        String sql = "UPDATE grupo4 SET SALDO = SALDO + ?, LCA = LCA - ? WHERE CPF = ?;";
+        String sqlAtualizaTotalBD = "UPDATE grupo4 SET TOTAL_INVESTIDO = TOTAL_INVESTIDO - ? WHERE CPF = ?;";
+        String sqlVerificaInvestimento = "SELECT LCA FROM grupo4 WHERE  CPF = ?;";
+        conn = new Conexao().conectaDB();
+        
+        float resgate = objUsuarioDTO.getInputResgate();
+        
+        try {            
+            PreparedStatement pstmsqlVerificaInvestimento = conn.prepareStatement(sqlVerificaInvestimento);
+            pstmsqlVerificaInvestimento.setString(1, objUsuarioDTO.getCpf_login());
+            ResultSet CDBSaldo = pstmsqlVerificaInvestimento.executeQuery();
+            float cdbSaldoRetorno = 0.0f;
+            float inputResgate = objUsuarioDTO.getInputResgate();
+            if (CDBSaldo.next()) {
+                cdbSaldoRetorno = CDBSaldo.getFloat("LCA");
+            }
+            CDBSaldo.close();
+            pstmsqlVerificaInvestimento.close();
+                        
+            if (inputResgate <= cdbSaldoRetorno) {
+                PreparedStatement pstmSQL = conn.prepareStatement(sql);
+                pstmSQL.setFloat(1, resgate);
+                pstmSQL.setFloat(2, resgate);
+                pstmSQL.setString(3, objUsuarioDTO.getCpf_login());
+                pstmSQL.execute();
+                pstmSQL.close();
+
+                PreparedStatement ptsmAtualiza = conn.prepareCall(sqlAtualizaTotalBD);
+                ptsmAtualiza.setFloat(1, resgate);
+                ptsmAtualiza.setString(2, objUsuarioDTO.getCpf_login());
+                ptsmAtualiza.execute();
+                ptsmAtualiza.close();
+
+                JOptionPane.showMessageDialog(null, "Investimento resgatado com sucesso!");
+            }else if (inputResgate > cdbSaldoRetorno){
+                JOptionPane.showMessageDialog(null, "Você esta tentando resgatar um valor acima do que está disponivel.");
+            }else{
+                System.out.println("Error");
+            }
+        } catch (Exception e) {
+            System.out.println("erro: " + e);
+        }        
+    }
+    
+    public void ResgataRF(){
+        UsuarioDTO objUsuarioDTO = new UsuarioDTO();
+        String sql = "UPDATE grupo4 SET SALDO = SALDO + ?, RENDA_FIXA = RENDA_FIXA - ? WHERE CPF = ?;";
+        String sqlAtualizaTotalBD = "UPDATE grupo4 SET TOTAL_INVESTIDO = TOTAL_INVESTIDO - ? WHERE CPF = ?;";
+        String sqlVerificaInvestimento = "SELECT RENDA_FIXA FROM grupo4 WHERE  CPF = ?;";
+        conn = new Conexao().conectaDB();
+        
+        float resgate = objUsuarioDTO.getInputResgate();
+        
+        try {            
+            PreparedStatement pstmsqlVerificaInvestimento = conn.prepareStatement(sqlVerificaInvestimento);
+            pstmsqlVerificaInvestimento.setString(1, objUsuarioDTO.getCpf_login());
+            ResultSet CDBSaldo = pstmsqlVerificaInvestimento.executeQuery();
+            float cdbSaldoRetorno = 0.0f;
+            float inputResgate = objUsuarioDTO.getInputResgate();
+            if (CDBSaldo.next()) {
+                cdbSaldoRetorno = CDBSaldo.getFloat("RENDA_FIXA");
+            }
+            CDBSaldo.close();
+            pstmsqlVerificaInvestimento.close();
+                        
+            if (inputResgate <= cdbSaldoRetorno) {
+                PreparedStatement pstmSQL = conn.prepareStatement(sql);
+                pstmSQL.setFloat(1, resgate);
+                pstmSQL.setFloat(2, resgate);
+                pstmSQL.setString(3, objUsuarioDTO.getCpf_login());
+                pstmSQL.execute();
+                pstmSQL.close();
+
+                PreparedStatement ptsmAtualiza = conn.prepareCall(sqlAtualizaTotalBD);
+                ptsmAtualiza.setFloat(1, resgate);
+                ptsmAtualiza.setString(2, objUsuarioDTO.getCpf_login());
+                ptsmAtualiza.execute();
+                ptsmAtualiza.close();
+
+                JOptionPane.showMessageDialog(null, "Investimento resgatado com sucesso!");
+            }else if (inputResgate > cdbSaldoRetorno){
+                JOptionPane.showMessageDialog(null, "Você esta tentando resgatar um valor acima do que está disponivel.");
+            }else{
+                System.out.println("Error");
+            }
+        } catch (Exception e) {
+            System.out.println("erro: " + e);
+        }        
     }
     
     //</editor-fold>

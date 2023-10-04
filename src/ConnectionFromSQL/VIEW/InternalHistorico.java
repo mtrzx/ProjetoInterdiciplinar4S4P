@@ -200,23 +200,23 @@ public class InternalHistorico extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-        public void listarValoresTabelaTED(String cpf) {
-        try {
-            UsuarioDAO objUsuarioDAO = new UsuarioDAO();
+       public void listarValoresTabelaTED(String cpf) {
+            try {
+                UsuarioDAO objUsuarioDAO = new UsuarioDAO();
 
-            DefaultTableModel model = (DefaultTableModel) tabelaTED.getModel();
+                DefaultTableModel model = (DefaultTableModel) tabelaTED.getModel();
 
-            ArrayList<UsuarioDTO> lista = objUsuarioDAO.HistoricoTEDDOC(cpf);
+                ArrayList<UsuarioDTO> lista = objUsuarioDAO.HistoricoTEDDOC(cpf);
 
-            for (int i = 0; i < lista.size(); i++) {
-                model.addRow(new Object[]{
-                    lista.get(i).getId_conta(),
-                    lista.get(i).getId_agencia(),
-                    lista.get(i).getId_valorTransTED(),
-                    lista.get(i).getId_contaDestinatario(),
-                    lista.get(i).getId_agenciaDestinatario()
-                });
-            }
+                for (int i = 0; i < lista.size(); i++) {
+                    model.addRow(new Object[]{
+                        lista.get(i).getId_conta(),
+                        lista.get(i).getId_agencia(),
+                        lista.get(i).getId_valorTransTED(),
+                        lista.get(i).getId_contaDestinatario(),
+                        lista.get(i).getId_agenciaDestinatario()
+                    });
+                }
 
             } catch (Exception erro) {
                 JOptionPane.showMessageDialog(null, "Erro no listavaloresTED" + erro);
