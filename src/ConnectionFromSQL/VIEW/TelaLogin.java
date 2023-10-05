@@ -279,7 +279,7 @@ public class TelaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCpfActionPerformed
 
     private void sairBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairBtnActionPerformed
-        dispose();
+        dispose();        
     }//GEN-LAST:event_sairBtnActionPerformed
     
     // <editor-fold defaultstate="collapsed" desc="Hovers">

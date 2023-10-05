@@ -8,6 +8,7 @@ import ConnectionFromSQL.DAO.UsuarioDAO;
 import ConnectionFromSQL.DTO.UsuarioDTO;
 import java.awt.Color;
 import java.awt.Toolkit;
+import java.text.BreakIterator;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -88,7 +89,18 @@ public class InternalCadastro extends javax.swing.JFrame {
         txtCpf.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtCpf.setForeground(new java.awt.Color(0, 0, 0));
         txtCpf.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtCpf.setToolTipText("");
         txtCpf.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtCpf.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCpfFocusLost(evt);
+            }
+        });
+        txtCpf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCpfKeyTyped(evt);
+            }
+        });
 
         txtNome.setBackground(new java.awt.Color(232, 246, 248));
         txtNome.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -213,47 +225,40 @@ public class InternalCadastro extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtSenha, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtNome, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtCpf, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtEmail)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nascimentoInput, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtRua)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtCEP, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNum)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(26, 26, 26)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
-                            .addComponent(txtEstado, 0, 0, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(148, 148, 148))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtSenha, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtNome, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtCpf, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtEmail)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nascimentoInput, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtRua)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtCEP)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(32, 32, 32)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtNum)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -325,7 +330,7 @@ public class InternalCadastro extends javax.swing.JFrame {
                 btnVoltarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 620, 50, 20));
+        jPanel1.add(btnVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 610, 60, 30));
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/projeto/imagens/degradeTransf.png"))); // NOI18N
@@ -378,11 +383,11 @@ public class InternalCadastro extends javax.swing.JFrame {
 
         if (maioridade == true) {
             String itemSelecionado = (String) txtEstado.getSelectedItem();
-            cpf = txtCpf.getText();
+            cpf = txtCpf.getText().toUpperCase();
             nome = txtNome.getText().toUpperCase();
             email = txtEmail.getText().toUpperCase();
             senha = txtSenha.getText();
-            endereco = txtRua.getText() + ", " + txtNum.getText() + " - " + itemSelecionado + ", " + txtCEP.getText();
+            endereco = txtRua.getText().toUpperCase() + ", " + txtNum.getText().toUpperCase() + " - " + itemSelecionado + ", " + txtCEP.getText().toUpperCase();
 
             UsuarioDTO objUsuarioDTO = new UsuarioDTO();
             objUsuarioDTO.setId_CadastCPF(cpf);
@@ -394,14 +399,14 @@ public class InternalCadastro extends javax.swing.JFrame {
             UsuarioDAO objUsuarioDAO = new UsuarioDAO();
             objUsuarioDAO.CadastrarUsuario(objUsuarioDTO);
             // Verificar idade do cliente
-            LimparCampo();
+            
             TelaLogin tl = new TelaLogin();
             tl.setVisible(true);
             dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Você não tem idade para criar uma conta no banco Rubik");
         }
-
+        LimparCampo();
     }
     
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
@@ -429,8 +434,37 @@ public class InternalCadastro extends javax.swing.JFrame {
         Color hover = new Color(232, 246,248);
         btnVoltar.setBackground(hover);
     }//GEN-LAST:event_btnVoltarMouseExited
+
+    private void txtCpfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCpfKeyTyped
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_txtCpfKeyTyped
+
+    private void txtCpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCpfFocusLost
+        // TODO add your handling code here:
+        VerificaCPF();
+    }//GEN-LAST:event_txtCpfFocusLost
     
     // </editor-fold>
+    
+    private void VerificaCPF(){
+        try {
+            Thread.sleep(50);
+            CpfComprimento();
+        } catch (Exception e) {
+        }
+    }
+    
+    private void CpfComprimento() {
+        if (txtCpf.getText().length() > 11) {
+            JOptionPane.showMessageDialog(null, "CPF possui somente 11 digitos");            
+            txtCpf.setText("");
+        } else if (txtCpf.getText().length() == 11) {
+            JOptionPane.showInternalMessageDialog(null, "CPF valido");
+        }else{
+            JOptionPane.showInternalMessageDialog(null, "CPF possui 11 digitos, você digitou somente " + txtCpf.getText().length()+ " digitos");
+        }
+    }
     
     private void LimparCampo (){
         txtCpf.setText("");
@@ -440,33 +474,34 @@ public class InternalCadastro extends javax.swing.JFrame {
     }
        
     public void DataRegistra() throws ParseException {
-    UsuarioDAO objUsuarioDAO = new UsuarioDAO();
-    String dataEU = nascimentoInput.getText(); // Substitua com sua data europeia
+        UsuarioDAO objUsuarioDAO = new UsuarioDAO();
+        String dataEU = nascimentoInput.getText(); // Substitua com sua data europeia
 
-    // Define o formato da data europeia
-    SimpleDateFormat formatoEuropeu = new SimpleDateFormat("dd/MM/yyyy");
-    LocalDate dataAtual = LocalDate.now();
+        // Define o formato da data europeia
+        SimpleDateFormat formatoEuropeu = new SimpleDateFormat("dd/MM/yyyy");
+        LocalDate dataAtual = LocalDate.now();
 
-    // Converte a data europeia em um objeto Date
-    Date data = formatoEuropeu.parse(dataEU);
+        // Converte a data europeia em um objeto Date
+        Date data = formatoEuropeu.parse(dataEU);
 
-    // Define o formato da data ISO
-    SimpleDateFormat formatoISO = new SimpleDateFormat("yyyy-MM-dd");
+        // Define o formato da data ISO
+        SimpleDateFormat formatoISO = new SimpleDateFormat("yyyy-MM-dd");
 
-    // Converte a data Date para o formato ISO
-    String dataISO = formatoISO.format(data);
-    Date dataFormatada = formatoISO.parse(dataISO);
+        // Converte a data Date para o formato ISO
+        String dataISO = formatoISO.format(data);
+        Date dataFormatada = formatoISO.parse(dataISO);
 
-    // Calcula a diferença de idade
-    Period diferenca = Period.between(dataFormatada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), dataAtual);
-    
-    if(diferenca.getYears() >= 18){
-        maioridade = true;
-    }else{
-        maioridade = false;
+        // Calcula a diferença de idade
+        Period diferenca = Period.between(dataFormatada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), dataAtual);
+
+        if (diferenca.getYears() >= 18) {
+            maioridade = true;
+        } else {
+            maioridade = false;
+        }
+
     }
     
-}
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

@@ -141,11 +141,9 @@ public class InternalPerfil extends javax.swing.JInternalFrame {
 
     public void listarValores() {
 
-        try {
-            /**
-             * chama a classe que guarda mesmo que brevenmente só para comparar
-             * com o banco de dados
-             */
+        try {            
+            //chama a classe que guarda mesmo que brevenmente só para comparar com o banco de dados
+            
             UsuarioDAO objUsuarioDAO = new UsuarioDAO();
 
             /**
