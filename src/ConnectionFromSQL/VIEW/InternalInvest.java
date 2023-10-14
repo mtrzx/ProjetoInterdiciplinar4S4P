@@ -74,7 +74,7 @@ public class InternalInvest extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
 
         popUpHist.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        popUpHist.setTitle("Histórico de insvestomentos");
+        popUpHist.setTitle("Histórico de investimentos");
         popUpHist.setMaximumSize(new java.awt.Dimension(980, 730));
         popUpHist.setMinimumSize(new java.awt.Dimension(980, 730));
         popUpHist.setName("Historico"); // NOI18N
@@ -494,7 +494,7 @@ public class InternalInvest extends javax.swing.JInternalFrame {
             for (int i = 0; i < lista.size(); i++) {
                 model.addRow(new Object[]{
                     lista.get(i).getTipoAtivo(),
-                    lista.get(i).getValorAtivo(),
+                    "R$ " + lista.get(i).getValorAtivo(),
                     lista.get(i).getDataAtivo()
                 });
             }
@@ -516,7 +516,7 @@ public class InternalInvest extends javax.swing.JInternalFrame {
             for (int i = 0; i < lista.size(); i++) {
                 model.addRow(new Object[]{
                     lista.get(i).getTipoAtivoResgtate(),
-                    lista.get(i).getValorAtivoResgate(),
+                    "R$ " + lista.get(i).getValorAtivoResgate(),
                     lista.get(i).getDataAtivoResgate()
                 });
             }
@@ -786,7 +786,6 @@ public class InternalInvest extends javax.swing.JInternalFrame {
                
         objUsuarioDAO.ResgataCDI();
         
-        System.out.println(objUsuarioDTO.getInputResgate());
     }
     
     private void ResgataCDB() {
@@ -799,7 +798,6 @@ public class InternalInvest extends javax.swing.JInternalFrame {
                
         objUsuarioDAO.ResgataCDB();
         
-        System.out.println(objUsuarioDTO.getInputResgate());
     }
     
     private void ResgataLCA() {
@@ -811,8 +809,6 @@ public class InternalInvest extends javax.swing.JInternalFrame {
         objUsuarioDTO.setInputResgate(resgataInput);
                
         objUsuarioDAO.ResgataLCA();
-        
-        System.out.println(objUsuarioDTO.getInputResgate());
     }
     
     private void ResgataRendaF() {

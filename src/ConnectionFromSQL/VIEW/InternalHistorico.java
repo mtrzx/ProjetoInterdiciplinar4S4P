@@ -212,7 +212,7 @@ public class InternalHistorico extends javax.swing.JInternalFrame {
                     model.addRow(new Object[]{
                         lista.get(i).getId_conta(),
                         lista.get(i).getId_agencia(),
-                        lista.get(i).getId_valorTransTED(),
+                        "R$ " + lista.get(i).getId_valorTransTED(),
                         lista.get(i).getId_contaDestinatario(),
                         lista.get(i).getId_agenciaDestinatario()
                     });
@@ -234,7 +234,7 @@ public class InternalHistorico extends javax.swing.JInternalFrame {
                 for (int i = 0; i < lista.size(); i++) {
                     model.addRow(new Object[]{
                         lista.get(i).getCpf_login(),
-                        lista.get(i).getId_valorTransPix(),
+                        "R$ " + lista.get(i).getId_valorTransPix(),
                         lista.get(i).getId_cpfDestinatario()
                     });
                 }

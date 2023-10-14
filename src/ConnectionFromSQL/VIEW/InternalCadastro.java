@@ -373,7 +373,7 @@ public class InternalCadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
     
     private void Cadastra() {
-        String cpf, nome, senha, email, endereco;
+        String cpf, nome, senha, email, endereco, data;
         int conta, agencia;
         try {
             DataRegistra();
@@ -388,7 +388,8 @@ public class InternalCadastro extends javax.swing.JFrame {
             email = txtEmail.getText().toUpperCase();
             senha = txtSenha.getText();
             endereco = txtRua.getText().toUpperCase() + ", " + txtNum.getText().toUpperCase() + " - " + itemSelecionado + ", " + txtCEP.getText().toUpperCase();
-
+            
+            
             UsuarioDTO objUsuarioDTO = new UsuarioDTO();
             objUsuarioDTO.setId_CadastCPF(cpf);
             objUsuarioDTO.setId_CadastNome(nome);
@@ -474,6 +475,7 @@ public class InternalCadastro extends javax.swing.JFrame {
     }
        
     public void DataRegistra() throws ParseException {
+        UsuarioDTO usuarioDTO = new UsuarioDTO();
         UsuarioDAO objUsuarioDAO = new UsuarioDAO();
         String dataEU = nascimentoInput.getText(); // Substitua com sua data europeia
 
@@ -490,7 +492,9 @@ public class InternalCadastro extends javax.swing.JFrame {
         // Converte a data Date para o formato ISO
         String dataISO = formatoISO.format(data);
         Date dataFormatada = formatoISO.parse(dataISO);
-
+        
+        usuarioDTO.setId_CadastDate(dataISO);
+        
         // Calcula a diferença de idade
         Period diferenca = Period.between(dataFormatada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), dataAtual);
 

@@ -114,7 +114,8 @@ public class InternalTrans extends javax.swing.JInternalFrame {
         jLabel6.setText("Chave PIX");
         PainelPix.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 93, 436, -1));
 
-        chavePix.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        chavePix.setBackground(new java.awt.Color(255, 255, 255));
+        chavePix.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         chavePix.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         PainelPix.add(chavePix, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 133, 436, 35));
 
@@ -131,7 +132,8 @@ public class InternalTrans extends javax.swing.JInternalFrame {
         jLabel8.setText("Valor");
         PainelPix.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 186, 436, -1));
 
-        valorPix.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        valorPix.setBackground(new java.awt.Color(255, 255, 255));
+        valorPix.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         valorPix.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         PainelPix.add(valorPix, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 226, 436, 35));
 
@@ -167,15 +169,18 @@ public class InternalTrans extends javax.swing.JInternalFrame {
         });
         PainelTEDDOC.add(enviarBtnTD, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 373, 70, 35));
 
-        contaTrans.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        contaTrans.setBackground(new java.awt.Color(255, 255, 255));
+        contaTrans.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         contaTrans.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         PainelTEDDOC.add(contaTrans, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 134, 436, 35));
 
+        agenciaTrans.setBackground(new java.awt.Color(255, 255, 255));
         agenciaTrans.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         agenciaTrans.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         PainelTEDDOC.add(agenciaTrans, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 227, 436, 35));
 
-        valorTD.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        valorTD.setBackground(new java.awt.Color(255, 255, 255));
+        valorTD.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         valorTD.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         PainelTEDDOC.add(valorTD, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 320, 436, 35));
 
@@ -266,16 +271,85 @@ public class InternalTrans extends javax.swing.JInternalFrame {
 
     private void enviarBtnTDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarBtnTDActionPerformed
         // TODO add your handling code here:
-        RegistrarTransfTed();
-        LimparCampo();
-        listarSaldo();
+        UsuarioDAO userDAO = new UsuarioDAO();
+        UsuarioDTO userDTO = new UsuarioDTO();
+        //conversões
+        String contaString = contaTrans.getText();
+        String agenciaString = agenciaTrans.getText();
+        int contaInt = Integer.parseInt(contaString);
+        int agenciaInt = Integer.parseInt(agenciaString);
+        //conversões
+        userDTO.setId_contaDestinatario(contaInt);
+        userDTO.setId_agenciaDestinatario(agenciaInt);
+        userDAO.VerificaDestinatarioSelf();
+        userDAO.VerificaDestinatarioTD();
+        userDAO.Verifica(userDTO);
+        
+        boolean TDDest = userDTO.isDestinatarioEncontradoTD();
+        boolean Self = true;        
+        String senha = JOptionPane.showInputDialog("Digite sua senha");
+        String senhaDTO = userDTO.getSenhaBancoDeDados();
+        
+        System.out.println(userDTO.getContaSelf() + " " + userDTO.getAgenciaSelf());
+        
+        if (contaInt == userDTO.getContaSelf() && agenciaInt == userDTO.getAgenciaSelf()){
+            Self = true;
+        }else if (contaInt != userDTO.getContaSelf() && agenciaInt != userDTO.getAgenciaSelf()){
+            Self = false;
+        }
+        
+        if(senha.equals(senhaDTO) && TDDest == true && Self == false){            
+            RegistrarTransfTed();
+            LimparCampo();
+            listarSaldo();        
+        }else if (TDDest == false){
+            JOptionPane.showMessageDialog(null, "Conta ou Agencia invalida");
+        }else if (!senha.equals(senhaDTO)){
+            JOptionPane.showMessageDialog(null, "Senha incorreta");
+        }else if (Self == true){
+            JOptionPane.showMessageDialog(null, "Você não pode enviar valores a sí proprio");
+            LimparCampo();
+        }else{
+            JOptionPane.showConfirmDialog(null, "ERROR");
+        }
     }//GEN-LAST:event_enviarBtnTDActionPerformed
 
     private void enviarBtnPixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarBtnPixActionPerformed
         // TODO add your handling code here:
-        RegistrarTransfPix();
-        LimparCampo();        
-        listarSaldo();
+        UsuarioDAO userDAO = new UsuarioDAO();
+        UsuarioDTO userDTO = new UsuarioDTO();
+        userDTO.setId_cpfDestinatario(chavePix.getText());
+        userDAO.VerificaDestinatarioCPF();
+        userDAO.Verifica(userDTO);
+        boolean CPFDest = userDTO.DestinatarioEncontrado;
+        boolean Self = true;
+        String senha = JOptionPane.showInputDialog("Digite sua senha");
+        String senhaDTO = userDTO.getSenhaBancoDeDados();
+        
+        //Verificador de conta
+        if(chavePix.getText() == userDTO.getCpf_login()){
+            Self = true;
+        }else if (!chavePix.getText().equals(userDTO.getCpf_login())){
+            Self = false;
+        }
+        
+        ////////////
+        
+        if(senha.equals(senhaDTO) && CPFDest == true && Self == false){
+            RegistrarTransfPix();
+            LimparCampo();
+            listarSaldo();        
+        }else if (CPFDest == false){
+            JOptionPane.showMessageDialog(null, "Chave Pix invalida");
+        }else if (!senha.equals(senhaDTO)){
+            JOptionPane.showMessageDialog(null, "Senha incorreta");
+        }else if (Self == true){
+            JOptionPane.showMessageDialog(null, "Você não pode enviar valores a sí proprio");
+            LimparCampo();
+        }
+        else{
+            JOptionPane.showConfirmDialog(null, "ERROR");
+        }
     }//GEN-LAST:event_enviarBtnPixActionPerformed
 
     private void toggleSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggleSaldoActionPerformed
@@ -308,7 +382,6 @@ public class InternalTrans extends javax.swing.JInternalFrame {
             float saldo = UserSaldo.getId_saldo();
             String saldoString = String.valueOf(saldo);
             campoSaldo.setText(saldoString);
-            System.out.println(saldoString);
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "Listar erro" 
             + erro);

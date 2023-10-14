@@ -54,7 +54,6 @@ public class UsuarioDAO {
                 objUsuarioDTO.setId_agencia(rs.getInt("AGENCIA"));
                 objUsuarioDTO.setId_conta(rs.getInt("CONTA"));
 
-                //Armazena as informações acima dentro da array
             }
 
         } catch (SQLException erro) {
@@ -147,7 +146,7 @@ public class UsuarioDAO {
                 JOptionPane.showMessageDialog(null, "Investimento realizado com sucesso!");
             } else {
                 // Saldo é maior que o investimento, portanto, cancelar o Investimento
-                throw new Exception("Saldo insuficiente para realizar o Investimento.");
+                JOptionPane.showMessageDialog(null ,"Saldo insuficiente para realizar o Investimento.");
             }
 
             conn.close();
@@ -197,7 +196,7 @@ public class UsuarioDAO {
                 ImprimeBDTD(objUsuarioDTO);
             } else {
                 // Saldo é maior que o investimento, portanto, cancelar a transferência
-                throw new Exception("Saldo insuficiente para realizar a transferência.");
+                JOptionPane.showMessageDialog(null ,"Saldo insuficiente para realizar o transferência.");
             }
 
             conn.close();
@@ -246,7 +245,7 @@ public class UsuarioDAO {
                 ImprimeBDPIX(objUsuarioDTO);
             } else {
                 // Saldo é maior que o investimento, portanto, cancelar a transferência
-                throw new Exception("Saldo insuficiente para realizar a transferência.");
+                JOptionPane.showMessageDialog(null ,"Saldo insuficiente para realizar o transferência.");
             }
 
             conn.close();
@@ -346,8 +345,8 @@ public class UsuarioDAO {
     }
     
     public void CadastrarUsuario(UsuarioDTO objUsuarioDTO) {
-        String sql = "INSERT INTO grupo4 (CPF, SENHA, NOME, AGENCIA, CONTA, EMAIL, ENDERECO, SALDO, TOTAL_INVESTIDO, LCA, RENDA_FIXA, "
-                + "CDI, CDB) VALUES (?, ?, ?, ?, ?, ?, ?, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)";
+        String sql = "INSERT INTO grupo4 (CPF, SENHA, NOME, AGENCIA, CONTA, EMAIL, ENDERECO, DATA_NASC, SALDO, TOTAL_INVESTIDO, LCA, RENDA_FIXA, "
+                + "CDI, CDB) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)";
 
         GeraNum();
         
@@ -368,6 +367,7 @@ public class UsuarioDAO {
             pstm.setInt(5, contaGerada);
             pstm.setString(6, objUsuarioDTO.getId_CadastEmail());
             pstm.setString(7, objUsuarioDTO.getId_CadastEndereco());
+            pstm.setString(8, objUsuarioDTO.getId_CadastDate());
 
             pstm.execute();
             pstm.close();
@@ -378,6 +378,7 @@ public class UsuarioDAO {
         
     }   
    
+    
     public int[] GeraNum(){
         // Gerar número aleatório de conta e agência
         Random random = new Random();
@@ -451,6 +452,81 @@ public class UsuarioDAO {
         userdto.setDataDto(dataFormatadaString);
                 
     }
+    
+    public void Verifica(UsuarioDTO objUsuarioDTO) {
+        conn = new Conexao().conectaDB();
+        String sql = "SELECT SENHA FROM grupo4 WHERE CPF = " + objUsuarioDTO.getCpf_login();
+        try{        
+            pstm = conn.prepareStatement(sql);
+            rs = pstm.executeQuery();
+            
+            while(rs.next()){
+                objUsuarioDTO.setSenhaBancoDeDados(rs.getString("SENHA"));
+                
+            }
+        }catch(SQLException erro){            
+            JOptionPane.showMessageDialog(null, "Erro ao retornar informação do banco de dados" + erro);
+        }
+    }
+    
+    public void VerificaDestinatarioCPF() {
+        UsuarioDTO userDTO = new UsuarioDTO();
+        conn = new Conexao().conectaDB();
+        String sql = "SELECT CPF FROM grupo4 WHERE CPF = ?"; 
+
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, userDTO.getId_cpfDestinatario()); 
+            rs = pstm.executeQuery();
+            if (rs.next()) {
+                userDTO.setDestinatarioEncontrado(true);                
+            } else {
+                userDTO.setDestinatarioEncontrado(false);
+            }
+            rs.close();
+        } catch (Exception e) {
+        }
+    }
+    
+    public void VerificaDestinatarioTD() {
+        UsuarioDTO userDTO = new UsuarioDTO();
+        conn = new Conexao().conectaDB();
+        String sql = "SELECT CONTA, AGENCIA FROM grupo4 WHERE CONTA = ? AND AGENCIA = ?"; 
+        
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, userDTO.getId_contaDestinatario());
+            pstm.setInt(2, userDTO.getId_agenciaDestinatario());
+            rs = pstm.executeQuery();
+            if (rs.next()) {                
+                userDTO.setDestinatarioEncontradoTD(true);
+            } else {
+                userDTO.setDestinatarioEncontradoTD(false);
+            }            
+            rs.close();
+        } catch (Exception e) {
+        }
+    }
+    
+    public void VerificaDestinatarioSelf() {
+    UsuarioDTO userDTO = new UsuarioDTO();
+    conn = new Conexao().conectaDB();
+    String sql = "SELECT CONTA, AGENCIA FROM grupo4 WHERE CPF = " + userDTO.getCpf_login();
+
+    try {
+        pstm = conn.prepareStatement(sql);
+        rs = pstm.executeQuery();
+        if (rs.next()) {
+            userDTO.setContaSelf(rs.getInt("CONTA")); 
+            userDTO.setAgenciaSelf(rs.getInt("AGENCIA")); 
+        }
+    } catch (SQLException erro) {
+        JOptionPane.showMessageDialog(null, "Erro no UsuarioDAO pesquisar" + erro);
+    }
+}
+
+    
+    
     
 // <editor-fold defaultstate="collapsed" desc="Registra Investimento Historico BD">
     
@@ -536,7 +612,7 @@ public class UsuarioDAO {
     
    // </editor-fold> 
     
-    // <editor-fold defaultstate="collapsed" desc="Registra Resgate Historico BD">
+// <editor-fold defaultstate="collapsed" desc="Registra Resgate Historico BD">
     
     public void BDResgataCDI(){
         UsuarioDTO objUsuarioDTO = new UsuarioDTO();
@@ -671,7 +747,7 @@ public class UsuarioDAO {
                 JOptionPane.showMessageDialog(null, "Investimento realizado com sucesso!");
             } else {
                 // Saldo é maior que o investimento, portanto, cancelar o Investimento
-                throw new Exception("Saldo insuficiente para realizar o Investimento.");
+                JOptionPane.showMessageDialog(null ,"Saldo insuficiente para realizar o Investimento.");
             }
             
             if(saldo >= investimento){
@@ -758,7 +834,7 @@ public class UsuarioDAO {
                 JOptionPane.showMessageDialog(null, "Investimento realizado com sucesso!");
             } else {
                 // Saldo é maior que o investimento, portanto, cancelar o Investimento
-                throw new Exception("Saldo insuficiente para realizar o Investimento.");
+                JOptionPane.showMessageDialog(null ,"Saldo insuficiente para realizar o Investimento.");
             }
             
             if(saldo >= investimento){
@@ -845,7 +921,7 @@ public class UsuarioDAO {
                 JOptionPane.showMessageDialog(null, "Investimento realizado com sucesso!");
             } else {
                 // Saldo é maior que o investimento, portanto, cancelar o Investimento
-                throw new Exception("Saldo insuficiente para realizar o Investimento.");
+                JOptionPane.showMessageDialog(null ,"Saldo insuficiente para realizar o Investimento.");
             }
             
             if(saldo >= investimento){
@@ -932,7 +1008,7 @@ public class UsuarioDAO {
                 JOptionPane.showMessageDialog(null, "Investimento realizado com sucesso!");
             } else {
                 // Saldo é maior que o investimento, portanto, cancelar o Investimento
-                throw new Exception("Saldo insuficiente para realizar o Investimento.");
+                JOptionPane.showMessageDialog(null ,"Saldo insuficiente para realizar o Investimento.");
             }
             
             if(saldo >= investimento){
@@ -970,8 +1046,6 @@ public class UsuarioDAO {
         }
     }
    // </editor-fold> 
-   
-   /////Divisor/////
    
 //<editor-fold defaultstate="collapsed" desc="Resgate-de-Investimento">
     public void ResgataCDI(){
@@ -1106,10 +1180,8 @@ public class UsuarioDAO {
             }else if (inputResgate > cdbSaldoRetorno){
                 JOptionPane.showMessageDialog(null, "Você esta tentando resgatar um valor acima do que está disponivel.");
             }else{
-                System.out.println("Error");
             }
         } catch (Exception e) {
-            System.out.println("erro: " + e);
         }        
     }
     
@@ -1152,14 +1224,10 @@ public class UsuarioDAO {
             }else if (inputResgate > cdbSaldoRetorno){
                 JOptionPane.showMessageDialog(null, "Você esta tentando resgatar um valor acima do que está disponivel.");
             }else{
-                System.out.println("Error");
             }
         } catch (Exception e) {
-            System.out.println("erro: " + e);
         }        
     }
     
     //</editor-fold>
 }
-    
-

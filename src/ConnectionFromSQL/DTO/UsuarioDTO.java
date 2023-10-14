@@ -1,8 +1,6 @@
 package ConnectionFromSQL.DTO;
 
 public class UsuarioDTO {
-
-    
     public int id_agencia;
     public int id_conta;
     private String id_senha;
@@ -14,22 +12,27 @@ public class UsuarioDTO {
     private float id_InvestTotal;
     public float id_valorTransTED;
     private float id_valorTransPix;
-    private String id_cpfDestinatario;
-    public int id_contaDestinatario;
-    private int id_agenciaDestinatario;
+    private static String id_cpfDestinatario;
+    public static int id_contaDestinatario;
+    private static int id_agenciaDestinatario;
     private String id_tipoPix = "PIX";
     private String id_TipoTD = "TED/DOC";
     public String tipo_CDI = "CDI";
     public String tipo_CDB = "CDB";
     public String tipo_LCA = "LCA";
     public String tipo_RendaFixa = "RENDA FIXA";
+    
+    //Variaveis para o cadastro
     private String id_CadastCPF;
     private String id_CadastSenha;
     private String id_CadastNome;
     public String id_CadastEndereco;
+    public static String id_CadastDate;
     private int id_CadastAgencia;
     private int id_CadastConta;
-    private String id_CadastEmail;
+    private String id_CadastEmail;    
+    //Variaveis para o cadastro
+    
     private int idade;
     private static String cpf_login;
     public static float cdiInvest;
@@ -46,8 +49,11 @@ public class UsuarioDTO {
     public static String dataAtivoResgate;
     public String tipoInvestimento = "INVESTIMENTO";
     public String tipoResgate = "RESGATE";
-    
-    
+    public static String senhaBancoDeDados;
+    public static boolean DestinatarioEncontrado;
+    public static boolean DestinatarioEncontradoTD;
+    public static int contaSelf;
+    public static int agenciaSelf;
     
     /////////////////////////////////
 
@@ -317,6 +323,20 @@ public class UsuarioDTO {
     public void setId_CadastEndereco(String id_CadastEndereco) {
         this.id_CadastEndereco = id_CadastEndereco;
     }
+
+    /**
+     * @return the id_CadastDate
+     */
+    public String getId_CadastDate() {
+        return id_CadastDate;
+    }
+
+    /**
+     * @param id_CadastDate the id_CadastDate to set
+     */
+    public void setId_CadastDate(String id_CadastDate) {
+        this.id_CadastDate = id_CadastDate;
+    }
     
     /**
      * @return the idade
@@ -541,6 +561,77 @@ public class UsuarioDTO {
     public String getTipoResgate() {
         return tipoResgate;
     }
+
+    /**
+     * @return the senhaBancoDeDados
+     */
+    public String getSenhaBancoDeDados() {
+        return senhaBancoDeDados;
+    }
+
+    /**
+     * @param senhaBancoDeDados the senhaBancoDeDados to set
+     */
+    public void setSenhaBancoDeDados(String senhaBancoDeDados) {
+        this.senhaBancoDeDados = senhaBancoDeDados;
+    }
+
+    /**
+     * @return the DestinatarioEncontrado
+     */
+    public boolean isDestinatarioEncontrado() {
+        return DestinatarioEncontrado;
+    }
+
+    /**
+     * @param DestinatarioEncontrado the DestinatarioEncontrado to set
+     */
+    public void setDestinatarioEncontrado(boolean DestinatarioEncontrado) {
+        this.DestinatarioEncontrado = DestinatarioEncontrado;
+    }
+
+    /**
+     * @return the DestinatarioEncontradoTD
+     */
+    public static boolean isDestinatarioEncontradoTD() {
+        return DestinatarioEncontradoTD;
+    }
+
+    /**
+     * @param aDestinatarioEncontradoTD the DestinatarioEncontradoTD to set
+     */
+    public static void setDestinatarioEncontradoTD(boolean aDestinatarioEncontradoTD) {
+        DestinatarioEncontradoTD = aDestinatarioEncontradoTD;
+    }
+
+    /**
+     * @return the contaSelf
+     */
+    public static int getContaSelf() {
+        return contaSelf;
+    }
+
+    /**
+     * @param aContaSelf the contaSelf to set
+     */
+    public static void setContaSelf(int aContaSelf) {
+        contaSelf = aContaSelf;
+    }
+
+    /**
+     * @return the agenciaSelf
+     */
+    public static int getAgenciaSelf() {
+        return agenciaSelf;
+    }
+
+    /**
+     * @param aAgenciaSelf the agenciaSelf to set
+     */
+    public static void setAgenciaSelf(int aAgenciaSelf) {
+        agenciaSelf = aAgenciaSelf;
+    }
+    
 
 }
 
