@@ -26,24 +26,26 @@ public class InternalTrans extends javax.swing.JInternalFrame {
     }
     
     private void RegistrarTransfPix() {
-        String cpfDestinatario = chavePix.getText();
+        String chaveDest = chavePix.getText().toUpperCase();
         float registroValorTransf = Float.parseFloat(valorPix.getText());
        
 
         UsuarioDTO objUsuarioDTO = new UsuarioDTO();
-        objUsuarioDTO.setId_cpfDestinatario(cpfDestinatario);
+        objUsuarioDTO.setChavePixBD(chaveDest);
         objUsuarioDTO.setId_valorTransPix(registroValorTransf);
         
         UsuarioDAO objUsuarioDAO = new UsuarioDAO();
+        objUsuarioDAO.RegistraData();
         objUsuarioDAO.RegistrarTransfPIX(objUsuarioDTO);
     }
 
     private void RegistrarTransfTed() {
+        
         int contaDestino = Integer.parseInt(contaTrans.getText());
         int agenciaDestino = Integer.parseInt(agenciaTrans.getText());
         float registroValorTransf = Float.parseFloat(valorTD.getText());
         UsuarioDAO objUsuarioDAO = new UsuarioDAO();
-        
+        objUsuarioDAO.RegistraData();
         UsuarioDTO objUsuarioDTO = objUsuarioDAO.PerfilUser();
         objUsuarioDTO.setId_contaDestinatario(contaDestino);
         objUsuarioDTO.setId_agenciaDestinatario(agenciaDestino);
@@ -318,18 +320,21 @@ public class InternalTrans extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         UsuarioDAO userDAO = new UsuarioDAO();
         UsuarioDTO userDTO = new UsuarioDTO();
-        userDTO.setId_cpfDestinatario(chavePix.getText());
-        userDAO.VerificaDestinatarioCPF();
+        userDTO.setChavePixBD(chavePix.getText().toUpperCase());
+        userDAO.VerificaDestinatarioCHAVEP();
         userDAO.Verifica(userDTO);
         boolean CPFDest = userDTO.DestinatarioEncontrado;
         boolean Self = true;
+        String ChaveSelf =  userDTO.getPixSelf();        
+        String ChaveInputSelf = chavePix.getText();
+        
         String senha = JOptionPane.showInputDialog("Digite sua senha");
         String senhaDTO = userDTO.getSenhaBancoDeDados();
-        
+        System.out.println(userDTO.getPixSelf());
         //Verificador de conta
-        if(chavePix.getText() == userDTO.getCpf_login()){
+        if(ChaveInputSelf.equals(ChaveSelf)){
             Self = true;
-        }else if (!chavePix.getText().equals(userDTO.getCpf_login())){
+        }else if (!chavePix.getText().toUpperCase().equals(userDTO.getCpf_login())){
             Self = false;
         }
         

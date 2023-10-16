@@ -80,6 +80,7 @@ public class InternalInvest extends javax.swing.JInternalFrame {
         popUpHist.setName("Historico"); // NOI18N
         popUpHist.setPreferredSize(new java.awt.Dimension(980, 730));
 
+        tabelaInvest.setAutoCreateRowSorter(true);
         tabelaInvest.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -486,6 +487,7 @@ public class InternalInvest extends javax.swing.JInternalFrame {
     public void AtualizaTabelaInvest() {
         try {
             UsuarioDAO objUsuarioDAO = new UsuarioDAO();
+            UsuarioDTO userDTO = new UsuarioDTO();
 
             DefaultTableModel model = (DefaultTableModel) tabelaInvest.getModel();
 
@@ -493,12 +495,16 @@ public class InternalInvest extends javax.swing.JInternalFrame {
 
             for (int i = 0; i < lista.size(); i++) {
                 model.addRow(new Object[]{
-                    lista.get(i).getTipoAtivo(),
-                    "R$ " + lista.get(i).getValorAtivo(),
-                    lista.get(i).getDataAtivo()
+                    lista.get(i).getTipoDeInvestimento(),
+                    "R$ " + lista.get(i).getValorInvestido(),
+                    lista.get(i).getDataInvestimento()                        
                 });
+
+                // Imprimir os valores no console
+                System.out.println("Tipo de Investimento: " + lista.get(i).getTipoDeInvestimento());
+                System.out.println("Valor Investido: R$ " + lista.get(i).getValorInvestido());
+                System.out.println("Data de Investimento: " + lista.get(i).getDataInvestimento());
             }
-            
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "Erro no listavaloresTED" + erro);
         }      
@@ -515,12 +521,12 @@ public class InternalInvest extends javax.swing.JInternalFrame {
 
             for (int i = 0; i < lista.size(); i++) {
                 model.addRow(new Object[]{
-                    lista.get(i).getTipoAtivoResgtate(),
-                    "R$ " + lista.get(i).getValorAtivoResgate(),
-                    lista.get(i).getDataAtivoResgate()
-                });
+                    lista.get(i).getTipoDeResgate(),
+                    "R$ " + lista.get(i).getValorResgatado(),
+                    lista.get(i).getDataResgate()
+                });                
             }
-
+            
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "Erro no listavaloresTED" + erro);
         }
@@ -715,9 +721,9 @@ public class InternalInvest extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_toggleSaldoActionPerformed
 
     private void historicoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historicoBtnActionPerformed
-        popUpHist.setVisible(true);
         AtualizaTabelaInvest();
         AtualizaTabelaResgate();
+        popUpHist.setVisible(true);
     }//GEN-LAST:event_historicoBtnActionPerformed
     
     //////////////////// Registra ////////////////

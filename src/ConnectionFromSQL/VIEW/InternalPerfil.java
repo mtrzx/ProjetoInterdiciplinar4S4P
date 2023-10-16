@@ -6,6 +6,7 @@ package ConnectionFromSQL.VIEW;
 
 import ConnectionFromSQL.DAO.UsuarioDAO;
 import ConnectionFromSQL.DTO.UsuarioDTO;
+import java.awt.Font;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -22,6 +23,14 @@ public class InternalPerfil extends javax.swing.JInternalFrame {
      */
     public InternalPerfil() {
         initComponents();
+        btnTrocar.setVisible(false);
+        if (chavePix.getText().isBlank()) {
+            btnTrocar.setText("Cadastrar \nchave");
+            Font novaFonte = new Font("Arial", Font.PLAIN, 11);
+            btnTrocar.setFont(novaFonte);
+        }else{
+            btnTrocar.setText("Trocar chave");
+        }
     }
 
     /**
@@ -38,7 +47,10 @@ public class InternalPerfil extends javax.swing.JInternalFrame {
         cpfTxt = new javax.swing.JTextField();
         agenciaTxt = new javax.swing.JTextField();
         t4 = new javax.swing.JTextField();
+        chavePix = new javax.swing.JTextField();
+        btnTrocar = new javax.swing.JButton();
         emailTxt = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -64,7 +76,7 @@ public class InternalPerfil extends javax.swing.JInternalFrame {
                 nomeTxtActionPerformed(evt);
             }
         });
-        jPanel4.add(nomeTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 128, 500, 40));
+        jPanel4.add(nomeTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, 500, 40));
 
         cpfTxt.setEditable(false);
         cpfTxt.setBackground(new java.awt.Color(232, 246, 248));
@@ -75,40 +87,72 @@ public class InternalPerfil extends javax.swing.JInternalFrame {
                 cpfTxtActionPerformed(evt);
             }
         });
-        jPanel4.add(cpfTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 199, 500, 40));
+        jPanel4.add(cpfTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 150, 500, 40));
 
         agenciaTxt.setEditable(false);
         agenciaTxt.setBackground(new java.awt.Color(232, 246, 248));
         agenciaTxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         agenciaTxt.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel4.add(agenciaTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(504, 335, 332, 40));
+        jPanel4.add(agenciaTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 280, 332, 40));
 
         t4.setEditable(false);
         t4.setBackground(new java.awt.Color(232, 246, 248));
         t4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         t4.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel4.add(t4, new org.netbeans.lib.awtextra.AbsoluteConstraints(504, 275, 332, 40));
+        jPanel4.add(t4, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 220, 332, 40));
+
+        chavePix.setBackground(new java.awt.Color(232, 246, 248));
+        chavePix.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        chavePix.setForeground(new java.awt.Color(0, 0, 0));
+        chavePix.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chavePixActionPerformed(evt);
+            }
+        });
+        chavePix.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                chavePixKeyPressed(evt);
+            }
+        });
+        jPanel4.add(chavePix, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 390, 230, 40));
+
+        btnTrocar.setBackground(new java.awt.Color(204, 255, 255));
+        btnTrocar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnTrocar.setForeground(new java.awt.Color(51, 51, 51));
+        btnTrocar.setText("Trocar chave");
+        btnTrocar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTrocarActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnTrocar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 390, 120, 40));
 
         emailTxt.setEditable(false);
         emailTxt.setBackground(new java.awt.Color(232, 246, 248));
         emailTxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         emailTxt.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel4.add(emailTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 393, 500, 40));
+        jPanel4.add(emailTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 340, 500, 40));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Agência:");
+        jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 280, 150, 40));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Conta:");
-        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 274, 150, 40));
+        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 220, 150, 40));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Agência:");
-        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 334, 150, 40));
+        jLabel2.setText("Chave PIX:");
+        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 390, 110, 40));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/projeto/imagens/pfp.png"))); // NOI18N
-        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 128, -1, -1));
+        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, -1, -1));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/projeto/imagens/rubikperfil.png"))); // NOI18N
         jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, -1, -1));
@@ -139,6 +183,47 @@ public class InternalPerfil extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cpfTxtActionPerformed
 
+    private void btnTrocarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrocarActionPerformed
+        // TODO add your handling code here:
+        registraChave();        
+        
+    }//GEN-LAST:event_btnTrocarActionPerformed
+
+    private void chavePixKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_chavePixKeyPressed
+        // TODO add your handling code here:
+        btnTrocar.setVisible(true);
+    }//GEN-LAST:event_chavePixKeyPressed
+
+    private void chavePixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chavePixActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chavePixActionPerformed
+    
+    public void registraChave(){
+        UsuarioDAO userDAO = new UsuarioDAO();
+        UsuarioDTO userDTO = new UsuarioDTO();
+        
+        String chavePixInput = chavePix.getText();
+        userDTO.setChavePIXalt(chavePixInput);
+        userDAO.VerificaPIXDup();
+        
+        
+        if (userDTO.chaveDup == false && chavePixInput.length() >= 5 && chavePixInput.length() <=15) {
+            userDAO.AtualizaChave(userDTO);
+            JOptionPane.showMessageDialog(null, "Chave alterada!");
+            listarValores();
+        }else if (userDTO.chaveDup == true){
+            JOptionPane.showMessageDialog(null, "Esta chave ja esta em uso");
+            listarValores();
+        }else if (chavePixInput.length()<5){
+            JOptionPane.showMessageDialog(null, "A chave deve conter de 5 a 15 caracteres, você digitou " + chavePixInput.length() + " caracteres.");
+        }else if (chavePixInput.length()<15){
+            JOptionPane.showMessageDialog(null, "A chave deve conter de 5 a 15 caracteres, você digitou " + chavePixInput.length() + " caracteres.");
+        }else{
+            return;
+        }
+    }
+    
+    
     public void listarValores() {
 
         try {            
@@ -163,6 +248,7 @@ public class InternalPerfil extends javax.swing.JInternalFrame {
             agenciaTxt.setText(agenciaString);
             t4.setText(contaString);
             emailTxt.setText(user.getId_email().toLowerCase());
+            chavePix.setText(user.getChavePIX());
 
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "Listar erro"
@@ -173,6 +259,8 @@ public class InternalPerfil extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField agenciaTxt;
+    private javax.swing.JButton btnTrocar;
+    private javax.swing.JTextField chavePix;
     private javax.swing.JTextField cpfTxt;
     private javax.swing.JTextField emailTxt;
     private javax.swing.JLabel jLabel1;
@@ -180,6 +268,7 @@ public class InternalPerfil extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JTextField nomeTxt;
     private javax.swing.JTextField t4;

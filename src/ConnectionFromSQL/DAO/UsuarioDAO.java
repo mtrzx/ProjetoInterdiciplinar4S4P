@@ -53,7 +53,7 @@ public class UsuarioDAO {
                 objUsuarioDTO.setId_email(rs.getString("EMAIL"));
                 objUsuarioDTO.setId_agencia(rs.getInt("AGENCIA"));
                 objUsuarioDTO.setId_conta(rs.getInt("CONTA"));
-
+                objUsuarioDTO.setChavePIX(rs.getString("CHAVE_PIX"));
             }
 
         } catch (SQLException erro) {
@@ -209,7 +209,9 @@ public class UsuarioDAO {
         
     public void RegistrarTransfPIX(UsuarioDTO objUsuarioDTO){
         
-        String sql = "UPDATE grupo4 SET SALDO = CASE WHEN CPF = ? THEN SALDO - ? WHEN CPF = ? THEN SALDO + ? ELSE SALDO END WHERE CPF IN (?, ?);";
+//        String sql = "UPDATE grupo4 SET SALDO = CASE WHEN CPF = ? THEN SALDO - ? WHEN CPF = ? THEN SALDO + ? ELSE SALDO END WHERE CPF IN (?, ?);";
+        String sql = "UPDATE grupo4 SET SALDO = SALDO - ? WHERE CPF = ?";
+        String sqlTransferencia = "UPDATE grupo4 SET SALDO = SALDO + ? WHERE CHAVE_PIX = ?";
         String sqlSaldo = "SELECT SALDO FROM `grupo4` WHERE CPF = ?;";
         
         conn = new Conexao().conectaDB();
@@ -230,16 +232,16 @@ public class UsuarioDAO {
             if (saldo >= valorpix) {
                 // Atualizar saldo e investimento na tabela
                 PreparedStatement pstmAtualizacao = conn.prepareStatement(sql);                
-                pstmAtualizacao.setString(1, objUsuarioDTO.getCpf_login());
-                pstmAtualizacao.setFloat(2, objUsuarioDTO.getId_valorTransPix());
-                //////
-                pstmAtualizacao.setString(3, objUsuarioDTO.getId_cpfDestinatario());
-                pstmAtualizacao.setFloat(4, objUsuarioDTO.getId_valorTransPix());
-                /////
-                pstmAtualizacao.setString(5, objUsuarioDTO.getCpf_login());
-                pstmAtualizacao.setString(6, objUsuarioDTO.getId_cpfDestinatario());
+                pstmAtualizacao.setFloat(1, objUsuarioDTO.getId_valorTransPix());
+                pstmAtualizacao.setString(2, objUsuarioDTO.getCpf_login());
                 pstmAtualizacao.execute();
                 pstmAtualizacao.close();        
+                
+                PreparedStatement pstmAtualizacaoTransf = conn.prepareStatement(sqlTransferencia);
+                pstmAtualizacaoTransf.setFloat(1, objUsuarioDTO.getId_valorTransPix());
+                pstmAtualizacaoTransf.setString(2, objUsuarioDTO.getChavePixBD().toUpperCase());
+                pstmAtualizacaoTransf.execute();
+                pstmAtualizacaoTransf.close();
                 
                 JOptionPane.showMessageDialog(null, "Tranferencia realizada com sucesso!");
                 ImprimeBDPIX(objUsuarioDTO);
@@ -258,27 +260,33 @@ public class UsuarioDAO {
     }
         
     public void ImprimeBDPIX(UsuarioDTO objUsuarioDTO){
-        String sqlArmazena = "INSERT INTO `grupo4historico` (TIPO_TRANS, CPF_REMET, VALOR, CPF_DEST) VALUES (?, ?, ?, ?);";
+        String sqlArmazena = "INSERT INTO `grupo4historico` (TIPO_TRANS, CPF_REMET, VALOR, CHAVE_PIX, CPF_DEST, DATA_REG) VALUES (?, ?, ?, ?, ?, ?);";
         conn = new Conexao().conectaDB();
-        
+        RegistraData();
+        atualizaChaveCPF();
         try{
             PreparedStatement pstmArmazenaDados = conn.prepareStatement(sqlArmazena);
             pstmArmazenaDados.setString(1, objUsuarioDTO.getId_tipoPix());
             pstmArmazenaDados.setString(2, objUsuarioDTO.getCpf_login());                
             pstmArmazenaDados.setFloat(3, objUsuarioDTO.getId_valorTransPix());
-            pstmArmazenaDados.setString(4, objUsuarioDTO.getId_cpfDestinatario());
+            pstmArmazenaDados.setString(4, objUsuarioDTO.getChavePixBD().toUpperCase());
+            pstmArmazenaDados.setString(5, objUsuarioDTO.getId_cpfDestinatario());
+            pstmArmazenaDados.setString(6, objUsuarioDTO.getDataDtoTransf());
 
             pstmArmazenaDados.execute();
             pstmArmazenaDados.close();
+            
+            System.out.println(objUsuarioDTO.getDataDtoTransf());
         }catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "Erro ao armazenar dados: " + erro.getMessage());
         }
     }
+    
         
-    public void ImprimeBDTD(UsuarioDTO objUsuarioDTO){
-        
-        String sqlArmazenaTD = "INSERT INTO `grupo4historico` (`CPF_REMET`,`VALOR`, `CONTA_REMET`, `CONTA_DEST`, `AGENCIA_REMET`, `AGENCIA_DEST`, `TIPO_TRANS`) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    public void ImprimeBDTD(UsuarioDTO objUsuarioDTO){        
+        String sqlArmazenaTD = "INSERT INTO `grupo4historico` (`CPF_REMET`,`VALOR`, `CONTA_REMET`, `CONTA_DEST`, `AGENCIA_REMET`, `AGENCIA_DEST`, `TIPO_TRANS` , DATA_REG) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         conn = new Conexao().conectaDB();
+        RegistraData();
         
         try{
             PreparedStatement pstmArmazenaDados = conn.prepareStatement(sqlArmazenaTD);
@@ -289,6 +297,7 @@ public class UsuarioDAO {
             pstmArmazenaDados.setInt(5, objUsuarioDTO.id_agencia);
             pstmArmazenaDados.setInt(6, objUsuarioDTO.getId_agenciaDestinatario());
             pstmArmazenaDados.setString(7, objUsuarioDTO.getId_TipoTD());
+            pstmArmazenaDados.setString(8, objUsuarioDTO.getDataDtoTransf());
 
             pstmArmazenaDados.execute();
             pstmArmazenaDados.close();
@@ -298,7 +307,7 @@ public class UsuarioDAO {
     }
     
     public ArrayList<UsuarioDTO> HistoricoPIX(String cpf){ 
-        
+        atualizaChaveCPF();
         conn = new Conexao().conectaDB();
         String sql = "SELECT * FROM grupo4historico WHERE CPF_REMET =" + cpf + " AND TIPO_TRANS = 'PIX' ";
         try{        
@@ -309,8 +318,79 @@ public class UsuarioDAO {
                 UsuarioDTO objUsuarioDTO = new UsuarioDTO();
                 objUsuarioDTO.setCpf_login(rs.getString("CPF_REMET"));
                 objUsuarioDTO.setId_valorTransPix(rs.getFloat("VALOR"));
-                objUsuarioDTO.setId_cpfDestinatario(rs.getString("CPF_DEST"));
-               
+                objUsuarioDTO.setTableid_chavePixDestinatario(rs.getString("CHAVE_PIX"));
+                objUsuarioDTO.setTableid_cpfDestinatario(rs.getString("CPF_DEST"));
+                objUsuarioDTO.setTableid_dataPix(rs.getString("DATA_REG"));                
+                lista.add(objUsuarioDTO);
+            }
+        }catch(SQLException erro){            
+            JOptionPane.showMessageDialog(null, "Erro pesquisar Historico" + erro);
+        }
+        return lista;
+    }
+    
+    public void atualizaChaveCPF(){
+        UsuarioDTO userdto = new UsuarioDTO();
+        conn = new Conexao().conectaDB();
+        String sql = "SELECT CPF FROM grupo4 WHERE CHAVE_PIX = ?";
+
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, userdto.getChavePixBD().toUpperCase()); // Define o valor do parâmetro no lugar do ponto de interrogação
+            rs = pstm.executeQuery();
+
+            System.out.println(userdto.getChavePixBD().toUpperCase());
+            while (rs.next()) {
+                userdto.setId_cpfDestinatario(rs.getString("CPF"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+    
+    public ArrayList<UsuarioDTO> HistoricoInvestimento(){ 
+        
+        UsuarioDTO userDTO = new UsuarioDTO();
+        conn = new Conexao().conectaDB();
+        String sql = "SELECT TIPO_INVEST, VALOR, DATA_REG FROM grupo4investimento WHERE CPF_REMET = '" + userDTO.getCpf_login() +
+                "' AND TIPO_TRANS LIKE 'INVESTIMENTO'";
+
+        try{        
+            pstm = conn.prepareStatement(sql);
+            rs = pstm.executeQuery();
+            
+            while(rs.next()){
+                UsuarioDTO objUsuarioDTO = new UsuarioDTO();
+                objUsuarioDTO.setTipoDeInvestimento(rs.getString("TIPO_INVEST"));
+                objUsuarioDTO.setValorInvestido(rs.getFloat("VALOR"));
+                objUsuarioDTO.setDataInvestimento(rs.getString("DATA_REG"));                
+                lista.add(objUsuarioDTO);                
+            }
+        }catch(SQLException erro){            
+            JOptionPane.showMessageDialog(null, "Erro pesquisar Historico" + erro);
+        }
+        
+        
+        return lista;
+    }
+    
+     public ArrayList<UsuarioDTO> HistoricoInvestimentoResgate(){ 
+        
+        UsuarioDTO userDTO = new UsuarioDTO();
+        conn = new Conexao().conectaDB();
+        String sql = "SELECT TIPO_INVEST, VALOR, DATA_REG FROM grupo4investimento WHERE CPF_REMET = '" + userDTO.getCpf_login() + 
+                "' AND TIPO_TRANS LIKE 'RESGATE'";
+
+        try{        
+            pstm = conn.prepareStatement(sql);
+            rs = pstm.executeQuery();
+            
+            while(rs.next()){
+                UsuarioDTO objUsuarioDTO = new UsuarioDTO();
+                objUsuarioDTO.setTipoDeResgate(rs.getString("TIPO_INVEST"));
+                objUsuarioDTO.setValorResgatado(rs.getFloat("VALOR"));
+                objUsuarioDTO.setDataResgate(rs.getString("DATA_REG"));
                 
                 lista.add(objUsuarioDTO);
             }
@@ -319,7 +399,7 @@ public class UsuarioDAO {
         }
         return lista;
     }
-
+    
     public ArrayList<UsuarioDTO> HistoricoTEDDOC(String cpf){ 
         
         conn = new Conexao().conectaDB();
@@ -333,8 +413,9 @@ public class UsuarioDAO {
                 objUsuarioDTO.setId_conta(rs.getInt("CONTA_REMET"));
                 objUsuarioDTO.setId_agencia(rs.getInt("AGENCIA_REMET"));
                 objUsuarioDTO.setId_valorTransTED(rs.getFloat("VALOR"));
-                objUsuarioDTO.setId_contaDestinatario(rs.getInt("CONTA_DEST"));
-                objUsuarioDTO.setId_agenciaDestinatario(rs.getInt("AGENCIA_DEST"));
+                objUsuarioDTO.setTableid_contaDestinatario(rs.getInt("CONTA_DEST"));
+                objUsuarioDTO.setTableid_agenciaDestinatario(rs.getInt("AGENCIA_DEST"));
+                objUsuarioDTO.setTableid_dataTD(rs.getString("DATA_REG"));
                 
                 lista.add(objUsuarioDTO);
             }
@@ -376,9 +457,8 @@ public class UsuarioDAO {
             JOptionPane.showMessageDialog(null, "UsuarioDAO " + erro);
         }
         
-    }   
-   
-    
+    }  
+       
     public int[] GeraNum(){
         // Gerar número aleatório de conta e agência
         Random random = new Random();
@@ -390,55 +470,7 @@ public class UsuarioDAO {
         int[] numeros = {conta, agencia}; // Armazena os números em um array e retorna
         return numeros;
    }
-    
-    public ArrayList<UsuarioDTO> HistoricoInvestimento(){ 
         
-        UsuarioDTO objUsuarioDTO = new UsuarioDTO();
-        conn = new Conexao().conectaDB();
-        String sql = "SELECT TIPO_INVEST, VALOR, DATA_REG FROM grupo4investimento WHERE CPF_REMET = '" + objUsuarioDTO.getCpf_login() +
-                "' AND TIPO_TRANS LIKE '" + objUsuarioDTO.getTipoInvestimento() + "'";
-
-        try{        
-            pstm = conn.prepareStatement(sql);
-            rs = pstm.executeQuery();
-            
-            while(rs.next()){
-                objUsuarioDTO.setTipoAtivo(rs.getString("TIPO_INVEST"));
-                objUsuarioDTO.setValorAtivo(rs.getFloat("VALOR"));
-                objUsuarioDTO.setDataAtivo(rs.getString("DATA_REG"));
-                
-                lista.add(objUsuarioDTO);
-            }
-        }catch(SQLException erro){            
-            JOptionPane.showMessageDialog(null, "Erro pesquisar Historico" + erro);
-        }
-        return lista;
-    }
-    
-    public ArrayList<UsuarioDTO> HistoricoInvestimentoResgate(){ 
-        
-        UsuarioDTO objUsuarioDTO = new UsuarioDTO();
-        conn = new Conexao().conectaDB();
-        String sql = "SELECT TIPO_INVEST, VALOR, DATA_REG FROM grupo4investimento WHERE CPF_REMET = '" + objUsuarioDTO.getCpf_login() + 
-                "' AND TIPO_TRANS LIKE '" + objUsuarioDTO.getTipoResgate() + "'";
-
-        try{        
-            pstm = conn.prepareStatement(sql);
-            rs = pstm.executeQuery();
-            
-            while(rs.next()){
-                objUsuarioDTO.setTipoAtivoResgtate(rs.getString("TIPO_INVEST"));
-                objUsuarioDTO.setValorAtivoResgate(rs.getFloat("VALOR"));
-                objUsuarioDTO.setDataAtivoResgate(rs.getString("DATA_REG"));
-                
-                lista.add(objUsuarioDTO);
-            }
-        }catch(SQLException erro){            
-            JOptionPane.showMessageDialog(null, "Erro pesquisar Historico" + erro);
-        }
-        return lista;
-    }
-    
     public void RegistraData (){
         
         UsuarioDTO userdto = new UsuarioDTO();
@@ -450,6 +482,7 @@ public class UsuarioDAO {
         String dataFormatadaString = now.format(dataFormatada);
         
         userdto.setDataDto(dataFormatadaString);
+        userdto.setDataDtoTransf(dataFormatadaString);
                 
     }
     
@@ -469,14 +502,14 @@ public class UsuarioDAO {
         }
     }
     
-    public void VerificaDestinatarioCPF() {
+    public void VerificaDestinatarioCHAVEP() {
         UsuarioDTO userDTO = new UsuarioDTO();
         conn = new Conexao().conectaDB();
-        String sql = "SELECT CPF FROM grupo4 WHERE CPF = ?"; 
+        String sql = "SELECT CHAVE_PIX FROM grupo4 WHERE CHAVE_PIX = ?"; 
 
         try {
             pstm = conn.prepareStatement(sql);
-            pstm.setString(1, userDTO.getId_cpfDestinatario()); 
+            pstm.setString(1, userDTO.getChavePixBD()); 
             rs = pstm.executeQuery();
             if (rs.next()) {
                 userDTO.setDestinatarioEncontrado(true);                
@@ -528,7 +561,7 @@ public class UsuarioDAO {
     
     
     
-// <editor-fold defaultstate="collapsed" desc="Registra Investimento Historico BD">
+    // <editor-fold defaultstate="collapsed" desc="Registra Investimento Historico BD">
     
     public void BDInvestimentoCDI(){
         UsuarioDTO objUsuarioDTO = new UsuarioDTO();
@@ -541,7 +574,7 @@ public class UsuarioDAO {
             pstmArmazenaDados.setFloat(2, objUsuarioDTO.getId_investimento());
             pstmArmazenaDados.setString(3, objUsuarioDTO.getDataDto());
             pstmArmazenaDados.setString(4, objUsuarioDTO.getTipo_CDI());
-            pstmArmazenaDados.setString(5, objUsuarioDTO.getTipoInvestimento());
+            pstmArmazenaDados.setString(5, "INVESTIMENTO");
             pstmArmazenaDados.execute();
             pstmArmazenaDados.close();
             
@@ -561,7 +594,7 @@ public class UsuarioDAO {
             pstmArmazenaDados.setFloat(2, objUsuarioDTO.getId_investimento());
             pstmArmazenaDados.setString(3, objUsuarioDTO.getDataDto());
             pstmArmazenaDados.setString(4, objUsuarioDTO.getTipo_CDB());
-            pstmArmazenaDados.setString(5, objUsuarioDTO.getTipoInvestimento());
+            pstmArmazenaDados.setString(5, "RESGATE");
             pstmArmazenaDados.execute();
             pstmArmazenaDados.close();
             
@@ -581,7 +614,7 @@ public class UsuarioDAO {
             pstmArmazenaDados.setFloat(2, objUsuarioDTO.getId_investimento());
             pstmArmazenaDados.setString(3, objUsuarioDTO.getDataDto());
             pstmArmazenaDados.setString(4, objUsuarioDTO.getTipo_LCA());
-            pstmArmazenaDados.setString(5, objUsuarioDTO.getTipoInvestimento());
+            pstmArmazenaDados.setString(5, "INVESTIMENTO");
             pstmArmazenaDados.execute();
             pstmArmazenaDados.close();
             
@@ -601,7 +634,7 @@ public class UsuarioDAO {
             pstmArmazenaDados.setFloat(2, objUsuarioDTO.getId_investimento());
             pstmArmazenaDados.setString(3, objUsuarioDTO.getDataDto());
             pstmArmazenaDados.setString(4, objUsuarioDTO.getTipo_RendaFixa());
-            pstmArmazenaDados.setString(5, objUsuarioDTO.getTipoInvestimento());
+            pstmArmazenaDados.setString(5, "INVESTIMENTO");
             pstmArmazenaDados.execute();
             pstmArmazenaDados.close();
             
@@ -612,7 +645,7 @@ public class UsuarioDAO {
     
    // </editor-fold> 
     
-// <editor-fold defaultstate="collapsed" desc="Registra Resgate Historico BD">
+    // <editor-fold defaultstate="collapsed" desc="Registra Resgate Historico BD">
     
     public void BDResgataCDI(){
         UsuarioDTO objUsuarioDTO = new UsuarioDTO();
@@ -625,7 +658,7 @@ public class UsuarioDAO {
             pstmArmazenaDados.setFloat(2, objUsuarioDTO.getInputResgate());
             pstmArmazenaDados.setString(3, objUsuarioDTO.getDataDto());
             pstmArmazenaDados.setString(4, objUsuarioDTO.getTipo_CDI());
-            pstmArmazenaDados.setString(5, objUsuarioDTO.getTipoResgate());
+            pstmArmazenaDados.setString(5, "RESGATE");
             pstmArmazenaDados.execute();
             pstmArmazenaDados.close();
             
@@ -645,7 +678,7 @@ public class UsuarioDAO {
             pstmArmazenaDados.setFloat(2, objUsuarioDTO.getInputResgate());
             pstmArmazenaDados.setString(3, objUsuarioDTO.getDataDto());
             pstmArmazenaDados.setString(4, objUsuarioDTO.getTipo_CDB());
-            pstmArmazenaDados.setString(5, objUsuarioDTO.getTipoResgate());
+            pstmArmazenaDados.setString(5, "RESGATE");
             pstmArmazenaDados.execute();
             pstmArmazenaDados.close();
             
@@ -665,7 +698,7 @@ public class UsuarioDAO {
             pstmArmazenaDados.setFloat(2, objUsuarioDTO.getInputResgate());
             pstmArmazenaDados.setString(3, objUsuarioDTO.getDataDto());
             pstmArmazenaDados.setString(4, objUsuarioDTO.getTipo_LCA());
-            pstmArmazenaDados.setString(5, objUsuarioDTO.getTipoResgate());
+            pstmArmazenaDados.setString(5, "RESGATE");
             pstmArmazenaDados.execute();
             pstmArmazenaDados.close();
             
@@ -685,7 +718,7 @@ public class UsuarioDAO {
             pstmArmazenaDados.setFloat(2, objUsuarioDTO.getInputResgate());
             pstmArmazenaDados.setString(3, objUsuarioDTO.getDataDto());
             pstmArmazenaDados.setString(4, objUsuarioDTO.getTipo_RendaFixa());
-            pstmArmazenaDados.setString(5, objUsuarioDTO.getTipoResgate());
+            pstmArmazenaDados.setString(5, "RESGATE");
             pstmArmazenaDados.execute();
             pstmArmazenaDados.close();
             
@@ -696,7 +729,7 @@ public class UsuarioDAO {
     
    // </editor-fold> 
    
-// <editor-fold defaultstate="collapsed" desc="Investimento">
+    // <editor-fold defaultstate="collapsed" desc="Investimento">
      
    public void RegistraCDB(UsuarioDTO objUsuarioDTO) {
         String sql = "UPDATE grupo4 SET SALDO = SALDO - ?, CDB = CDB + ? WHERE CPF = ?;";
@@ -1047,7 +1080,7 @@ public class UsuarioDAO {
     }
    // </editor-fold> 
    
-//<editor-fold defaultstate="collapsed" desc="Resgate-de-Investimento">
+    //<editor-fold defaultstate="collapsed" desc="Resgate-de-Investimento">
     public void ResgataCDI(){
         UsuarioDTO objUsuarioDTO = new UsuarioDTO();
         String sql = "UPDATE grupo4 SET SALDO = SALDO + ?, CDI = CDI - ? WHERE CPF = ?;";
@@ -1230,4 +1263,59 @@ public class UsuarioDAO {
     }
     
     //</editor-fold>
+    
+    public void VerificaPIXDup(){
+        UsuarioDTO userDTO = new UsuarioDTO();
+        conn = new Conexao().conectaDB();
+        String sql = "SELECT CHAVE_PIX FROM grupo4 WHERE CHAVE_PIX = ?;";
+        
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, userDTO.getChavePIXalt());
+            rs = pstm.executeQuery();
+            if (rs.next()) {
+                userDTO.setChaveDup(true);                
+            } else {
+                userDTO.setChaveDup(false);
+            }
+            rs.close();
+        } catch (Exception e) {
+            
+        }
+    }
+    
+    public void AtualizaChave(UsuarioDTO userDTO) {
+        conn = new Conexao().conectaDB();
+        String sql = "UPDATE grupo4 SET CHAVE_PIX = ? WHERE CPF = ?";
+
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, userDTO.getChavePIXalt().toUpperCase());
+            pstm.setString(2, userDTO.getCpf_login());
+            int rowsAffected = pstm.executeUpdate();
+            pstm.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void SelfVerificador() {
+        UsuarioDTO userdto = new UsuarioDTO();
+        conn = new Conexao().conectaDB();
+        String sql = "SELECT CHAVE_PIX FROM grupo4 WHERE CPF = ?";
+
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, userdto.getCpf_login()); 
+            rs = pstm.executeQuery();
+
+            System.out.println(userdto.getChavePixBD().toUpperCase());
+            while (rs.next()) {
+                userdto.setPixSelf(rs.getString("CHAVE_PIX"));
+            }
+        } catch (SQLException e) {
+            
+            e.printStackTrace();
+        }
+    }
 }

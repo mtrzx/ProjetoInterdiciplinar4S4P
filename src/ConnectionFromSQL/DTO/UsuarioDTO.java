@@ -12,7 +12,7 @@ public class UsuarioDTO {
     private float id_InvestTotal;
     public float id_valorTransTED;
     private float id_valorTransPix;
-    private static String id_cpfDestinatario;
+    private static String id_cpfDestinatario;    
     public static int id_contaDestinatario;
     private static int id_agenciaDestinatario;
     private String id_tipoPix = "PIX";
@@ -41,19 +41,36 @@ public class UsuarioDTO {
     public static float rendaF;
     public static float inputResgate;
     public static String dataDto;
-    public static String tipoAtivo;
-    public static float valorAtivo;
-    public static String dataAtivo;
-    public static float ValorAtivoResgate;
-    public static String tipoAtivoResgtate;
-    public static String dataAtivoResgate;
-    public String tipoInvestimento = "INVESTIMENTO";
-    public String tipoResgate = "RESGATE";
+    
+    ////////////////////    
+    public float valorInvestido;
+    public float valorResgatado;
+    public String tipoDeInvestimento;
+    public String tipoDeResgate;
+    public String dataInvestimento;
+    public String dataResgate;
+    ////////////////////
+    
+    public String chavePIX;
+    public static String chavePIXalt;
+    public static String chavePixBD;
+    public static boolean chaveDup;
+    
+    ////////////////////
     public static String senhaBancoDeDados;
     public static boolean DestinatarioEncontrado;
     public static boolean DestinatarioEncontradoTD;
     public static int contaSelf;
     public static int agenciaSelf;
+    public static String dataDtoTransf;
+    public static String pixSelf;
+    
+    public String tableid_cpfDestinatario;
+    public String tableid_chavePixDestinatario;
+    public int tableid_contaDestinatario;
+    public int tableid_agenciaDestinatario;
+    public String tableid_dataPix;
+    public String tableid_dataTD;
     
     /////////////////////////////////
 
@@ -463,105 +480,7 @@ public class UsuarioDTO {
     public String getTipo_RendaFixa() {
         return tipo_RendaFixa;
     }
-
-    /**
-     * @return the tipoAtivo
-     */
-    public String getTipoAtivo() {
-        return tipoAtivo;
-    }
-
-    /**
-     * @param tipoAtivo the tipoAtivo to set
-     */
-    public void setTipoAtivo(String tipoAtivo) {
-        this.tipoAtivo = tipoAtivo;
-    }
-
-    /**
-     * @return the valorAtivo
-     */
-    public float getValorAtivo() {
-        return valorAtivo;
-    }
-
-    /**
-     * @param valorAtivo the valorAtivo to set
-     */
-    public void setValorAtivo(float valorAtivo) {
-        this.valorAtivo = valorAtivo;
-    }
-
-    /**
-     * @return the dataAtivo
-     */
-    public String getDataAtivo() {
-        return dataAtivo;
-    }
-
-    /**
-     * @param dataAtivo the dataAtivo to set
-     */
-    public void setDataAtivo(String dataAtivo) {
-        this.dataAtivo = dataAtivo;
-    }
-
-    /**
-     * @return the getValorAtivoResgate
-     */
-    public float getValorAtivoResgate() {
-        return ValorAtivoResgate;
-    }
-
-    /**
-     * @param getValorAtivoResgate the getValorAtivoResgate to set
-     */
-    public void setValorAtivoResgate(float getValorAtivoResgate) {
-        this.ValorAtivoResgate = getValorAtivoResgate;
-    }
-
-    /**
-     * @return the tipoAtivoResgtate
-     */
-    public String getTipoAtivoResgtate() {
-        return tipoAtivoResgtate;
-    }
-
-    /**
-     * @param tipoAtivoResgtate the tipoAtivoResgtate to set
-     */
-    public void setTipoAtivoResgtate(String tipoAtivoResgtate) {
-        this.tipoAtivoResgtate = tipoAtivoResgtate;
-    }
-
-    /**
-     * @return the dataAtivoResgate
-     */
-    public String getDataAtivoResgate() {
-        return dataAtivoResgate;
-    }
-
-    /**
-     * @param dataAtivoResgate the dataAtivoResgate to set
-     */
-    public void setDataAtivoResgate(String dataAtivoResgate) {
-        this.dataAtivoResgate = dataAtivoResgate;
-    }
-
-    /**
-     * @return the tipoInvestimento
-     */
-    public String getTipoInvestimento() {
-        return tipoInvestimento;
-    }
-
-    /**
-     * @return the tipoResgate
-     */
-    public String getTipoResgate() {
-        return tipoResgate;
-    }
-
+    
     /**
      * @return the senhaBancoDeDados
      */
@@ -631,7 +550,258 @@ public class UsuarioDTO {
     public static void setAgenciaSelf(int aAgenciaSelf) {
         agenciaSelf = aAgenciaSelf;
     }
-    
+
+    /**
+     * @return the tableid_cpfDestinatario
+     */
+    public String getTableid_cpfDestinatario() {
+        return tableid_cpfDestinatario;
+    }
+
+    /**
+     * @param tableid_cpfDestinatario the tableid_cpfDestinatario to set
+     */
+    public void setTableid_cpfDestinatario(String tableid_cpfDestinatario) {
+        this.tableid_cpfDestinatario = tableid_cpfDestinatario;
+    }
+
+    /**
+     * @return the tableid_contaDestinatario
+     */
+    public int getTableid_contaDestinatario() {
+        return tableid_contaDestinatario;
+    }
+
+    /**
+     * @param tableid_contaDestinatario the tableid_contaDestinatario to set
+     */
+    public void setTableid_contaDestinatario(int tableid_contaDestinatario) {
+        this.tableid_contaDestinatario = tableid_contaDestinatario;
+    }
+
+    /**
+     * @return the tableid_agenciaDestinatario
+     */
+    public int getTableid_agenciaDestinatario() {
+        return tableid_agenciaDestinatario;
+    }
+
+    /**
+     * @param tableid_agenciaDestinatario the tableid_agenciaDestinatario to set
+     */
+    public void setTableid_agenciaDestinatario(int tableid_agenciaDestinatario) {
+        this.tableid_agenciaDestinatario = tableid_agenciaDestinatario;
+    }
+
+    /**
+     * @return the dataDtoTransf
+     */
+    public static String getDataDtoTransf() {
+        return dataDtoTransf;
+    }
+
+    /**
+     * @param aDataDtoTransf the dataDtoTransf to set
+     */
+    public static void setDataDtoTransf(String aDataDtoTransf) {
+        dataDtoTransf = aDataDtoTransf;
+    }
+
+    /**
+     * @return the tableid_dataPix
+     */
+    public String getTableid_dataPix() {
+        return tableid_dataPix;
+    }
+
+    /**
+     * @param tableid_dataPix the tableid_dataPix to set
+     */
+    public void setTableid_dataPix(String tableid_dataPix) {
+        this.tableid_dataPix = tableid_dataPix;
+    }
+
+    /**
+     * @return the tableid_dataTD
+     */
+    public String getTableid_dataTD() {
+        return tableid_dataTD;
+    }
+
+    /**
+     * @param tableid_dataTD the tableid_dataTD to set
+     */
+    public void setTableid_dataTD(String tableid_dataTD) {
+        this.tableid_dataTD = tableid_dataTD;
+    }    
+
+    /**
+     * @return the valorInvestido
+     */
+    public float getValorInvestido() {
+        return valorInvestido;
+    }
+
+    /**
+     * @param valorInvestido the valorInvestido to set
+     */
+    public void setValorInvestido(float valorInvestido) {
+        this.valorInvestido = valorInvestido;
+    }
+
+    /**
+     * @return the valorResgatado
+     */
+    public float getValorResgatado() {
+        return valorResgatado;
+    }
+
+    /**
+     * @param valorResgatado the valorResgatado to set
+     */
+    public void setValorResgatado(float valorResgatado) {
+        this.valorResgatado = valorResgatado;
+    }
+
+    /**
+     * @return the tipoDeInvestimento
+     */
+    public String getTipoDeInvestimento() {
+        return tipoDeInvestimento;
+    }
+
+    /**
+     * @param tipoDeInvestimento the tipoDeInvestimento to set
+     */
+    public void setTipoDeInvestimento(String tipoDeInvestimento) {
+        this.tipoDeInvestimento = tipoDeInvestimento;
+    }
+
+    /**
+     * @return the tipoDeResgate
+     */
+    public String getTipoDeResgate() {
+        return tipoDeResgate;
+    }
+
+    /**
+     * @param tipoDeResgate the tipoDeResgate to set
+     */
+    public void setTipoDeResgate(String tipoDeResgate) {
+        this.tipoDeResgate = tipoDeResgate;
+    }
+
+    /**
+     * @return the dataInvestimento
+     */
+    public String getDataInvestimento() {
+        return dataInvestimento;
+    }
+
+    /**
+     * @param dataInvestimento the dataInvestimento to set
+     */
+    public void setDataInvestimento(String dataInvestimento) {
+        this.dataInvestimento = dataInvestimento;
+    }
+
+    /**
+     * @return the dataResgate
+     */
+    public String getDataResgate() {
+        return dataResgate;
+    }
+
+    /**
+     * @param dataResgate the dataResgate to set
+     */
+    public void setDataResgate(String dataResgate) {
+        this.dataResgate = dataResgate;
+    }
+
+    /**
+     * @return the chavePIX
+     */
+    public String getChavePIX() {
+        return chavePIX;
+    }
+
+    /**
+     * @param chavePIX the chavePIX to set
+     */
+    public void setChavePIX(String chavePIX) {
+        this.chavePIX = chavePIX;
+    }
+
+    /**
+     * @return the chavePIXalt
+     */
+    public String getChavePIXalt() {
+        return chavePIXalt;
+    }
+
+    /**
+     * @param chavePIXalt the chavePIXalt to set
+     */
+    public void setChavePIXalt(String chavePIXalt) {
+        this.chavePIXalt = chavePIXalt;
+    }
+
+    /**
+     * @return the chaveDup
+     */
+    public boolean isChaveDup() {
+        return chaveDup;
+    }
+
+    /**
+     * @param chaveDup the chaveDup to set
+     */
+    public void setChaveDup(boolean chaveDup) {
+        this.chaveDup = chaveDup;
+    }
+
+    /**
+     * @return the chavePixBD
+     */
+    public static String getChavePixBD() {
+        return chavePixBD;
+    }
+
+    /**
+     * @param aChavePixBD the chavePixBD to set
+     */
+    public static void setChavePixBD(String aChavePixBD) {
+        chavePixBD = aChavePixBD;
+    }
+
+    /**
+     * @return the tableid_chavePixDestinatario
+     */
+    public String getTableid_chavePixDestinatario() {
+        return tableid_chavePixDestinatario;
+    }
+
+    /**
+     * @param tableid_chavePixDestinatario the tableid_chavePixDestinatario to set
+     */
+    public void setTableid_chavePixDestinatario(String tableid_chavePixDestinatario) {
+        this.tableid_chavePixDestinatario = tableid_chavePixDestinatario;
+    }
+
+    /**
+     * @return the pixSelf
+     */
+    public static String getPixSelf() {
+        return pixSelf;
+    }
+
+    /**
+     * @param aPixSelf the pixSelf to set
+     */
+    public static void setPixSelf(String aPixSelf) {
+        pixSelf = aPixSelf;
+    }
 
 }
 

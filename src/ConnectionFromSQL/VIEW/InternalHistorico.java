@@ -75,11 +75,11 @@ public class InternalHistorico extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "De", "Valor", "Para"
+                "Remetente", "Valor", "Chave Pix usada", "Destinatário", "Data"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, true, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -129,11 +129,11 @@ public class InternalHistorico extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Conta Remetente", "Agência Remetente", "Valor", "Conta Destinatário", "Agencia Destinatário"
+                "Conta Remetente", "Agência Remetente", "Valor", "Conta Destinatário", "Agencia Destinatário", "Data"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -194,7 +194,7 @@ public class InternalHistorico extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 755, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 742, Short.MAX_VALUE)
         );
 
         pack();
@@ -213,8 +213,9 @@ public class InternalHistorico extends javax.swing.JInternalFrame {
                         lista.get(i).getId_conta(),
                         lista.get(i).getId_agencia(),
                         "R$ " + lista.get(i).getId_valorTransTED(),
-                        lista.get(i).getId_contaDestinatario(),
-                        lista.get(i).getId_agenciaDestinatario()
+                        lista.get(i).getTableid_contaDestinatario(),
+                        lista.get(i).getTableid_agenciaDestinatario(),
+                        lista.get(i).getTableid_dataTD()
                     });
                 }
 
@@ -235,9 +236,14 @@ public class InternalHistorico extends javax.swing.JInternalFrame {
                     model.addRow(new Object[]{
                         lista.get(i).getCpf_login(),
                         "R$ " + lista.get(i).getId_valorTransPix(),
-                        lista.get(i).getId_cpfDestinatario()
+                        lista.get(i).getTableid_chavePixDestinatario(),
+                        lista.get(i).getTableid_cpfDestinatario(),
+                        lista.get(i).getTableid_dataPix()
                     });
+                    
                 }
+                
+                
             } catch (Exception erro) {
                 JOptionPane.showMessageDialog(null, "Erro no listavaloresPIX" + erro);
             }
