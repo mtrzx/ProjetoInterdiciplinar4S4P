@@ -248,7 +248,13 @@ public class InternalPerfil extends javax.swing.JInternalFrame {
             agenciaTxt.setText(agenciaString);
             t4.setText(contaString);
             emailTxt.setText(user.getId_email().toLowerCase());
-            chavePix.setText(user.getChavePIX());
+            String chavePIXDTO = user.getChavePIX();
+            
+            if (chavePIXDTO == null || chavePIXDTO.equals("")){
+                chavePix.setText(user.getChavePIX());
+            }else{
+                chavePix.setText(user.getChavePIX().toLowerCase());
+            }
 
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "Listar erro"

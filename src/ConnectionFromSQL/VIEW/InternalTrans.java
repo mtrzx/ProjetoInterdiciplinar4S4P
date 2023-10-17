@@ -323,10 +323,11 @@ public class InternalTrans extends javax.swing.JInternalFrame {
         userDTO.setChavePixBD(chavePix.getText().toUpperCase());
         userDAO.VerificaDestinatarioCHAVEP();
         userDAO.Verifica(userDTO);
+        userDAO.SelfVerificador();
         boolean CPFDest = userDTO.DestinatarioEncontrado;
         boolean Self = true;
-        String ChaveSelf =  userDTO.getPixSelf();        
-        String ChaveInputSelf = chavePix.getText();
+        String ChaveSelf = userDTO.getPixSelf();        
+        String ChaveInputSelf = chavePix.getText().toUpperCase();
         
         String senha = JOptionPane.showInputDialog("Digite sua senha");
         String senhaDTO = userDTO.getSenhaBancoDeDados();
@@ -334,7 +335,7 @@ public class InternalTrans extends javax.swing.JInternalFrame {
         //Verificador de conta
         if(ChaveInputSelf.equals(ChaveSelf)){
             Self = true;
-        }else if (!chavePix.getText().toUpperCase().equals(userDTO.getCpf_login())){
+        }else if (!chavePix.getText().equals(userDTO.getCpf_login())){
             Self = false;
         }
         
@@ -351,6 +352,8 @@ public class InternalTrans extends javax.swing.JInternalFrame {
         }else if (Self == true){
             JOptionPane.showMessageDialog(null, "Você não pode enviar valores a sí proprio");
             LimparCampo();
+        }else if (ChaveInputSelf.isBlank() || ChaveInputSelf.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Campo da Chave pix esta vazio.");
         }
         else{
             JOptionPane.showConfirmDialog(null, "ERROR");

@@ -84,9 +84,10 @@ public class UsuarioDAO {
     public UsuarioDTO PerfilSaldoTrnasacoes() {
         conn = new Conexao().conectaDB();
         UsuarioDTO objUsuarioDTO = new UsuarioDTO();
-        String sql = "select SALDO from grupo4 where CPF = " + objUsuarioDTO.getCpf_login();
+        String sql = "SELECT SALDO FROM grupo4 WHERE CPF = ?";
         try {
             pstm = conn.prepareStatement(sql);
+            pstm.setString(1, objUsuarioDTO.getCpf_login());
             rs = pstm.executeQuery();
             if (rs.next()) {
                 objUsuarioDTO.setId_saldo(rs.getFloat("SALDO"));
@@ -336,10 +337,9 @@ public class UsuarioDAO {
 
         try {
             pstm = conn.prepareStatement(sql);
-            pstm.setString(1, userdto.getChavePixBD().toUpperCase()); // Define o valor do parâmetro no lugar do ponto de interrogação
+            pstm.setString(1, userdto.getChavePixBD()); // Define o valor do parâmetro no lugar do ponto de interrogação
             rs = pstm.executeQuery();
 
-            System.out.println(userdto.getChavePixBD().toUpperCase());
             while (rs.next()) {
                 userdto.setId_cpfDestinatario(rs.getString("CPF"));
             }
@@ -594,7 +594,7 @@ public class UsuarioDAO {
             pstmArmazenaDados.setFloat(2, objUsuarioDTO.getId_investimento());
             pstmArmazenaDados.setString(3, objUsuarioDTO.getDataDto());
             pstmArmazenaDados.setString(4, objUsuarioDTO.getTipo_CDB());
-            pstmArmazenaDados.setString(5, "RESGATE");
+            pstmArmazenaDados.setString(5, "INVESTIMENTO");
             pstmArmazenaDados.execute();
             pstmArmazenaDados.close();
             
@@ -1309,7 +1309,6 @@ public class UsuarioDAO {
             pstm.setString(1, userdto.getCpf_login()); 
             rs = pstm.executeQuery();
 
-            System.out.println(userdto.getChavePixBD().toUpperCase());
             while (rs.next()) {
                 userdto.setPixSelf(rs.getString("CHAVE_PIX"));
             }

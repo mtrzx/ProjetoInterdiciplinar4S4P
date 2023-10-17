@@ -56,7 +56,7 @@ public class InternalHistorico extends javax.swing.JInternalFrame {
         jPanel1.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.setPreferredSize(new java.awt.Dimension(633, 500));
 
-        jPanel2.setBackground(new java.awt.Color(20, 26, 38));
+        jPanel2.setBackground(new java.awt.Color(31, 41, 60));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 255, 255)));
         jPanel2.setForeground(new java.awt.Color(84, 124, 140));
 
@@ -65,10 +65,13 @@ public class InternalHistorico extends javax.swing.JInternalFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Historico Pix");
 
+        jScrollPane1.setBackground(new java.awt.Color(204, 204, 204));
         jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jScrollPane1.setForeground(new java.awt.Color(51, 51, 51));
 
         jTable1.setAutoCreateRowSorter(true);
         jTable1.setBackground(new java.awt.Color(255, 255, 255));
+        jTable1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jTable1.setForeground(new java.awt.Color(0, 0, 0));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -79,7 +82,7 @@ public class InternalHistorico extends javax.swing.JInternalFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -87,7 +90,8 @@ public class InternalHistorico extends javax.swing.JInternalFrame {
             }
         });
         jTable1.setGridColor(new java.awt.Color(0, 0, 0));
-        jTable1.setSelectionForeground(new java.awt.Color(229, 255, 255));
+        jTable1.setSelectionBackground(new java.awt.Color(0, 153, 204));
+        jTable1.setSelectionForeground(new java.awt.Color(51, 51, 51));
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -119,11 +123,14 @@ public class InternalHistorico extends javax.swing.JInternalFrame {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Histórico TED/DOC");
 
+        jScrollPane6.setBackground(new java.awt.Color(204, 204, 204));
         jScrollPane6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jScrollPane6.setForeground(new java.awt.Color(232, 246, 248));
+        jScrollPane6.setForeground(new java.awt.Color(51, 51, 51));
 
         tabelaTED.setAutoCreateRowSorter(true);
         tabelaTED.setBackground(new java.awt.Color(255, 255, 255));
+        tabelaTED.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        tabelaTED.setForeground(new java.awt.Color(0, 0, 0));
         tabelaTED.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -141,7 +148,9 @@ public class InternalHistorico extends javax.swing.JInternalFrame {
             }
         });
         tabelaTED.setGridColor(new java.awt.Color(0, 0, 0));
-        tabelaTED.setSelectionForeground(new java.awt.Color(229, 255, 255));
+        tabelaTED.setSelectionBackground(new java.awt.Color(0, 153, 204));
+        tabelaTED.setSelectionForeground(new java.awt.Color(51, 51, 51));
+        tabelaTED.setShowGrid(false);
         jScrollPane6.setViewportView(tabelaTED);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -229,14 +238,14 @@ public class InternalHistorico extends javax.swing.JInternalFrame {
                 UsuarioDAO objUsuarioDAO = new UsuarioDAO();
 
                 DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-
+                
                 ArrayList<UsuarioDTO> lista = objUsuarioDAO.HistoricoPIX(cpf);
 
                 for (int i = 0; i < lista.size(); i++) {
                     model.addRow(new Object[]{
                         lista.get(i).getCpf_login(),
                         "R$ " + lista.get(i).getId_valorTransPix(),
-                        lista.get(i).getTableid_chavePixDestinatario(),
+                        lista.get(i).getTableid_chavePixDestinatario().toLowerCase(),
                         lista.get(i).getTableid_cpfDestinatario(),
                         lista.get(i).getTableid_dataPix()
                     });

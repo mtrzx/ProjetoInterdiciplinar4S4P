@@ -81,6 +81,7 @@ public class InternalInvest extends javax.swing.JInternalFrame {
         popUpHist.setPreferredSize(new java.awt.Dimension(980, 730));
 
         tabelaInvest.setAutoCreateRowSorter(true);
+        tabelaInvest.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         tabelaInvest.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -99,6 +100,7 @@ public class InternalInvest extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tabelaInvest);
 
+        tabelaResgate.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         tabelaResgate.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
