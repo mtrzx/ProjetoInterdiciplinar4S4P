@@ -295,7 +295,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="CPF"/>
+                <Property name="text" type="java.lang.String" value="CPF*"/>
                 <Property name="verticalAlignment" type="int" value="3"/>
               </Properties>
             </Component>
@@ -308,7 +308,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Nome completo"/>
+                <Property name="text" type="java.lang.String" value="Nome completo*"/>
                 <Property name="verticalAlignment" type="int" value="3"/>
               </Properties>
             </Component>
@@ -321,7 +321,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Email"/>
+                <Property name="text" type="java.lang.String" value="Email*"/>
                 <Property name="verticalAlignment" type="int" value="3"/>
               </Properties>
             </Component>
@@ -334,7 +334,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Data de nascimento"/>
+                <Property name="text" type="java.lang.String" value="Data de nascimento*"/>
                 <Property name="verticalAlignment" type="int" value="3"/>
               </Properties>
             </Component>
@@ -347,7 +347,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Senha"/>
+                <Property name="text" type="java.lang.String" value="Senha*"/>
                 <Property name="verticalAlignment" type="int" value="3"/>
               </Properties>
             </Component>
@@ -379,7 +379,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Endere&#xe7;o"/>
+                <Property name="text" type="java.lang.String" value="Endere&#xe7;o*"/>
                 <Property name="verticalAlignment" type="int" value="3"/>
               </Properties>
             </Component>
@@ -430,7 +430,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="CEP"/>
+                <Property name="text" type="java.lang.String" value="CEP*"/>
                 <Property name="verticalAlignment" type="int" value="3"/>
               </Properties>
             </Component>
@@ -443,7 +443,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="N&#xfa;mero"/>
+                <Property name="text" type="java.lang.String" value="N&#xfa;mero*"/>
                 <Property name="verticalAlignment" type="int" value="3"/>
               </Properties>
             </Component>
@@ -475,7 +475,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Estado"/>
+                <Property name="text" type="java.lang.String" value="Estado*"/>
                 <Property name="verticalAlignment" type="int" value="3"/>
               </Properties>
             </Component>

@@ -74,6 +74,10 @@ public class UsuarioDTO {
     
     /////////////////////////////////
 
+    public static String cpf_Remetente;
+    public static String data_Remetente;
+    public static float valor_Remetente;
+    
     public String getCpf_login() {
         return cpf_login;
     }
@@ -801,6 +805,48 @@ public class UsuarioDTO {
      */
     public static void setPixSelf(String aPixSelf) {
         pixSelf = aPixSelf;
+    }
+
+    /**
+     * @return the cpf_Remetente
+     */
+    public String getCpf_Remetente() {
+        return cpf_Remetente;
+    }
+
+    /**
+     * @param cpf_Remetente the cpf_Remetente to set
+     */
+    public void setCpf_Remetente(String cpf_Remetente) {
+        this.cpf_Remetente = cpf_Remetente;
+    }
+
+    /**
+     * @return the data_Remetente
+     */
+    public String getData_Remetente() {
+        return data_Remetente;
+    }
+
+    /**
+     * @param data_Remetente the data_Remetente to set
+     */
+    public void setData_Remetente(String data_Remetente) {
+        this.data_Remetente = data_Remetente;
+    }
+
+    /**
+     * @return the valor_Remetente
+     */
+    public float getValor_Remetente() {
+        return valor_Remetente;
+    }
+
+    /**
+     * @param valor_Remetente the valor_Remetente to set
+     */
+    public void setValor_Remetente(float valor_Remetente) {
+        this.valor_Remetente = valor_Remetente;
     }
 
 }

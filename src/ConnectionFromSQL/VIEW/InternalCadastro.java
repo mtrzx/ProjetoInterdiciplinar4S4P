@@ -142,31 +142,31 @@ public class InternalCadastro extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("CPF");
+        jLabel1.setText("CPF*");
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Nome completo");
+        jLabel2.setText("Nome completo*");
         jLabel2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Email");
+        jLabel3.setText("Email*");
         jLabel3.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Data de nascimento");
+        jLabel4.setText("Data de nascimento*");
         jLabel4.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Senha");
+        jLabel5.setText("Senha*");
         jLabel5.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         nascimentoInput.setBackground(new java.awt.Color(255, 255, 255));
@@ -178,7 +178,7 @@ public class InternalCadastro extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("Endereço");
+        jLabel9.setText("Endereço*");
         jLabel9.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         txtRua.setBackground(new java.awt.Color(232, 246, 248));
@@ -196,13 +196,13 @@ public class InternalCadastro extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setText("CEP");
+        jLabel10.setText("CEP*");
         jLabel10.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("Número");
+        jLabel11.setText("Número*");
         jLabel11.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         txtNum.setBackground(new java.awt.Color(232, 246, 248));
@@ -214,7 +214,7 @@ public class InternalCadastro extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("Estado");
+        jLabel12.setText("Estado*");
         jLabel12.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         txtEstado.setBackground(new java.awt.Color(232, 246, 248));

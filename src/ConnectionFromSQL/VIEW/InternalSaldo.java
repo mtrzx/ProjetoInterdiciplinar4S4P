@@ -27,6 +27,7 @@ public class InternalSaldo extends javax.swing.JInternalFrame {
     public InternalSaldo() {
         initComponents();
         
+        
     }
 
     /**
@@ -38,6 +39,9 @@ public class InternalSaldo extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        historicoPupUP = new javax.swing.JDialog();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableHist = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         campoNome = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -45,7 +49,51 @@ public class InternalSaldo extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         toggleSaldo = new javax.swing.JToggleButton();
         campoSaldo1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+
+        historicoPupUP.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        historicoPupUP.setMaximumSize(new java.awt.Dimension(700, 500));
+        historicoPupUP.setMinimumSize(new java.awt.Dimension(700, 500));
+
+        jScrollPane1.setMaximumSize(new java.awt.Dimension(700, 500));
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(700, 500));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(700, 500));
+
+        tableHist.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Remetente", "Valor da transferência", "Data da transferência"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tableHist);
+
+        javax.swing.GroupLayout historicoPupUPLayout = new javax.swing.GroupLayout(historicoPupUP.getContentPane());
+        historicoPupUP.getContentPane().setLayout(historicoPupUPLayout);
+        historicoPupUPLayout.setHorizontalGroup(
+            historicoPupUPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(historicoPupUPLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        historicoPupUPLayout.setVerticalGroup(
+            historicoPupUPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(historicoPupUPLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setMaximumSize(new java.awt.Dimension(990, 766));
@@ -101,6 +149,16 @@ public class InternalSaldo extends javax.swing.JInternalFrame {
         campoSaldo1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jPanel1.add(campoSaldo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 260, -1, 40));
 
+        jButton1.setBackground(new java.awt.Color(102, 102, 255));
+        jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jButton1.setText("Historico de recebimento");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 680, -1, -1));
+
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/projeto/imagens/rubik_bg.png"))); // NOI18N
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 990, 730));
@@ -138,6 +196,11 @@ public class InternalSaldo extends javax.swing.JInternalFrame {
             toggleSaldo.setForeground(Color.white);
         }
     }//GEN-LAST:event_toggleSaldoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        AtualizaTabela();
+        historicoPupUP.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
     public void listarSaldo(){        
         /*Método responsavel por imprimir na interface grafica as informações
         recebidas pelo retorno do UsuarioDAO
@@ -159,21 +222,43 @@ public class InternalSaldo extends javax.swing.JInternalFrame {
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "Listar erro" 
             + erro);
-        }
+        }  
+    }
+    
+    public void AtualizaTabela() {
+        try {
+            UsuarioDAO objUsuarioDAO = new UsuarioDAO();
+            UsuarioDTO userDTO = new UsuarioDTO();
+            objUsuarioDAO.HistoricoRecebimento();
+            DefaultTableModel model = (DefaultTableModel) tableHist.getModel();
+
+            ArrayList<UsuarioDTO> lista = objUsuarioDAO.HistoricoRecebimento();
+
+            for (int i = 0; i < lista.size(); i++) {
+                model.addRow(new Object[]{
+                    lista.get(i).getCpf_Remetente(),
+                    "R$ " + lista.get(i).getValor_Remetente(),
+                    lista.get(i).getData_Remetente()
+                });
+            }
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Erro no listavaloresTED" + erro);
+        }      
         
-         
-           
-              
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField campoNome;
     private javax.swing.JLabel campoSaldo;
     private javax.swing.JLabel campoSaldo1;
+    private javax.swing.JDialog historicoPupUP;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tableHist;
     private javax.swing.JToggleButton toggleSaldo;
     // End of variables declaration//GEN-END:variables
 

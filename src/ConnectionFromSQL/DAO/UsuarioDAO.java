@@ -285,10 +285,10 @@ public class UsuarioDAO {
     
         
     public void ImprimeBDTD(UsuarioDTO objUsuarioDTO){        
-        String sqlArmazenaTD = "INSERT INTO `grupo4historico` (`CPF_REMET`,`VALOR`, `CONTA_REMET`, `CONTA_DEST`, `AGENCIA_REMET`, `AGENCIA_DEST`, `TIPO_TRANS` , DATA_REG) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sqlArmazenaTD = "INSERT INTO `grupo4historico` (`CPF_REMET`,`VALOR`, `CONTA_REMET`, `CONTA_DEST`, `AGENCIA_REMET`, `AGENCIA_DEST`, `TIPO_TRANS` , DATA_REG, CPF_DEST) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         conn = new Conexao().conectaDB();
         RegistraData();
-        
+        atualizaDados();
         try{
             PreparedStatement pstmArmazenaDados = conn.prepareStatement(sqlArmazenaTD);
             pstmArmazenaDados.setString(1, objUsuarioDTO.getCpf_login());
@@ -299,6 +299,8 @@ public class UsuarioDAO {
             pstmArmazenaDados.setInt(6, objUsuarioDTO.getId_agenciaDestinatario());
             pstmArmazenaDados.setString(7, objUsuarioDTO.getId_TipoTD());
             pstmArmazenaDados.setString(8, objUsuarioDTO.getDataDtoTransf());
+            pstmArmazenaDados.setString(9, objUsuarioDTO.getId_cpfDestinatario());
+            
 
             pstmArmazenaDados.execute();
             pstmArmazenaDados.close();
@@ -338,6 +340,26 @@ public class UsuarioDAO {
         try {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, userdto.getChavePixBD()); // Define o valor do parâmetro no lugar do ponto de interrogação
+            rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                userdto.setId_cpfDestinatario(rs.getString("CPF"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+    
+    public void atualizaDados(){
+        UsuarioDTO userdto = new UsuarioDTO();
+        conn = new Conexao().conectaDB();
+        String sql = "SELECT CPF FROM grupo4 WHERE CONTA = ? AND AGENCIA = ?";
+
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, userdto.getId_contaDestinatario());
+            pstm.setInt(2, userdto.getId_agenciaDestinatario());// Define o valor do parâmetro no lugar do ponto de interrogação
             rs = pstm.executeQuery();
 
             while (rs.next()) {
@@ -1317,4 +1339,31 @@ public class UsuarioDAO {
             e.printStackTrace();
         }
     }
+    
+   public ArrayList<UsuarioDTO> HistoricoRecebimento() {
+    ArrayList<UsuarioDTO> lista = new ArrayList<>();
+    UsuarioDTO userDTO = new UsuarioDTO();
+    conn = new Conexao().conectaDB();
+    
+    String sql = "SELECT * FROM grupo4historico WHERE CPF_DEST = ?";
+    
+    try {
+        pstm = conn.prepareStatement(sql);
+        pstm.setString(1, userDTO.getCpf_login());
+        rs = pstm.executeQuery();
+        
+        while (rs.next()) {
+            UsuarioDTO objUsuarioDTO = new UsuarioDTO();
+            objUsuarioDTO.setCpf_Remetente(rs.getString("CPF_REMET"));
+            objUsuarioDTO.setValor_Remetente(rs.getFloat("VALOR"));
+            objUsuarioDTO.setData_Remetente(rs.getString("DATA_REG"));
+            lista.add(objUsuarioDTO);
+            System.out.println(objUsuarioDTO.getCpf_Remetente() + " / " + objUsuarioDTO.getValor_Remetente() + " / " + objUsuarioDTO.getData_Remetente());
+        }
+    } catch (SQLException erro) {
+        JOptionPane.showMessageDialog(null, "Erro pesquisar Historico" + erro);
+    }
+    return lista;
+}
+
 }
