@@ -374,7 +374,7 @@ public class InternalTrans extends javax.swing.JInternalFrame {
             campoSaldo1.setVisible(false);
             campoSaldo.setForeground(Color.white);
             toggleSaldo.setText("Ocultar");
-            toggleSaldo.setForeground(Color.white);
+            toggleSaldo.setForeground(Color.black);
         }
     }//GEN-LAST:event_toggleSaldoActionPerformed
                                         

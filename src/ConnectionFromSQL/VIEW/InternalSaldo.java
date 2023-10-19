@@ -53,7 +53,6 @@ public class InternalSaldo extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
 
         historicoPupUP.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        historicoPupUP.setMaximumSize(new java.awt.Dimension(700, 500));
         historicoPupUP.setMinimumSize(new java.awt.Dimension(700, 500));
 
         jScrollPane1.setMaximumSize(new java.awt.Dimension(700, 500));
@@ -130,7 +129,7 @@ public class InternalSaldo extends javax.swing.JInternalFrame {
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 978, -1));
 
         toggleSaldo.setBackground(new java.awt.Color(20, 26, 38));
-        toggleSaldo.setForeground(new java.awt.Color(255, 255, 255));
+        toggleSaldo.setForeground(new java.awt.Color(0, 0, 0));
         toggleSaldo.setSelected(true);
         toggleSaldo.setText("Revelar");
         toggleSaldo.setToolTipText("");

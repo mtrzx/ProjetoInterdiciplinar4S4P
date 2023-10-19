@@ -74,9 +74,9 @@ public class UsuarioDTO {
     
     /////////////////////////////////
 
-    public static String cpf_Remetente;
-    public static String data_Remetente;
-    public static float valor_Remetente;
+    public String cpf_Remetente;
+    public String data_Remetente;
+    public float valor_Remetente;
     
     public String getCpf_login() {
         return cpf_login;

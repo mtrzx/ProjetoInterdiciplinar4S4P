@@ -76,6 +76,7 @@ public class TelaLogin extends javax.swing.JFrame {
         txtCpf.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtCpf.setForeground(new java.awt.Color(0, 0, 0));
         txtCpf.setToolTipText("");
+        txtCpf.setBorder(null);
         txtCpf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCpfActionPerformed(evt);
