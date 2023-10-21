@@ -219,12 +219,12 @@ public class InternalHistorico extends javax.swing.JInternalFrame {
 
                 for (int i = 0; i < lista.size(); i++) {
                     model.addRow(new Object[]{
-                        lista.get(i).getId_conta(),
-                        lista.get(i).getId_agencia(),
+                        " " + lista.get(i).getId_conta(),
+                        " " + lista.get(i).getId_agencia(),
                         "R$ " + lista.get(i).getId_valorTransTED(),
-                        lista.get(i).getTableid_contaDestinatario(),
-                        lista.get(i).getTableid_agenciaDestinatario(),
-                        lista.get(i).getTableid_dataTD()
+                        " " + lista.get(i).getTableid_contaDestinatario(),
+                        " " + lista.get(i).getTableid_agenciaDestinatario(),
+                        " " + lista.get(i).getTableid_dataTD()
                     });
                 }
 
@@ -243,11 +243,11 @@ public class InternalHistorico extends javax.swing.JInternalFrame {
 
                 for (int i = 0; i < lista.size(); i++) {
                     model.addRow(new Object[]{
-                        lista.get(i).getCpf_login(),
-                        "R$ " + lista.get(i).getId_valorTransPix(),
-                        lista.get(i).getTableid_chavePixDestinatario().toLowerCase(),
-                        lista.get(i).getTableid_cpfDestinatario(),
-                        lista.get(i).getTableid_dataPix()
+                        " CPF: " + lista.get(i).getCpf_login(),
+                        " R$ " + lista.get(i).getId_valorTransPix(),
+                        " " + lista.get(i).getTableid_chavePixDestinatario().toLowerCase(),
+                        " CPF: " + lista.get(i).getTableid_cpfDestinatario(),
+                        " " + lista.get(i).getTableid_dataPix()
                     });
                     
                 }

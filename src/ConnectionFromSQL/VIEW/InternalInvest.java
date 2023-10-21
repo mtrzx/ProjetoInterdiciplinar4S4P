@@ -497,9 +497,9 @@ public class InternalInvest extends javax.swing.JInternalFrame {
 
             for (int i = 0; i < lista.size(); i++) {
                 model.addRow(new Object[]{
-                    lista.get(i).getTipoDeInvestimento(),
-                    "R$ " + lista.get(i).getValorInvestido(),
-                    lista.get(i).getDataInvestimento()                        
+                    " " + lista.get(i).getTipoDeInvestimento(),
+                    " R$ " + lista.get(i).getValorInvestido(),
+                    " " + lista.get(i).getDataInvestimento()                        
                 });
 
                 // Imprimir os valores no console
@@ -523,9 +523,9 @@ public class InternalInvest extends javax.swing.JInternalFrame {
 
             for (int i = 0; i < lista.size(); i++) {
                 model.addRow(new Object[]{
-                    lista.get(i).getTipoDeResgate(),
+                    " " + lista.get(i).getTipoDeResgate(),
                     "R$ " + lista.get(i).getValorResgatado(),
-                    lista.get(i).getDataResgate()
+                    " " + lista.get(i).getDataResgate()
                 });                
             }
             

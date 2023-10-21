@@ -235,8 +235,8 @@ public class InternalSaldo extends javax.swing.JInternalFrame {
 
             for (int i = 0; i < lista.size(); i++) {
                 model.addRow(new Object[]{
-                    lista.get(i).getCpf_Remetente(),
-                    "R$ " + lista.get(i).getValor_Remetente(),
+                    " CPF: " +lista.get(i).getCpf_Remetente(),
+                    " R$ " + lista.get(i).getValor_Remetente(),
                     lista.get(i).getData_Remetente(),
                     lista.get(i).getTipoTransf_Remetente()
                 });
