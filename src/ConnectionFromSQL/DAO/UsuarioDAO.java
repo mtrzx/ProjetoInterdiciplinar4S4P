@@ -1357,6 +1357,7 @@ public class UsuarioDAO {
             objUsuarioDTO.setCpf_Remetente(rs.getString("CPF_REMET"));
             objUsuarioDTO.setValor_Remetente(rs.getFloat("VALOR"));
             objUsuarioDTO.setData_Remetente(rs.getString("DATA_REG"));
+            objUsuarioDTO.setTipoTransf_Remetente(rs.getString("TIPO_TRANS"));
             lista.add(objUsuarioDTO);
             System.out.println(objUsuarioDTO.getCpf_Remetente() + " / " + objUsuarioDTO.getValor_Remetente() + " / " + objUsuarioDTO.getData_Remetente());
         }

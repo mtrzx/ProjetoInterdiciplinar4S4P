@@ -77,6 +77,7 @@ public class UsuarioDTO {
     public String cpf_Remetente;
     public String data_Remetente;
     public float valor_Remetente;
+    public String tipoTransf_Remetente;
     
     public String getCpf_login() {
         return cpf_login;
@@ -847,6 +848,20 @@ public class UsuarioDTO {
      */
     public void setValor_Remetente(float valor_Remetente) {
         this.valor_Remetente = valor_Remetente;
+    }
+
+    /**
+     * @return the tipoTransf_Remetente
+     */
+    public String getTipoTransf_Remetente() {
+        return tipoTransf_Remetente;
+    }
+
+    /**
+     * @param tipoTransf_Remetente the tipoTransf_Remetente to set
+     */
+    public void setTipoTransf_Remetente(String tipoTransf_Remetente) {
+        this.tipoTransf_Remetente = tipoTransf_Remetente;
     }
 
 }

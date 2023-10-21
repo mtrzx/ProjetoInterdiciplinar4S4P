@@ -64,11 +64,11 @@ public class InternalSaldo extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Remetente", "Valor da transferência", "Data da transferência"
+                "Remetente", "Valor da transferência", "Data da transferência", "Tipo de transferência"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -237,7 +237,8 @@ public class InternalSaldo extends javax.swing.JInternalFrame {
                 model.addRow(new Object[]{
                     lista.get(i).getCpf_Remetente(),
                     "R$ " + lista.get(i).getValor_Remetente(),
-                    lista.get(i).getData_Remetente()
+                    lista.get(i).getData_Remetente(),
+                    lista.get(i).getTipoTransf_Remetente()
                 });
             }
         } catch (Exception erro) {
