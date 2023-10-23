@@ -53,7 +53,8 @@ public class InternalSaldo extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
 
         historicoPupUP.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        historicoPupUP.setMinimumSize(new java.awt.Dimension(700, 500));
+        historicoPupUP.setMaximumSize(new java.awt.Dimension(775, 540));
+        historicoPupUP.setMinimumSize(new java.awt.Dimension(775, 540));
 
         jScrollPane1.setMaximumSize(new java.awt.Dimension(700, 500));
         jScrollPane1.setMinimumSize(new java.awt.Dimension(700, 500));
@@ -83,15 +84,15 @@ public class InternalSaldo extends javax.swing.JInternalFrame {
             historicoPupUPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(historicoPupUPLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 763, Short.MAX_VALUE)
                 .addContainerGap())
         );
         historicoPupUPLayout.setVerticalGroup(
             historicoPupUPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(historicoPupUPLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
+                .addGap(14, 14, 14))
         );
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
