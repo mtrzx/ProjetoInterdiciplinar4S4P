@@ -75,10 +75,8 @@ public class InternalInvest extends javax.swing.JInternalFrame {
 
         popUpHist.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         popUpHist.setTitle("Histórico de investimentos");
-        popUpHist.setMaximumSize(new java.awt.Dimension(980, 730));
         popUpHist.setMinimumSize(new java.awt.Dimension(980, 730));
         popUpHist.setName("Historico"); // NOI18N
-        popUpHist.setPreferredSize(new java.awt.Dimension(980, 730));
 
         tabelaInvest.setAutoCreateRowSorter(true);
         tabelaInvest.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -169,6 +167,11 @@ public class InternalInvest extends javax.swing.JInternalFrame {
                 investInputActionPerformed(evt);
             }
         });
+        investInput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                investInputKeyTyped(evt);
+            }
+        });
 
         btnInvestir.setBackground(new java.awt.Color(16, 148, 164));
         btnInvestir.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
@@ -212,6 +215,11 @@ public class InternalInvest extends javax.swing.JInternalFrame {
         inputResgate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputResgateActionPerformed(evt);
+            }
+        });
+        inputResgate.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                inputResgateKeyTyped(evt);
             }
         });
 
@@ -727,6 +735,24 @@ public class InternalInvest extends javax.swing.JInternalFrame {
         AtualizaTabelaResgate();
         popUpHist.setVisible(true);
     }//GEN-LAST:event_historicoBtnActionPerformed
+
+    private void investInputKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_investInputKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        
+        if(!Character.isDigit(c)){
+            evt.consume();
+        }
+    }//GEN-LAST:event_investInputKeyTyped
+
+    private void inputResgateKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputResgateKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        
+        if(!Character.isDigit(c)){
+            evt.consume();
+        }
+    }//GEN-LAST:event_inputResgateKeyTyped
     
     //////////////////// Registra ////////////////
 //<editor-fold defaultstate="collapsed" desc="Registradore-de-Investimento">

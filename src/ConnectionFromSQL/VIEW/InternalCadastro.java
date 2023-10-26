@@ -7,6 +7,7 @@ package ConnectionFromSQL.VIEW;
 import ConnectionFromSQL.DAO.UsuarioDAO;
 import ConnectionFromSQL.DTO.UsuarioDTO;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.text.BreakIterator;
 import java.text.ParseException;
@@ -18,6 +19,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -32,6 +34,12 @@ public class InternalCadastro extends javax.swing.JFrame {
     public InternalCadastro() {
         initComponents();
         setIconImage();
+        btnVoltar.requestFocus();
+        addPlaceholderStyle(txtCpf);
+        addPlaceholderStyle(nascimentoInput);
+        txtCpf.setText("CPF sem formatação");
+        nascimentoInput.setText("Dia/Mês/Ano");
+        
     }
 
     /**
@@ -89,11 +97,25 @@ public class InternalCadastro extends javax.swing.JFrame {
         txtCpf.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtCpf.setForeground(new java.awt.Color(0, 0, 0));
         txtCpf.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtCpf.setToolTipText("");
+        txtCpf.setToolTipText("CPF sem formatação");
         txtCpf.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtCpf.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtCpf.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtCpfFocusGained(evt);
+            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtCpfFocusLost(evt);
+            }
+        });
+        txtCpf.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtCpfMouseClicked(evt);
+            }
+        });
+        txtCpf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCpfActionPerformed(evt);
             }
         });
         txtCpf.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -169,11 +191,19 @@ public class InternalCadastro extends javax.swing.JFrame {
         jLabel5.setText("Senha*");
         jLabel5.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
-        nascimentoInput.setBackground(new java.awt.Color(255, 255, 255));
+        nascimentoInput.setBackground(new java.awt.Color(232, 246, 248));
         nascimentoInput.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         nascimentoInput.setForeground(new java.awt.Color(0, 0, 0));
         nascimentoInput.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
         nascimentoInput.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        nascimentoInput.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                nascimentoInputFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                nascimentoInputFocusLost(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -192,6 +222,11 @@ public class InternalCadastro extends javax.swing.JFrame {
         txtCEP.setForeground(new java.awt.Color(0, 0, 0));
         txtCEP.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtCEP.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtCEP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCEPKeyTyped(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
@@ -210,6 +245,11 @@ public class InternalCadastro extends javax.swing.JFrame {
         txtNum.setForeground(new java.awt.Color(0, 0, 0));
         txtNum.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtNum.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtNum.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNumKeyTyped(evt);
+            }
+        });
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
@@ -415,6 +455,20 @@ public class InternalCadastro extends javax.swing.JFrame {
         verificaEmpty();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
+    public void addPlaceholderStyle(JTextField textField) {
+        Font font = txtCpf.getFont();
+        font = font.deriveFont(Font.ITALIC);
+        textField.setFont(font);
+        textField.setForeground(Color.gray); //font color    
+    }
+
+    public void removePlaceholderStyle(JTextField textField) {
+        Font font = txtCpf.getFont();
+        font = font.deriveFont(Font.PLAIN);
+        textField.setFont(font);
+        textField.setForeground(Color.black); //font color
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="Hovers">
     private void btnCadastrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCadastrarMouseExited
         Color hover = new Color(232, 246,248);
@@ -438,13 +492,78 @@ public class InternalCadastro extends javax.swing.JFrame {
 
     private void txtCpfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCpfKeyTyped
         // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        
+        if(!Character.isDigit(c)){
+            evt.consume();
+        }
         
     }//GEN-LAST:event_txtCpfKeyTyped
 
     private void txtCpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCpfFocusLost
         // TODO add your handling code here:
         VerificaCPF();
+        if (txtCpf.getText().length() == 0 ) {
+            addPlaceholderStyle(txtCpf);
+            txtCpf.setText("CPF sem formatação");
+        }
     }//GEN-LAST:event_txtCpfFocusLost
+
+    private void txtCpfFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCpfFocusGained
+        // TODO add your handling code here:
+        if(txtCpf.getText().equals("CPF sem formatação")){
+            txtCpf.setText(null);
+            txtCpf.requestFocus();
+            removePlaceholderStyle(txtCpf);
+        }
+    }//GEN-LAST:event_txtCpfFocusGained
+
+    private void txtCpfMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCpfMouseClicked
+        
+    }//GEN-LAST:event_txtCpfMouseClicked
+
+    private void txtCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCpfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCpfActionPerformed
+
+    private void nascimentoInputFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nascimentoInputFocusGained
+        // TODO add your handling code here:
+        
+        if(nascimentoInput.getText().equals("Dia/Mês/Ano") || nascimentoInput.getText().equals("30/12/9999")){
+            nascimentoInput.setText(null);
+            nascimentoInput.requestFocus();
+            removePlaceholderStyle(nascimentoInput);
+            System.out.println(nascimentoInput.getText().length());
+        }
+    }//GEN-LAST:event_nascimentoInputFocusGained
+
+    private void nascimentoInputFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nascimentoInputFocusLost
+        // TODO add your handling code here:
+        if (nascimentoInput.getText().length() == 0 ) {
+            nascimentoInput.setText("30/12/9999");
+            addPlaceholderStyle(nascimentoInput);
+            System.out.println(nascimentoInput.getText().length() + " na perda de foco");
+        }
+    }//GEN-LAST:event_nascimentoInputFocusLost
+
+    private void txtCEPKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCEPKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        
+        if(!Character.isDigit(c)){
+            evt.consume();
+        }
+        
+    }//GEN-LAST:event_txtCEPKeyTyped
+
+    private void txtNumKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        
+        if(!Character.isDigit(c)){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNumKeyTyped
     
     // </editor-fold>
     

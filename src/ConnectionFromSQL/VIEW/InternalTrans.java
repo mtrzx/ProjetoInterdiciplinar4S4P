@@ -119,6 +119,11 @@ public class InternalTrans extends javax.swing.JInternalFrame {
         chavePix.setBackground(new java.awt.Color(255, 255, 255));
         chavePix.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         chavePix.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        chavePix.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                chavePixKeyTyped(evt);
+            }
+        });
         PainelPix.add(chavePix, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 133, 436, 35));
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -174,11 +179,21 @@ public class InternalTrans extends javax.swing.JInternalFrame {
         contaTrans.setBackground(new java.awt.Color(255, 255, 255));
         contaTrans.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         contaTrans.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        contaTrans.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                contaTransKeyTyped(evt);
+            }
+        });
         PainelTEDDOC.add(contaTrans, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 134, 436, 35));
 
         agenciaTrans.setBackground(new java.awt.Color(255, 255, 255));
         agenciaTrans.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         agenciaTrans.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        agenciaTrans.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                agenciaTransKeyTyped(evt);
+            }
+        });
         PainelTEDDOC.add(agenciaTrans, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 227, 436, 35));
 
         valorTD.setBackground(new java.awt.Color(255, 255, 255));
@@ -377,6 +392,29 @@ public class InternalTrans extends javax.swing.JInternalFrame {
             toggleSaldo.setForeground(Color.black);
         }
     }//GEN-LAST:event_toggleSaldoActionPerformed
+
+    private void chavePixKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_chavePixKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chavePixKeyTyped
+
+    private void contaTransKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_contaTransKeyTyped
+        // TODO add your handling code here:
+        
+        char c = evt.getKeyChar();
+        
+        if(!Character.isDigit(c)){
+            evt.consume();
+        }
+    }//GEN-LAST:event_contaTransKeyTyped
+
+    private void agenciaTransKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_agenciaTransKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        
+        if(!Character.isDigit(c)){
+            evt.consume();
+        }
+    }//GEN-LAST:event_agenciaTransKeyTyped
                                         
     public void listarSaldo(){        
         /*Método responsavel por imprimir na interface grafica as informações

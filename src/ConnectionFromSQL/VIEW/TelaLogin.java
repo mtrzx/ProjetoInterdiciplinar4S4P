@@ -82,6 +82,11 @@ public class TelaLogin extends javax.swing.JFrame {
                 txtCpfActionPerformed(evt);
             }
         });
+        txtCpf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCpfKeyTyped(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -313,6 +318,15 @@ public class TelaLogin extends javax.swing.JFrame {
         Color hover = new Color(232, 246,248);
         sairBtn.setBackground(hover);
     }//GEN-LAST:event_sairBtnMouseExited
+
+    private void txtCpfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCpfKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        
+        if(!Character.isDigit(c)){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCpfKeyTyped
     // </editor-fold>
     /**
      * @param args the command line arguments

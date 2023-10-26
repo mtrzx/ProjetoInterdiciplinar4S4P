@@ -267,6 +267,7 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="investInputActionPerformed"/>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="investInputKeyTyped"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnInvestir">
@@ -356,6 +357,7 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inputResgateActionPerformed"/>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="inputResgateKeyTyped"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnResgate">
