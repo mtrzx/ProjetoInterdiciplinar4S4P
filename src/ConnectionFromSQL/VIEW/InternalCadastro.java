@@ -28,6 +28,8 @@ import javax.swing.JTextField;
 public class InternalCadastro extends javax.swing.JFrame {
     
     boolean maioridade;
+    boolean senhaLength = false;
+    boolean senhaConfirmada = false;
     /**
      * Creates new form InternalCadastro
      */
@@ -37,8 +39,11 @@ public class InternalCadastro extends javax.swing.JFrame {
         btnVoltar.requestFocus();
         addPlaceholderStyle(txtCpf);
         addPlaceholderStyle(nascimentoInput);
+        addPlaceholderStyle(txtTelefone);
         txtCpf.setText("CPF sem formatação");
         nascimentoInput.setText("Dia/Mês/Ano");
+        txtTelefone.setText("11 99999 9999 (sem espaços)");
+        
         
     }
 
@@ -72,6 +77,8 @@ public class InternalCadastro extends javax.swing.JFrame {
         txtNum = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         txtEstado = new javax.swing.JComboBox<>();
+        jLabel13 = new javax.swing.JLabel();
+        txtTelefone = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         btnVoltar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
@@ -83,7 +90,7 @@ public class InternalCadastro extends javax.swing.JFrame {
         setResizable(false);
         setSize(new java.awt.Dimension(1270, 650));
 
-        jPanel1.setBackground(new java.awt.Color(84, 124, 140));
+        jPanel1.setBackground(new java.awt.Color(82, 117, 131));
         jPanel1.setMaximumSize(new java.awt.Dimension(1000, 600));
         jPanel1.setMinimumSize(new java.awt.Dimension(1000, 600));
         jPanel1.setPreferredSize(new java.awt.Dimension(1000, 600));
@@ -141,6 +148,11 @@ public class InternalCadastro extends javax.swing.JFrame {
         txtSenha.setForeground(new java.awt.Color(0, 0, 0));
         txtSenha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtSenha.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtSenha.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtSenhaFocusLost(evt);
+            }
+        });
 
         btnCadastrar.setBackground(new java.awt.Color(232, 246, 248));
         btnCadastrar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -216,6 +228,11 @@ public class InternalCadastro extends javax.swing.JFrame {
         txtRua.setForeground(new java.awt.Color(0, 0, 0));
         txtRua.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtRua.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtRua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtRuaActionPerformed(evt);
+            }
+        });
 
         txtCEP.setBackground(new java.awt.Color(232, 246, 248));
         txtCEP.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -261,6 +278,31 @@ public class InternalCadastro extends javax.swing.JFrame {
         txtEstado.setForeground(new java.awt.Color(0, 0, 0));
         txtEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
 
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setText("Telefone*");
+        jLabel13.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+
+        txtTelefone.setBackground(new java.awt.Color(232, 246, 248));
+        txtTelefone.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtTelefone.setForeground(new java.awt.Color(0, 0, 0));
+        txtTelefone.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtTelefone.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtTelefone.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtTelefoneFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtTelefoneFocusLost(evt);
+            }
+        });
+        txtTelefone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefoneKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -268,37 +310,41 @@ public class InternalCadastro extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(148, 148, 148))
+                .addGap(146, 146, 146))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtSenha, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtNome, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtCpf, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtEmail)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(nascimentoInput, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtRua)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
+                        .addGap(64, 64, 64)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtCEP)
                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(32, 32, 32)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtNum)
                             .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNome, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtCpf, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtEmail)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(nascimentoInput, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtTelefone)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtSenha, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtRua))
+                        .addContainerGap())))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -320,33 +366,38 @@ public class InternalCadastro extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(jLabel10)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(jLabel11)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtNum, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
+                        .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNum, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
-                            .addComponent(txtEstado))))
-                .addGap(18, 18, 18)
+                        .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23))
+                .addGap(13, 13, 13))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, 407, 500));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, 407, 560));
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/projeto/imagens/rubiklog0login.png"))); // NOI18N
@@ -370,11 +421,11 @@ public class InternalCadastro extends javax.swing.JFrame {
                 btnVoltarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 610, 60, 30));
+        jPanel1.add(btnVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 670, 60, 30));
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/projeto/imagens/degradeTransf.png"))); // NOI18N
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 650));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 710));
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/projeto/imagens/rubikCadastro.png"))); // NOI18N
@@ -388,7 +439,7 @@ public class InternalCadastro extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 705, Short.MAX_VALUE)
         );
 
         pack();
@@ -413,7 +464,7 @@ public class InternalCadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
     
     private void Cadastra() {
-        String cpf, nome, senha, email, endereco, data;
+        String cpf, nome, senha, email, endereco, data, telefone;
         int conta, agencia;
         try {
             DataRegistra();
@@ -428,6 +479,7 @@ public class InternalCadastro extends javax.swing.JFrame {
             email = txtEmail.getText().toUpperCase();
             senha = txtSenha.getText();
             endereco = txtRua.getText().toUpperCase() + ", " + txtNum.getText().toUpperCase() + " - " + itemSelecionado + ", " + txtCEP.getText().toUpperCase();
+            telefone = txtTelefone.getText();
             
             
             UsuarioDTO objUsuarioDTO = new UsuarioDTO();
@@ -436,6 +488,7 @@ public class InternalCadastro extends javax.swing.JFrame {
             objUsuarioDTO.setId_CadastEmail(email);
             objUsuarioDTO.setId_CadastSenha(senha);
             objUsuarioDTO.setId_CadastEndereco(endereco);
+            objUsuarioDTO.setId_Telefone(telefone);
 
             UsuarioDAO objUsuarioDAO = new UsuarioDAO();
             objUsuarioDAO.CadastrarUsuario(objUsuarioDTO);
@@ -538,12 +591,7 @@ public class InternalCadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_nascimentoInputFocusGained
 
     private void nascimentoInputFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nascimentoInputFocusLost
-        // TODO add your handling code here:
-        if (nascimentoInput.getText().length() == 0 ) {
-            nascimentoInput.setText("30/12/9999");
-            addPlaceholderStyle(nascimentoInput);
-            System.out.println(nascimentoInput.getText().length() + " na perda de foco");
-        }
+   
     }//GEN-LAST:event_nascimentoInputFocusLost
 
     private void txtCEPKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCEPKeyTyped
@@ -564,6 +612,67 @@ public class InternalCadastro extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txtNumKeyTyped
+
+    private void txtSenhaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSenhaFocusLost
+        // TODO add your handling code here:
+        verificaSenha();
+        
+        if(senhaLength == true){
+            verificaSenhaCerta();
+            return;
+        }else{
+            return;
+        }
+        
+    }//GEN-LAST:event_txtSenhaFocusLost
+
+    private void txtRuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRuaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtRuaActionPerformed
+
+    private void txtTelefoneKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefoneKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        
+        if(!Character.isDigit(c)){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtTelefoneKeyTyped
+
+    private void txtTelefoneFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTelefoneFocusGained
+        // TODO add your handling code here:
+        if(txtTelefone.getText().equals("11 99999 9999 (sem espaços)")){
+            txtTelefone.setText(null);
+            txtTelefone.requestFocus();
+            removePlaceholderStyle(txtTelefone);
+        }
+    }//GEN-LAST:event_txtTelefoneFocusGained
+
+    private void txtTelefoneFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTelefoneFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTelefoneFocusLost
+    
+    private void verificaSenhaCerta() {
+        String senhaRegistrada = txtSenha.getText();
+        String senhaConfirmada = JOptionPane.showInputDialog(null, "Confirme sua senha");
+
+        if (senhaConfirmada == null) { // O usuário cancelou o JOptionPane
+            txtSenha.setText(null); // Define o texto como null
+            return;
+        }
+
+        if (senhaConfirmada.equals(senhaRegistrada)) {
+            JOptionPane.showMessageDialog(null, "Senha confirmada");
+        } else if(btnCadastrar.isSelected()){
+            JOptionPane.showMessageDialog(null, "Ainda há informações a  serem preenchidas");
+            return;
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Senha divergente, insira a senha novamente");
+            txtSenha.setText(null);
+        }
+}
+
     
     // </editor-fold>
     
@@ -618,11 +727,24 @@ public class InternalCadastro extends javax.swing.JFrame {
         Period diferenca = Period.between(dataFormatada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), dataAtual);
 
         if (diferenca.getYears() >= 18) {
-            maioridade = true;
+            maioridade = true; 
+            System.out.println(diferenca.getYears());
         } else {
             maioridade = false;
         }
-
+           
+    }
+    
+    private void verificaSenha (){
+        if (txtSenha.getText().length() <6) {
+            JOptionPane.showMessageDialog(null, "Senha muito curta, sua senha deve conter ao menos 6 digitos");
+        }else if(txtSenha.getText().length()>15){
+            JOptionPane.showMessageDialog(null, "Senha muito longa, sua senha deve conter até 15 digitos");
+        }else {
+            senhaLength = true;
+        }
+        
+        
     }
     
     public static void main(String args[]) {
@@ -664,6 +786,7 @@ public class InternalCadastro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -683,6 +806,7 @@ public class InternalCadastro extends javax.swing.JFrame {
     private javax.swing.JTextField txtNum;
     private javax.swing.JTextField txtRua;
     private javax.swing.JTextField txtSenha;
+    private javax.swing.JTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
 
     private void setIconImage() {

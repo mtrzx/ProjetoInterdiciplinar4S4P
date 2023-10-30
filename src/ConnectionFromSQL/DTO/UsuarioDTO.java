@@ -7,6 +7,7 @@ public class UsuarioDTO {
     private String id_CPF;
     private String id_nome;
     private String id_email;
+    public String id_telefoneP;
     private static float id_saldo;
     private static float id_investimento;
     private float id_InvestTotal;
@@ -30,7 +31,8 @@ public class UsuarioDTO {
     public static String id_CadastDate;
     private int id_CadastAgencia;
     private int id_CadastConta;
-    private String id_CadastEmail;    
+    private String id_CadastEmail;
+    public String id_Telefone;
     //Variaveis para o cadastro
     
     private int idade;
@@ -863,6 +865,36 @@ public class UsuarioDTO {
     public void setTipoTransf_Remetente(String tipoTransf_Remetente) {
         this.tipoTransf_Remetente = tipoTransf_Remetente;
     }
+
+    /**
+     * @return the id_Telefone
+     */
+    public String getId_Telefone() {
+        return id_Telefone;
+    }
+
+    /**
+     * @param id_Telefone the id_Telefone to set
+     */
+    public void setId_Telefone(String id_Telefone) {
+        this.id_Telefone = id_Telefone;
+    }
+
+    /**
+     * @return the id_telefoneP
+     */
+    public String getId_telefoneP() {
+        return id_telefoneP;
+    }
+
+    /**
+     * @param id_telefoneP the id_telefoneP to set
+     */
+    public void setId_telefoneP(String id_telefoneP) {
+        this.id_telefoneP = id_telefoneP;
+    }
+
+    
 
 }
 

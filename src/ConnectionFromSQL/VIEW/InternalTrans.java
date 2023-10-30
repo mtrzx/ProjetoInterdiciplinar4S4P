@@ -295,6 +295,7 @@ public class InternalTrans extends javax.swing.JInternalFrame {
         String agenciaString = agenciaTrans.getText();
         int contaInt = Integer.parseInt(contaString);
         int agenciaInt = Integer.parseInt(agenciaString);
+        float registroValorTransf = Float.parseFloat(valorTD.getText());
         //conversões
         userDTO.setId_contaDestinatario(contaInt);
         userDTO.setId_agenciaDestinatario(agenciaInt);
@@ -304,7 +305,7 @@ public class InternalTrans extends javax.swing.JInternalFrame {
         
         boolean TDDest = userDTO.isDestinatarioEncontradoTD();
         boolean Self = true;        
-        String senha = JOptionPane.showInputDialog("Digite sua senha");
+        String senha = JOptionPane.showInputDialog("Digite sua senha para confirmar a transação de R$ " + registroValorTransf);
         String senhaDTO = userDTO.getSenhaBancoDeDados();
         
         System.out.println(userDTO.getContaSelf() + " " + userDTO.getAgenciaSelf());
@@ -344,7 +345,10 @@ public class InternalTrans extends javax.swing.JInternalFrame {
         String ChaveSelf = userDTO.getPixSelf();        
         String ChaveInputSelf = chavePix.getText().toUpperCase();
         
-        String senha = JOptionPane.showInputDialog("Digite sua senha");
+        
+        float registroValorTransf = Float.parseFloat(valorPix.getText());
+        
+        String senha = JOptionPane.showInputDialog("Digite sua senha para confirmar a transação de R$ " + registroValorTransf );
         String senhaDTO = userDTO.getSenhaBancoDeDados();
         System.out.println(userDTO.getPixSelf());
         //Verificador de conta

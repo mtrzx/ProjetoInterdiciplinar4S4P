@@ -580,10 +580,6 @@ public class InternalInvest extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnInvestirActionPerformed
     
     
-    private void investInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_investInputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_investInputActionPerformed
-
     private void AtualizaCDI(){
         UsuarioDTO userDto = new UsuarioDTO();
         UsuarioDAO userDao = new UsuarioDAO();
@@ -672,10 +668,6 @@ public class InternalInvest extends javax.swing.JInternalFrame {
         AtualizaRendaFixa();
     }//GEN-LAST:event_rendaFixaBtnActionPerformed
 
-    private void inputResgateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputResgateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputResgateActionPerformed
-
     private void btnResgateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResgateActionPerformed
         UsuarioDAO userDAO = new UsuarioDAO();
         if (inputResgate.getText().toString().isEmpty()) {
@@ -736,23 +728,31 @@ public class InternalInvest extends javax.swing.JInternalFrame {
         popUpHist.setVisible(true);
     }//GEN-LAST:event_historicoBtnActionPerformed
 
+    private void inputResgateKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputResgateKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+
+        if(!Character.isDigit(c)){
+            evt.consume();
+        }
+    }//GEN-LAST:event_inputResgateKeyTyped
+
+    private void inputResgateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputResgateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputResgateActionPerformed
+
     private void investInputKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_investInputKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        
+
         if(!Character.isDigit(c)){
             evt.consume();
         }
     }//GEN-LAST:event_investInputKeyTyped
 
-    private void inputResgateKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputResgateKeyTyped
+    private void investInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_investInputActionPerformed
         // TODO add your handling code here:
-        char c = evt.getKeyChar();
-        
-        if(!Character.isDigit(c)){
-            evt.consume();
-        }
-    }//GEN-LAST:event_inputResgateKeyTyped
+    }//GEN-LAST:event_investInputActionPerformed
     
     //////////////////// Registra ////////////////
 //<editor-fold defaultstate="collapsed" desc="Registradore-de-Investimento">
@@ -880,7 +880,7 @@ public class InternalInvest extends javax.swing.JInternalFrame {
         
     private void LimparCampo (){
         investInput.setText("");
-        inputResgate.setText("");
+        investInput.setText("");
     }
     
     

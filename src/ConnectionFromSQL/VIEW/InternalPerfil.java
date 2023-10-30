@@ -44,6 +44,7 @@ public class InternalPerfil extends javax.swing.JInternalFrame {
 
         jPanel4 = new javax.swing.JPanel();
         nomeTxt = new javax.swing.JTextField();
+        telefoneTxt = new javax.swing.JTextField();
         cpfTxt = new javax.swing.JTextField();
         agenciaTxt = new javax.swing.JTextField();
         t4 = new javax.swing.JTextField();
@@ -51,6 +52,7 @@ public class InternalPerfil extends javax.swing.JInternalFrame {
         btnTrocar = new javax.swing.JButton();
         emailTxt = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -77,6 +79,22 @@ public class InternalPerfil extends javax.swing.JInternalFrame {
             }
         });
         jPanel4.add(nomeTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, 500, 40));
+
+        telefoneTxt.setEditable(false);
+        telefoneTxt.setBackground(new java.awt.Color(232, 246, 248));
+        telefoneTxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        telefoneTxt.setForeground(new java.awt.Color(0, 0, 0));
+        telefoneTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                telefoneTxtActionPerformed(evt);
+            }
+        });
+        telefoneTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                telefoneTxtKeyPressed(evt);
+            }
+        });
+        jPanel4.add(telefoneTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 400, 330, 40));
 
         cpfTxt.setEditable(false);
         cpfTxt.setBackground(new java.awt.Color(232, 246, 248));
@@ -114,7 +132,7 @@ public class InternalPerfil extends javax.swing.JInternalFrame {
                 chavePixKeyPressed(evt);
             }
         });
-        jPanel4.add(chavePix, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 390, 230, 40));
+        jPanel4.add(chavePix, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 460, 230, 40));
 
         btnTrocar.setBackground(new java.awt.Color(204, 255, 255));
         btnTrocar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -125,7 +143,7 @@ public class InternalPerfil extends javax.swing.JInternalFrame {
                 btnTrocarActionPerformed(evt);
             }
         });
-        jPanel4.add(btnTrocar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 390, 120, 40));
+        jPanel4.add(btnTrocar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 460, 120, 40));
 
         emailTxt.setEditable(false);
         emailTxt.setBackground(new java.awt.Color(232, 246, 248));
@@ -136,8 +154,14 @@ public class InternalPerfil extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Agência:");
-        jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 280, 150, 40));
+        jLabel6.setText("Telefone:");
+        jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 400, 150, 40));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("Agência:");
+        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 280, 150, 40));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -149,7 +173,7 @@ public class InternalPerfil extends javax.swing.JInternalFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Chave PIX:");
-        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 390, 110, 40));
+        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 460, 110, 40));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/projeto/imagens/pfp.png"))); // NOI18N
         jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, -1, -1));
@@ -197,6 +221,14 @@ public class InternalPerfil extends javax.swing.JInternalFrame {
     private void chavePixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chavePixActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_chavePixActionPerformed
+
+    private void telefoneTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefoneTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_telefoneTxtActionPerformed
+
+    private void telefoneTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_telefoneTxtKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_telefoneTxtKeyPressed
     
     public void registraChave(){
         UsuarioDAO userDAO = new UsuarioDAO();
@@ -249,6 +281,7 @@ public class InternalPerfil extends javax.swing.JInternalFrame {
             t4.setText(contaString);
             emailTxt.setText(user.getId_email().toLowerCase());
             String chavePIXDTO = user.getChavePIX();
+            telefoneTxt.setText(user.getId_telefoneP());
             
             if (chavePIXDTO == null || chavePIXDTO.equals("")){
                 chavePix.setText(user.getChavePIX());
@@ -275,8 +308,10 @@ public class InternalPerfil extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JTextField nomeTxt;
     private javax.swing.JTextField t4;
+    private javax.swing.JTextField telefoneTxt;
     // End of variables declaration//GEN-END:variables
 }

@@ -54,6 +54,7 @@ public class UsuarioDAO {
                 objUsuarioDTO.setId_agencia(rs.getInt("AGENCIA"));
                 objUsuarioDTO.setId_conta(rs.getInt("CONTA"));
                 objUsuarioDTO.setChavePIX(rs.getString("CHAVE_PIX"));
+                objUsuarioDTO.setId_telefoneP(rs.getString ("TELEFONE"));
             }
 
         } catch (SQLException erro) {
@@ -449,7 +450,7 @@ public class UsuarioDAO {
     
     public void CadastrarUsuario(UsuarioDTO objUsuarioDTO) {
         String sql = "INSERT INTO grupo4 (CPF, SENHA, NOME, AGENCIA, CONTA, EMAIL, ENDERECO, DATA_NASC, SALDO, TOTAL_INVESTIDO, LCA, RENDA_FIXA, "
-                + "CDI, CDB) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)";
+                + "CDI, CDB, TELEFONE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, ?)";
 
         GeraNum();
         
@@ -471,6 +472,7 @@ public class UsuarioDAO {
             pstm.setString(6, objUsuarioDTO.getId_CadastEmail());
             pstm.setString(7, objUsuarioDTO.getId_CadastEndereco());
             pstm.setString(8, objUsuarioDTO.getId_CadastDate());
+            pstm.setString(9, objUsuarioDTO.getId_Telefone());
 
             pstm.execute();
             pstm.close();

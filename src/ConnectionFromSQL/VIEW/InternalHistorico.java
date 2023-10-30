@@ -150,7 +150,7 @@ public class InternalHistorico extends javax.swing.JInternalFrame {
         tabelaTED.setGridColor(new java.awt.Color(0, 0, 0));
         tabelaTED.setSelectionBackground(new java.awt.Color(0, 153, 204));
         tabelaTED.setSelectionForeground(new java.awt.Color(51, 51, 51));
-        tabelaTED.setShowGrid(false);
+        tabelaTED.setShowGrid(true);
         jScrollPane6.setViewportView(tabelaTED);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
