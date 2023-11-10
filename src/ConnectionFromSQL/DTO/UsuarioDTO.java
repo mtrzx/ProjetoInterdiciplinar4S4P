@@ -27,12 +27,12 @@ public class UsuarioDTO {
     private String id_CadastCPF;
     private String id_CadastSenha;
     private String id_CadastNome;
-    public String id_CadastEndereco;
-    public static String id_CadastDate;
+    private String id_CadastEndereco;
+    private static String id_CadastDate;
     private int id_CadastAgencia;
     private int id_CadastConta;
     private String id_CadastEmail;
-    public String id_Telefone;
+    private String id_Telefone;
     //Variaveis para o cadastro
     
     private int idade;

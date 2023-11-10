@@ -209,9 +209,7 @@ public class UsuarioDAO {
         }               
     }
         
-    public void RegistrarTransfPIX(UsuarioDTO objUsuarioDTO){
-        
-//        String sql = "UPDATE grupo4 SET SALDO = CASE WHEN CPF = ? THEN SALDO - ? WHEN CPF = ? THEN SALDO + ? ELSE SALDO END WHERE CPF IN (?, ?);";
+    public void RegistrarTransfPIX(UsuarioDTO objUsuarioDTO){       
         String sql = "UPDATE grupo4 SET SALDO = SALDO - ? WHERE CPF = ?";
         String sqlTransferencia = "UPDATE grupo4 SET SALDO = SALDO + ? WHERE CHAVE_PIX = ?";
         String sqlSaldo = "SELECT SALDO FROM `grupo4` WHERE CPF = ?;";
@@ -278,7 +276,6 @@ public class UsuarioDAO {
             pstmArmazenaDados.execute();
             pstmArmazenaDados.close();
             
-            System.out.println(objUsuarioDTO.getDataDtoTransf());
         }catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "Erro ao armazenar dados: " + erro.getMessage());
         }
@@ -449,7 +446,8 @@ public class UsuarioDAO {
     }
     
     public void CadastrarUsuario(UsuarioDTO objUsuarioDTO) {
-        String sql = "INSERT INTO grupo4 (CPF, SENHA, NOME, AGENCIA, CONTA, EMAIL, ENDERECO, DATA_NASC, SALDO, TOTAL_INVESTIDO, LCA, RENDA_FIXA, "
+        String sql = "INSERT INTO grupo4 (CPF, SENHA, NOME, AGENCIA, CONTA, EMAIL,"
+                + " ENDERECO, DATA_NASC, SALDO, TOTAL_INVESTIDO, LCA, RENDA_FIXA, "
                 + "CDI, CDB, TELEFONE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, ?)";
 
         GeraNum();
@@ -491,7 +489,8 @@ public class UsuarioDAO {
          // Gera um número de 4 dígitos entre 100 e 999
         var agencia = 1000 + random.nextInt(9000);
         
-        int[] numeros = {conta, agencia}; // Armazena os números em um array e retorna
+        int[] numeros = {conta, agencia}; 
+        // Armazena os números em um array e retorna
         return numeros;
    }
         
@@ -1144,10 +1143,10 @@ public class UsuarioDAO {
             }else if (inputResgate > cdiSaldoRetorno){
                 JOptionPane.showMessageDialog(null, "Você esta tentando resgatar um valor acima do que está disponivel.");
             }else{
-                System.out.println("Error");
+                return;
             }
         } catch (Exception e) {
-            System.out.println("erro: " + e);
+            
         }
         
     }
@@ -1191,10 +1190,8 @@ public class UsuarioDAO {
             }else if (inputResgate > cdbSaldoRetorno){
                 JOptionPane.showMessageDialog(null, "Você esta tentando resgatar um valor acima do que está disponivel.");
             }else{
-                System.out.println("Error");
             }
         } catch (Exception e) {
-            System.out.println("erro: " + e);
         }       
     }
     
@@ -1361,7 +1358,6 @@ public class UsuarioDAO {
             objUsuarioDTO.setData_Remetente(rs.getString("DATA_REG"));
             objUsuarioDTO.setTipoTransf_Remetente(rs.getString("TIPO_TRANS"));
             lista.add(objUsuarioDTO);
-            System.out.println(objUsuarioDTO.getCpf_Remetente() + " / " + objUsuarioDTO.getValor_Remetente() + " / " + objUsuarioDTO.getData_Remetente());
         }
     } catch (SQLException erro) {
         JOptionPane.showMessageDialog(null, "Erro pesquisar Historico" + erro);

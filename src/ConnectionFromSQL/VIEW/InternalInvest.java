@@ -509,11 +509,6 @@ public class InternalInvest extends javax.swing.JInternalFrame {
                     " R$ " + lista.get(i).getValorInvestido(),
                     " " + lista.get(i).getDataInvestimento()                        
                 });
-
-                // Imprimir os valores no console
-                System.out.println("Tipo de Investimento: " + lista.get(i).getTipoDeInvestimento());
-                System.out.println("Valor Investido: R$ " + lista.get(i).getValorInvestido());
-                System.out.println("Data de Investimento: " + lista.get(i).getDataInvestimento());
             }
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "Erro no listavaloresTED" + erro);

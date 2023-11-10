@@ -308,7 +308,6 @@ public class InternalTrans extends javax.swing.JInternalFrame {
         String senha = JOptionPane.showInputDialog("Digite sua senha para confirmar a transação de R$ " + registroValorTransf);
         String senhaDTO = userDTO.getSenhaBancoDeDados();
         
-        System.out.println(userDTO.getContaSelf() + " " + userDTO.getAgenciaSelf());
         
         if (contaInt == userDTO.getContaSelf() && agenciaInt == userDTO.getAgenciaSelf()){
             Self = true;
@@ -350,7 +349,6 @@ public class InternalTrans extends javax.swing.JInternalFrame {
         
         String senha = JOptionPane.showInputDialog("Digite sua senha para confirmar a transação de R$ " + registroValorTransf );
         String senhaDTO = userDTO.getSenhaBancoDeDados();
-        System.out.println(userDTO.getPixSelf());
         //Verificador de conta
         if(ChaveInputSelf.equals(ChaveSelf)){
             Self = true;

@@ -63,24 +63,24 @@ public class InternalCadastro extends javax.swing.JFrame {
         txtEmail = new javax.swing.JTextField();
         txtSenha = new javax.swing.JTextField();
         btnCadastrar = new javax.swing.JButton();
+        nascimentoInput = new javax.swing.JFormattedTextField();
+        txtRua = new javax.swing.JTextField();
+        txtCEP = new javax.swing.JTextField();
+        txtNum = new javax.swing.JTextField();
+        txtTelefone = new javax.swing.JTextField();
+        txtEstado = new javax.swing.JComboBox<>();
+        btnVoltar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        nascimentoInput = new javax.swing.JFormattedTextField();
         jLabel9 = new javax.swing.JLabel();
-        txtRua = new javax.swing.JTextField();
-        txtCEP = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        txtNum = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        txtEstado = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
-        txtTelefone = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        btnVoltar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
 
@@ -173,6 +173,95 @@ public class InternalCadastro extends javax.swing.JFrame {
             }
         });
 
+        nascimentoInput.setBackground(new java.awt.Color(232, 246, 248));
+        nascimentoInput.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        nascimentoInput.setForeground(new java.awt.Color(0, 0, 0));
+        nascimentoInput.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
+        nascimentoInput.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        nascimentoInput.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                nascimentoInputFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                nascimentoInputFocusLost(evt);
+            }
+        });
+
+        txtRua.setBackground(new java.awt.Color(232, 246, 248));
+        txtRua.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtRua.setForeground(new java.awt.Color(0, 0, 0));
+        txtRua.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtRua.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtRua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtRuaActionPerformed(evt);
+            }
+        });
+
+        txtCEP.setBackground(new java.awt.Color(232, 246, 248));
+        txtCEP.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtCEP.setForeground(new java.awt.Color(0, 0, 0));
+        txtCEP.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtCEP.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtCEP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCEPKeyTyped(evt);
+            }
+        });
+
+        txtNum.setBackground(new java.awt.Color(232, 246, 248));
+        txtNum.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtNum.setForeground(new java.awt.Color(0, 0, 0));
+        txtNum.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtNum.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtNum.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNumKeyTyped(evt);
+            }
+        });
+
+        txtTelefone.setBackground(new java.awt.Color(232, 246, 248));
+        txtTelefone.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtTelefone.setForeground(new java.awt.Color(0, 0, 0));
+        txtTelefone.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtTelefone.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtTelefone.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtTelefoneFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtTelefoneFocusLost(evt);
+            }
+        });
+        txtTelefone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefoneKeyTyped(evt);
+            }
+        });
+
+        txtEstado.setBackground(new java.awt.Color(232, 246, 248));
+        txtEstado.setForeground(new java.awt.Color(0, 0, 0));
+        txtEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
+
+        btnVoltar.setBackground(new java.awt.Color(232, 246, 248));
+        btnVoltar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnVoltar.setForeground(new java.awt.Color(51, 51, 51));
+        btnVoltar.setText("Voltar");
+        btnVoltar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 255)));
+        btnVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnVoltarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnVoltarMouseExited(evt);
+            }
+        });
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -203,47 +292,11 @@ public class InternalCadastro extends javax.swing.JFrame {
         jLabel5.setText("Senha*");
         jLabel5.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
-        nascimentoInput.setBackground(new java.awt.Color(232, 246, 248));
-        nascimentoInput.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        nascimentoInput.setForeground(new java.awt.Color(0, 0, 0));
-        nascimentoInput.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
-        nascimentoInput.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        nascimentoInput.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                nascimentoInputFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                nascimentoInputFocusLost(evt);
-            }
-        });
-
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Endereço*");
         jLabel9.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-
-        txtRua.setBackground(new java.awt.Color(232, 246, 248));
-        txtRua.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        txtRua.setForeground(new java.awt.Color(0, 0, 0));
-        txtRua.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtRua.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        txtRua.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtRuaActionPerformed(evt);
-            }
-        });
-
-        txtCEP.setBackground(new java.awt.Color(232, 246, 248));
-        txtCEP.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        txtCEP.setForeground(new java.awt.Color(0, 0, 0));
-        txtCEP.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtCEP.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        txtCEP.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtCEPKeyTyped(evt);
-            }
-        });
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
@@ -257,51 +310,17 @@ public class InternalCadastro extends javax.swing.JFrame {
         jLabel11.setText("Número*");
         jLabel11.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
-        txtNum.setBackground(new java.awt.Color(232, 246, 248));
-        txtNum.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        txtNum.setForeground(new java.awt.Color(0, 0, 0));
-        txtNum.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtNum.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        txtNum.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNumKeyTyped(evt);
-            }
-        });
-
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("Estado*");
         jLabel12.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
-        txtEstado.setBackground(new java.awt.Color(232, 246, 248));
-        txtEstado.setForeground(new java.awt.Color(0, 0, 0));
-        txtEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
-
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("Telefone*");
         jLabel13.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-
-        txtTelefone.setBackground(new java.awt.Color(232, 246, 248));
-        txtTelefone.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        txtTelefone.setForeground(new java.awt.Color(0, 0, 0));
-        txtTelefone.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtTelefone.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        txtTelefone.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtTelefoneFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtTelefoneFocusLost(evt);
-            }
-        });
-        txtTelefone.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtTelefoneKeyTyped(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -345,6 +364,11 @@ public class InternalCadastro extends javax.swing.JFrame {
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtRua))
                         .addContainerGap())))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -395,6 +419,11 @@ public class InternalCadastro extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(13, 13, 13))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, 407, 560));
@@ -402,26 +431,6 @@ public class InternalCadastro extends javax.swing.JFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/projeto/imagens/rubiklog0login.png"))); // NOI18N
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(298, 0, 407, 120));
-
-        btnVoltar.setBackground(new java.awt.Color(232, 246, 248));
-        btnVoltar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        btnVoltar.setForeground(new java.awt.Color(51, 51, 51));
-        btnVoltar.setText("Voltar");
-        btnVoltar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 255)));
-        btnVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnVoltarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnVoltarMouseExited(evt);
-            }
-        });
-        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVoltarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 670, 60, 30));
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/projeto/imagens/degradeTransf.png"))); // NOI18N
@@ -469,7 +478,8 @@ public class InternalCadastro extends javax.swing.JFrame {
         try {
             DataRegistra();
         } catch (ParseException ex) {
-            Logger.getLogger(InternalCadastro.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InternalCadastro.class.getName())
+                    .log(Level.SEVERE, null, ex);
         }
 
         if (maioridade == true) {
@@ -478,7 +488,9 @@ public class InternalCadastro extends javax.swing.JFrame {
             nome = txtNome.getText().toUpperCase();
             email = txtEmail.getText().toUpperCase();
             senha = txtSenha.getText();
-            endereco = txtRua.getText().toUpperCase() + ", " + txtNum.getText().toUpperCase() + " - " + itemSelecionado + ", " + txtCEP.getText().toUpperCase();
+            endereco = txtRua.getText().toUpperCase() + ", " + 
+                    txtNum.getText().toUpperCase() + " - " + itemSelecionado +
+                    ", " + txtCEP.getText().toUpperCase();
             telefone = txtTelefone.getText();
             
             
@@ -492,13 +504,16 @@ public class InternalCadastro extends javax.swing.JFrame {
 
             UsuarioDAO objUsuarioDAO = new UsuarioDAO();
             objUsuarioDAO.CadastrarUsuario(objUsuarioDTO);
+            
+            
             // Verificar idade do cliente
             
             TelaLogin tl = new TelaLogin();
             tl.setVisible(true);
             dispose();
         } else {
-            JOptionPane.showMessageDialog(null, "Você não tem idade para criar uma conta no banco Rubik");
+            JOptionPane.showMessageDialog(null, "Você não tem idade para"
+                    + " criar uma conta no banco Rubik");
         }
         LimparCampo();
     }
@@ -586,7 +601,6 @@ public class InternalCadastro extends javax.swing.JFrame {
             nascimentoInput.setText(null);
             nascimentoInput.requestFocus();
             removePlaceholderStyle(nascimentoInput);
-            System.out.println(nascimentoInput.getText().length());
         }
     }//GEN-LAST:event_nascimentoInputFocusGained
 
@@ -705,7 +719,7 @@ public class InternalCadastro extends javax.swing.JFrame {
     public void DataRegistra() throws ParseException {
         UsuarioDTO usuarioDTO = new UsuarioDTO();
         UsuarioDAO objUsuarioDAO = new UsuarioDAO();
-        String dataEU = nascimentoInput.getText(); // Substitua com sua data europeia
+        String dataEU = nascimentoInput.getText(); 
 
         // Define o formato da data europeia
         SimpleDateFormat formatoEuropeu = new SimpleDateFormat("dd/MM/yyyy");
@@ -724,11 +738,12 @@ public class InternalCadastro extends javax.swing.JFrame {
         usuarioDTO.setId_CadastDate(dataISO);
         
         // Calcula a diferença de idade
-        Period diferenca = Period.between(dataFormatada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), dataAtual);
+        Period diferenca = Period.between(
+                dataFormatada.toInstant().atZone
+        (ZoneId.systemDefault()).toLocalDate(), dataAtual);
 
         if (diferenca.getYears() >= 18) {
             maioridade = true; 
-            System.out.println(diferenca.getYears());
         } else {
             maioridade = false;
         }
