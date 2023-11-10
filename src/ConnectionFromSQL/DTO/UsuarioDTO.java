@@ -1,155 +1,131 @@
 package ConnectionFromSQL.DTO;
 
 public class UsuarioDTO {
-    public int id_agencia;
-    public int id_conta;
-    private String id_senha;
-    private String id_CPF;
-    private String id_nome;
-    private String id_email;
-    public String id_telefoneP;
-    private static float id_saldo;
-    private static float id_investimento;
-    private float id_InvestTotal;
-    public float id_valorTransTED;
-    private float id_valorTransPix;
-    private static String id_cpfDestinatario;    
-    public static int id_contaDestinatario;
-    private static int id_agenciaDestinatario;
-    private String id_tipoPix = "PIX";
-    private String id_TipoTD = "TED/DOC";
-    public String tipo_CDI = "CDI";
-    public String tipo_CDB = "CDB";
-    public String tipo_LCA = "LCA";
-    public String tipo_RendaFixa = "RENDA FIXA";
-    
-    //Variaveis para o cadastro
-    private String id_CadastCPF;
-    private String id_CadastSenha;
-    private String id_CadastNome;
-    private String id_CadastEndereco;
-    private static String id_CadastDate;
-    private int id_CadastAgencia;
-    private int id_CadastConta;
-    private String id_CadastEmail;
-    private String id_Telefone;
-    //Variaveis para o cadastro
-    
-    private int idade;
-    private static String cpf_login;
-    public static float cdiInvest;
-    public static float cdbInvest;
-    public static float lcaInvest;
-    public static float rendaF;
-    public static float inputResgate;
-    public static String dataDto;
-    
-    ////////////////////    
-    public float valorInvestido;
-    public float valorResgatado;
-    public String tipoDeInvestimento;
-    public String tipoDeResgate;
-    public String dataInvestimento;
-    public String dataResgate;
-    ////////////////////
-    
-    public String chavePIX;
-    public static String chavePIXalt;
-    public static String chavePixBD;
-    public static boolean chaveDup;
-    
-    ////////////////////
-    public static String senhaBancoDeDados;
-    public static boolean DestinatarioEncontrado;
-    public static boolean DestinatarioEncontradoTD;
-    public static int contaSelf;
-    public static int agenciaSelf;
-    public static String dataDtoTransf;
-    public static String pixSelf;
-    
-    public String tableid_cpfDestinatario;
-    public String tableid_chavePixDestinatario;
-    public int tableid_contaDestinatario;
-    public int tableid_agenciaDestinatario;
-    public String tableid_dataPix;
-    public String tableid_dataTD;
-    
-    /////////////////////////////////
 
-    public String cpf_Remetente;
-    public String data_Remetente;
-    public float valor_Remetente;
-    public String tipoTransf_Remetente;
-    
-    public String getCpf_login() {
-        return cpf_login;
-    }
-
-    public void setCpf_login(String cpf_login) {
-        this.cpf_login = cpf_login;
-    }
-    public float getId_saldo() {
-        return id_saldo;
-    }
-
-    public void setId_saldo(float id_saldo) {
-        this.id_saldo = id_saldo;
-    }
-    
+    /**
+     * @return the id_agencia
+     */
     public int getId_agencia() {
         return id_agencia;
     }
 
+    /**
+     * @param id_agencia the id_agencia to set
+     */
     public void setId_agencia(int id_agencia) {
         this.id_agencia = id_agencia;
     }
 
+    /**
+     * @return the id_conta
+     */
     public int getId_conta() {
         return id_conta;
     }
 
+    /**
+     * @param id_conta the id_conta to set
+     */
     public void setId_conta(int id_conta) {
         this.id_conta = id_conta;
     }
-    
-    public String getId_nome() {
-        return id_nome;
-    }
 
-    public void setId_nome(String id_nome) {
-        this.id_nome = id_nome;
-    }
-
-    public String getId_email() {
-        return id_email;
-    }
-
-    public void setId_email(String id_email) {
-        this.id_email = id_email;
-    }
-
+    /**
+     * @return the id_senha
+     */
     public String getId_senha() {
         return id_senha;
     }
 
+    /**
+     * @param id_senha the id_senha to set
+     */
     public void setId_senha(String id_senha) {
         this.id_senha = id_senha;
     }
 
+    /**
+     * @return the id_CPF
+     */
     public String getId_CPF() {
-        return this.id_CPF;
+        return id_CPF;
     }
 
+    /**
+     * @param id_CPF the id_CPF to set
+     */
     public void setId_CPF(String id_CPF) {
         this.id_CPF = id_CPF;
     }
-    
-    public float getId_investimento() {
+
+    /**
+     * @return the id_nome
+     */
+    public String getId_nome() {
+        return id_nome;
+    }
+
+    /**
+     * @param id_nome the id_nome to set
+     */
+    public void setId_nome(String id_nome) {
+        this.id_nome = id_nome;
+    }
+
+    /**
+     * @return the id_email
+     */
+    public String getId_email() {
+        return id_email;
+    }
+
+    /**
+     * @param id_email the id_email to set
+     */
+    public void setId_email(String id_email) {
+        this.id_email = id_email;
+    }
+
+    /**
+     * @return the id_telefoneP
+     */
+    public String getId_telefoneP() {
+        return id_telefoneP;
+    }
+
+    /**
+     * @param id_telefoneP the id_telefoneP to set
+     */
+    public void setId_telefoneP(String id_telefoneP) {
+        this.id_telefoneP = id_telefoneP;
+    }
+
+    /**
+     * @return the id_saldo
+     */
+    public static float getId_saldo() {
+        return id_saldo;
+    }
+
+    /**
+     * @param aId_saldo the id_saldo to set
+     */
+    public static void setId_saldo(float aId_saldo) {
+        id_saldo = aId_saldo;
+    }
+
+    /**
+     * @return the id_investimento
+     */
+    public static float getId_investimento() {
         return id_investimento;
     }
 
-    public void setId_investimento(float id_investimento) {
-        this.id_investimento = id_investimento;
+    /**
+     * @param aId_investimento the id_investimento to set
+     */
+    public static void setId_investimento(float aId_investimento) {
+        id_investimento = aId_investimento;
     }
 
     /**
@@ -165,7 +141,7 @@ public class UsuarioDTO {
     public void setId_InvestTotal(float id_InvestTotal) {
         this.id_InvestTotal = id_InvestTotal;
     }
-        
+
     /**
      * @return the id_valorTransTED
      */
@@ -178,20 +154,6 @@ public class UsuarioDTO {
      */
     public void setId_valorTransTED(float id_valorTransTED) {
         this.id_valorTransTED = id_valorTransTED;
-    }
-
-    /**
-     * @return the id_cpfDestinatario
-     */
-    public String getId_cpfDestinatario() {
-        return id_cpfDestinatario;
-    }
-
-    /**
-     * @param id_cpfDestinatario the id_cpfDestinatario to set
-     */
-    public void setId_cpfDestinatario(String id_cpfDestinatario) {
-        this.id_cpfDestinatario = id_cpfDestinatario;
     }
 
     /**
@@ -209,31 +171,45 @@ public class UsuarioDTO {
     }
 
     /**
+     * @return the id_cpfDestinatario
+     */
+    public static String getId_cpfDestinatario() {
+        return id_cpfDestinatario;
+    }
+
+    /**
+     * @param aId_cpfDestinatario the id_cpfDestinatario to set
+     */
+    public static void setId_cpfDestinatario(String aId_cpfDestinatario) {
+        id_cpfDestinatario = aId_cpfDestinatario;
+    }
+
+    /**
      * @return the id_contaDestinatario
      */
-    public int getId_contaDestinatario() {
+    public static int getId_contaDestinatario() {
         return id_contaDestinatario;
     }
 
     /**
-     * @param id_contaDestinatario the id_contaDestinatario to set
+     * @param aId_contaDestinatario the id_contaDestinatario to set
      */
-    public void setId_contaDestinatario(int id_contaDestinatario) {
-        this.id_contaDestinatario = id_contaDestinatario;
+    public static void setId_contaDestinatario(int aId_contaDestinatario) {
+        id_contaDestinatario = aId_contaDestinatario;
     }
 
     /**
      * @return the id_agenciaDestinatario
      */
-    public int getId_agenciaDestinatario() {
+    public static int getId_agenciaDestinatario() {
         return id_agenciaDestinatario;
     }
 
     /**
-     * @param id_agenciaDestinatario the id_agenciaDestinatario to set
+     * @param aId_agenciaDestinatario the id_agenciaDestinatario to set
      */
-    public void setId_agenciaDestinatario(int id_agenciaDestinatario) {
-        this.id_agenciaDestinatario = id_agenciaDestinatario;
+    public static void setId_agenciaDestinatario(int aId_agenciaDestinatario) {
+        id_agenciaDestinatario = aId_agenciaDestinatario;
     }
 
     /**
@@ -244,10 +220,80 @@ public class UsuarioDTO {
     }
 
     /**
+     * @param id_tipoPix the id_tipoPix to set
+     */
+    public void setId_tipoPix(String id_tipoPix) {
+        this.id_tipoPix = id_tipoPix;
+    }
+
+    /**
      * @return the id_TipoTD
      */
     public String getId_TipoTD() {
         return id_TipoTD;
+    }
+
+    /**
+     * @param id_TipoTD the id_TipoTD to set
+     */
+    public void setId_TipoTD(String id_TipoTD) {
+        this.id_TipoTD = id_TipoTD;
+    }
+
+    /**
+     * @return the tipo_CDI
+     */
+    public String getTipo_CDI() {
+        return tipo_CDI;
+    }
+
+    /**
+     * @param tipo_CDI the tipo_CDI to set
+     */
+    public void setTipo_CDI(String tipo_CDI) {
+        this.tipo_CDI = tipo_CDI;
+    }
+
+    /**
+     * @return the tipo_CDB
+     */
+    public String getTipo_CDB() {
+        return tipo_CDB;
+    }
+
+    /**
+     * @param tipo_CDB the tipo_CDB to set
+     */
+    public void setTipo_CDB(String tipo_CDB) {
+        this.tipo_CDB = tipo_CDB;
+    }
+
+    /**
+     * @return the tipo_LCA
+     */
+    public String getTipo_LCA() {
+        return tipo_LCA;
+    }
+
+    /**
+     * @param tipo_LCA the tipo_LCA to set
+     */
+    public void setTipo_LCA(String tipo_LCA) {
+        this.tipo_LCA = tipo_LCA;
+    }
+
+    /**
+     * @return the tipo_RendaFixa
+     */
+    public String getTipo_RendaFixa() {
+        return tipo_RendaFixa;
+    }
+
+    /**
+     * @param tipo_RendaFixa the tipo_RendaFixa to set
+     */
+    public void setTipo_RendaFixa(String tipo_RendaFixa) {
+        this.tipo_RendaFixa = tipo_RendaFixa;
     }
 
     /**
@@ -293,6 +339,34 @@ public class UsuarioDTO {
     }
 
     /**
+     * @return the id_CadastEndereco
+     */
+    public String getId_CadastEndereco() {
+        return id_CadastEndereco;
+    }
+
+    /**
+     * @param id_CadastEndereco the id_CadastEndereco to set
+     */
+    public void setId_CadastEndereco(String id_CadastEndereco) {
+        this.id_CadastEndereco = id_CadastEndereco;
+    }
+
+    /**
+     * @return the id_CadastDate
+     */
+    public static String getId_CadastDate() {
+        return id_CadastDate;
+    }
+
+    /**
+     * @param aId_CadastDate the id_CadastDate to set
+     */
+    public static void setId_CadastDate(String aId_CadastDate) {
+        id_CadastDate = aId_CadastDate;
+    }
+
+    /**
      * @return the id_CadastAgencia
      */
     public int getId_CadastAgencia() {
@@ -335,33 +409,19 @@ public class UsuarioDTO {
     }
 
     /**
-     * @return the id_CadastEndereco
+     * @return the id_Telefone
      */
-    public String getId_CadastEndereco() {
-        return id_CadastEndereco;
+    public String getId_Telefone() {
+        return id_Telefone;
     }
 
     /**
-     * @param id_CadastEndereco the id_CadastEndereco to set
+     * @param id_Telefone the id_Telefone to set
      */
-    public void setId_CadastEndereco(String id_CadastEndereco) {
-        this.id_CadastEndereco = id_CadastEndereco;
+    public void setId_Telefone(String id_Telefone) {
+        this.id_Telefone = id_Telefone;
     }
 
-    /**
-     * @return the id_CadastDate
-     */
-    public String getId_CadastDate() {
-        return id_CadastDate;
-    }
-
-    /**
-     * @param id_CadastDate the id_CadastDate to set
-     */
-    public void setId_CadastDate(String id_CadastDate) {
-        this.id_CadastDate = id_CadastDate;
-    }
-    
     /**
      * @return the idade
      */
@@ -377,75 +437,89 @@ public class UsuarioDTO {
     }
 
     /**
+     * @return the cpf_login
+     */
+    public static String getCpf_login() {
+        return cpf_login;
+    }
+
+    /**
+     * @param aCpf_login the cpf_login to set
+     */
+    public static void setCpf_login(String aCpf_login) {
+        cpf_login = aCpf_login;
+    }
+
+    /**
      * @return the cdiInvest
      */
-    public float getCdiInvest() {
+    public static float getCdiInvest() {
         return cdiInvest;
     }
 
     /**
-     * @param cdiInvest the cdiInvest to set
+     * @param aCdiInvest the cdiInvest to set
      */
-    public void setCdiInvest(float cdiInvest) {
-        this.cdiInvest = cdiInvest;
+    public static void setCdiInvest(float aCdiInvest) {
+        cdiInvest = aCdiInvest;
     }
 
     /**
      * @return the cdbInvest
      */
-    public float getCdbInvest() {
+    public static float getCdbInvest() {
         return cdbInvest;
     }
 
     /**
-     * @param cdbInvest the cdbInvest to set
+     * @param aCdbInvest the cdbInvest to set
      */
-    public void setCdbInvest(float cdbInvest) {
-        this.cdbInvest = cdbInvest;
+    public static void setCdbInvest(float aCdbInvest) {
+        cdbInvest = aCdbInvest;
     }
 
     /**
      * @return the lcaInvest
      */
-    public float getLcaInvest() {
+    public static float getLcaInvest() {
         return lcaInvest;
     }
 
     /**
-     * @param lcaInvest the lcaInvest to set
+     * @param aLcaInvest the lcaInvest to set
      */
-    public void setLcaInvest(float lcaInvest) {
-        this.lcaInvest = lcaInvest;
+    public static void setLcaInvest(float aLcaInvest) {
+        lcaInvest = aLcaInvest;
     }
 
     /**
      * @return the rendaF
      */
-    public float getRendaF() {
+    public static float getRendaF() {
         return rendaF;
     }
 
     /**
-     * @param rendaF the rendaF to set
+     * @param aRendaF the rendaF to set
      */
-    public void setRendaF(float rendaF) {
-        this.rendaF = rendaF;
+    public static void setRendaF(float aRendaF) {
+        rendaF = aRendaF;
     }
 
     /**
      * @return the inputResgate
      */
-    public float getInputResgate() {
+    public static float getInputResgate() {
         return inputResgate;
     }
 
     /**
-     * @param inputResgate the inputResgate to set
+     * @param aInputResgate the inputResgate to set
      */
-    public void setInputResgate(float inputResgate) {
-        this.inputResgate = inputResgate;
+    public static void setInputResgate(float aInputResgate) {
+        inputResgate = aInputResgate;
     }
-    
+
     /**
      * @return the dataDto
      */
@@ -458,189 +532,7 @@ public class UsuarioDTO {
      */
     public static void setDataDto(String aDataDto) {
         dataDto = aDataDto;
-    }   
-
-    /**
-     * @return the tipo_CDI
-     */
-    public String getTipo_CDI() {
-        return tipo_CDI;
     }
-
-    /**
-     * @return the tipo_CDB
-     */
-    public String getTipo_CDB() {
-        return tipo_CDB;
-    }
-
-    /**
-     * @return the tipo_LCA
-     */
-    public String getTipo_LCA() {
-        return tipo_LCA;
-    }
-
-    /**
-     * @return the tipo_RendaFixa
-     */
-    public String getTipo_RendaFixa() {
-        return tipo_RendaFixa;
-    }
-    
-    /**
-     * @return the senhaBancoDeDados
-     */
-    public String getSenhaBancoDeDados() {
-        return senhaBancoDeDados;
-    }
-
-    /**
-     * @param senhaBancoDeDados the senhaBancoDeDados to set
-     */
-    public void setSenhaBancoDeDados(String senhaBancoDeDados) {
-        this.senhaBancoDeDados = senhaBancoDeDados;
-    }
-
-    /**
-     * @return the DestinatarioEncontrado
-     */
-    public boolean isDestinatarioEncontrado() {
-        return DestinatarioEncontrado;
-    }
-
-    /**
-     * @param DestinatarioEncontrado the DestinatarioEncontrado to set
-     */
-    public void setDestinatarioEncontrado(boolean DestinatarioEncontrado) {
-        this.DestinatarioEncontrado = DestinatarioEncontrado;
-    }
-
-    /**
-     * @return the DestinatarioEncontradoTD
-     */
-    public static boolean isDestinatarioEncontradoTD() {
-        return DestinatarioEncontradoTD;
-    }
-
-    /**
-     * @param aDestinatarioEncontradoTD the DestinatarioEncontradoTD to set
-     */
-    public static void setDestinatarioEncontradoTD(boolean aDestinatarioEncontradoTD) {
-        DestinatarioEncontradoTD = aDestinatarioEncontradoTD;
-    }
-
-    /**
-     * @return the contaSelf
-     */
-    public static int getContaSelf() {
-        return contaSelf;
-    }
-
-    /**
-     * @param aContaSelf the contaSelf to set
-     */
-    public static void setContaSelf(int aContaSelf) {
-        contaSelf = aContaSelf;
-    }
-
-    /**
-     * @return the agenciaSelf
-     */
-    public static int getAgenciaSelf() {
-        return agenciaSelf;
-    }
-
-    /**
-     * @param aAgenciaSelf the agenciaSelf to set
-     */
-    public static void setAgenciaSelf(int aAgenciaSelf) {
-        agenciaSelf = aAgenciaSelf;
-    }
-
-    /**
-     * @return the tableid_cpfDestinatario
-     */
-    public String getTableid_cpfDestinatario() {
-        return tableid_cpfDestinatario;
-    }
-
-    /**
-     * @param tableid_cpfDestinatario the tableid_cpfDestinatario to set
-     */
-    public void setTableid_cpfDestinatario(String tableid_cpfDestinatario) {
-        this.tableid_cpfDestinatario = tableid_cpfDestinatario;
-    }
-
-    /**
-     * @return the tableid_contaDestinatario
-     */
-    public int getTableid_contaDestinatario() {
-        return tableid_contaDestinatario;
-    }
-
-    /**
-     * @param tableid_contaDestinatario the tableid_contaDestinatario to set
-     */
-    public void setTableid_contaDestinatario(int tableid_contaDestinatario) {
-        this.tableid_contaDestinatario = tableid_contaDestinatario;
-    }
-
-    /**
-     * @return the tableid_agenciaDestinatario
-     */
-    public int getTableid_agenciaDestinatario() {
-        return tableid_agenciaDestinatario;
-    }
-
-    /**
-     * @param tableid_agenciaDestinatario the tableid_agenciaDestinatario to set
-     */
-    public void setTableid_agenciaDestinatario(int tableid_agenciaDestinatario) {
-        this.tableid_agenciaDestinatario = tableid_agenciaDestinatario;
-    }
-
-    /**
-     * @return the dataDtoTransf
-     */
-    public static String getDataDtoTransf() {
-        return dataDtoTransf;
-    }
-
-    /**
-     * @param aDataDtoTransf the dataDtoTransf to set
-     */
-    public static void setDataDtoTransf(String aDataDtoTransf) {
-        dataDtoTransf = aDataDtoTransf;
-    }
-
-    /**
-     * @return the tableid_dataPix
-     */
-    public String getTableid_dataPix() {
-        return tableid_dataPix;
-    }
-
-    /**
-     * @param tableid_dataPix the tableid_dataPix to set
-     */
-    public void setTableid_dataPix(String tableid_dataPix) {
-        this.tableid_dataPix = tableid_dataPix;
-    }
-
-    /**
-     * @return the tableid_dataTD
-     */
-    public String getTableid_dataTD() {
-        return tableid_dataTD;
-    }
-
-    /**
-     * @param tableid_dataTD the tableid_dataTD to set
-     */
-    public void setTableid_dataTD(String tableid_dataTD) {
-        this.tableid_dataTD = tableid_dataTD;
-    }    
 
     /**
      * @return the valorInvestido
@@ -743,29 +635,15 @@ public class UsuarioDTO {
     /**
      * @return the chavePIXalt
      */
-    public String getChavePIXalt() {
+    public static String getChavePIXalt() {
         return chavePIXalt;
     }
 
     /**
-     * @param chavePIXalt the chavePIXalt to set
+     * @param aChavePIXalt the chavePIXalt to set
      */
-    public void setChavePIXalt(String chavePIXalt) {
-        this.chavePIXalt = chavePIXalt;
-    }
-
-    /**
-     * @return the chaveDup
-     */
-    public boolean isChaveDup() {
-        return chaveDup;
-    }
-
-    /**
-     * @param chaveDup the chaveDup to set
-     */
-    public void setChaveDup(boolean chaveDup) {
-        this.chaveDup = chaveDup;
+    public static void setChavePIXalt(String aChavePIXalt) {
+        chavePIXalt = aChavePIXalt;
     }
 
     /**
@@ -783,17 +661,101 @@ public class UsuarioDTO {
     }
 
     /**
-     * @return the tableid_chavePixDestinatario
+     * @return the chaveDup
      */
-    public String getTableid_chavePixDestinatario() {
-        return tableid_chavePixDestinatario;
+    public static boolean isChaveDup() {
+        return chaveDup;
     }
 
     /**
-     * @param tableid_chavePixDestinatario the tableid_chavePixDestinatario to set
+     * @param aChaveDup the chaveDup to set
      */
-    public void setTableid_chavePixDestinatario(String tableid_chavePixDestinatario) {
-        this.tableid_chavePixDestinatario = tableid_chavePixDestinatario;
+    public static void setChaveDup(boolean aChaveDup) {
+        chaveDup = aChaveDup;
+    }
+
+    /**
+     * @return the senhaBancoDeDados
+     */
+    public static String getSenhaBancoDeDados() {
+        return senhaBancoDeDados;
+    }
+
+    /**
+     * @param aSenhaBancoDeDados the senhaBancoDeDados to set
+     */
+    public static void setSenhaBancoDeDados(String aSenhaBancoDeDados) {
+        senhaBancoDeDados = aSenhaBancoDeDados;
+    }
+
+    /**
+     * @return the DestinatarioEncontrado
+     */
+    public static boolean isDestinatarioEncontrado() {
+        return DestinatarioEncontrado;
+    }
+
+    /**
+     * @param aDestinatarioEncontrado the DestinatarioEncontrado to set
+     */
+    public static void setDestinatarioEncontrado(boolean aDestinatarioEncontrado) {
+        DestinatarioEncontrado = aDestinatarioEncontrado;
+    }
+
+    /**
+     * @return the DestinatarioEncontradoTD
+     */
+    public static boolean isDestinatarioEncontradoTD() {
+        return DestinatarioEncontradoTD;
+    }
+
+    /**
+     * @param aDestinatarioEncontradoTD the DestinatarioEncontradoTD to set
+     */
+    public static void setDestinatarioEncontradoTD(boolean aDestinatarioEncontradoTD) {
+        DestinatarioEncontradoTD = aDestinatarioEncontradoTD;
+    }
+
+    /**
+     * @return the contaSelf
+     */
+    public static int getContaSelf() {
+        return contaSelf;
+    }
+
+    /**
+     * @param aContaSelf the contaSelf to set
+     */
+    public static void setContaSelf(int aContaSelf) {
+        contaSelf = aContaSelf;
+    }
+
+    /**
+     * @return the agenciaSelf
+     */
+    public static int getAgenciaSelf() {
+        return agenciaSelf;
+    }
+
+    /**
+     * @param aAgenciaSelf the agenciaSelf to set
+     */
+    public static void setAgenciaSelf(int aAgenciaSelf) {
+        agenciaSelf = aAgenciaSelf;
+    }
+
+    /**
+     * @return the dataDtoTransf
+     */
+    public static String getDataDtoTransf() {
+        return dataDtoTransf;
+    }
+
+    /**
+     * @param aDataDtoTransf the dataDtoTransf to set
+     */
+    public static void setDataDtoTransf(String aDataDtoTransf) {
+        dataDtoTransf = aDataDtoTransf;
     }
 
     /**
@@ -808,6 +770,90 @@ public class UsuarioDTO {
      */
     public static void setPixSelf(String aPixSelf) {
         pixSelf = aPixSelf;
+    }
+
+    /**
+     * @return the tableid_cpfDestinatario
+     */
+    public String getTableid_cpfDestinatario() {
+        return tableid_cpfDestinatario;
+    }
+
+    /**
+     * @param tableid_cpfDestinatario the tableid_cpfDestinatario to set
+     */
+    public void setTableid_cpfDestinatario(String tableid_cpfDestinatario) {
+        this.tableid_cpfDestinatario = tableid_cpfDestinatario;
+    }
+
+    /**
+     * @return the tableid_chavePixDestinatario
+     */
+    public String getTableid_chavePixDestinatario() {
+        return tableid_chavePixDestinatario;
+    }
+
+    /**
+     * @param tableid_chavePixDestinatario the tableid_chavePixDestinatario to set
+     */
+    public void setTableid_chavePixDestinatario(String tableid_chavePixDestinatario) {
+        this.tableid_chavePixDestinatario = tableid_chavePixDestinatario;
+    }
+
+    /**
+     * @return the tableid_contaDestinatario
+     */
+    public int getTableid_contaDestinatario() {
+        return tableid_contaDestinatario;
+    }
+
+    /**
+     * @param tableid_contaDestinatario the tableid_contaDestinatario to set
+     */
+    public void setTableid_contaDestinatario(int tableid_contaDestinatario) {
+        this.tableid_contaDestinatario = tableid_contaDestinatario;
+    }
+
+    /**
+     * @return the tableid_agenciaDestinatario
+     */
+    public int getTableid_agenciaDestinatario() {
+        return tableid_agenciaDestinatario;
+    }
+
+    /**
+     * @param tableid_agenciaDestinatario the tableid_agenciaDestinatario to set
+     */
+    public void setTableid_agenciaDestinatario(int tableid_agenciaDestinatario) {
+        this.tableid_agenciaDestinatario = tableid_agenciaDestinatario;
+    }
+
+    /**
+     * @return the tableid_dataPix
+     */
+    public String getTableid_dataPix() {
+        return tableid_dataPix;
+    }
+
+    /**
+     * @param tableid_dataPix the tableid_dataPix to set
+     */
+    public void setTableid_dataPix(String tableid_dataPix) {
+        this.tableid_dataPix = tableid_dataPix;
+    }
+
+    /**
+     * @return the tableid_dataTD
+     */
+    public String getTableid_dataTD() {
+        return tableid_dataTD;
+    }
+
+    /**
+     * @param tableid_dataTD the tableid_dataTD to set
+     */
+    public void setTableid_dataTD(String tableid_dataTD) {
+        this.tableid_dataTD = tableid_dataTD;
     }
 
     /**
@@ -865,36 +911,85 @@ public class UsuarioDTO {
     public void setTipoTransf_Remetente(String tipoTransf_Remetente) {
         this.tipoTransf_Remetente = tipoTransf_Remetente;
     }
-
-    /**
-     * @return the id_Telefone
-     */
-    public String getId_Telefone() {
-        return id_Telefone;
-    }
-
-    /**
-     * @param id_Telefone the id_Telefone to set
-     */
-    public void setId_Telefone(String id_Telefone) {
-        this.id_Telefone = id_Telefone;
-    }
-
-    /**
-     * @return the id_telefoneP
-     */
-    public String getId_telefoneP() {
-        return id_telefoneP;
-    }
-
-    /**
-     * @param id_telefoneP the id_telefoneP to set
-     */
-    public void setId_telefoneP(String id_telefoneP) {
-        this.id_telefoneP = id_telefoneP;
-    }
-
+   
+    public int id_agencia;
+    public int id_conta;
+    public String id_senha;
+    public String id_CPF;
+    public String id_nome;
+    public String id_email;
+    public String id_telefoneP;
+    public static float id_saldo;
+    public static float id_investimento;
+    public float id_InvestTotal;
+    public float id_valorTransTED;
+    public float id_valorTransPix;
+    public static String id_cpfDestinatario;    
+    public static int id_contaDestinatario;
+    public static int id_agenciaDestinatario;
+    public String id_tipoPix = "PIX";
+    public String id_TipoTD = "TED/DOC";
+    public String tipo_CDI = "CDI";
+    public String tipo_CDB = "CDB";
+    public String tipo_LCA = "LCA";
+    public String tipo_RendaFixa = "RENDA FIXA";
     
+    //Variaveis para o cadastro
+    public String id_CadastCPF;
+    public String id_CadastSenha;
+    public String id_CadastNome;
+    public String id_CadastEndereco;
+    public static String id_CadastDate;
+    public int id_CadastAgencia;
+    public int id_CadastConta;
+    public String id_CadastEmail;
+    public String id_Telefone;
+    //Variaveis para o cadastro
+    
+    public int idade;
+    public static String cpf_login;
+    public static float cdiInvest;
+    public static float cdbInvest;
+    public static float lcaInvest;
+    public static float rendaF;
+    public static float inputResgate;
+    public static String dataDto;
+    
+    ////////////////////    
+    public float valorInvestido;
+    public float valorResgatado;
+    public String tipoDeInvestimento;
+    public String tipoDeResgate;
+    public String dataInvestimento;
+    public String dataResgate;
+    ////////////////////
+    
+    public String chavePIX;
+    public static String chavePIXalt;
+    public static String chavePixBD;
+    public static boolean chaveDup;
+    
+    ////////////////////
+    public static String senhaBancoDeDados;
+    public static boolean DestinatarioEncontrado;
+    public static boolean DestinatarioEncontradoTD;
+    public static int contaSelf;
+    public static int agenciaSelf;
+    public static String dataDtoTransf;
+    public static String pixSelf;
+    
+    public String tableid_cpfDestinatario;
+    public String tableid_chavePixDestinatario;
+    public int tableid_contaDestinatario;
+    public int tableid_agenciaDestinatario;
+    public String tableid_dataPix;
+    public String tableid_dataTD;
+    
+    /////////////////////////////////
 
+    public String cpf_Remetente;
+    public String data_Remetente;
+    public float valor_Remetente;
+    public String tipoTransf_Remetente;
+    
 }
-
