@@ -1,5 +1,5 @@
 # ProjetoInterdiciplinar4S4P
-Projeto interdiciplinar do 3° semestre do curso de Análise e Desenvolvimento de Sistemas - 4°P
+Projeto interdiciplinar do 4° semestre do curso de Análise e Desenvolvimento de Sistemas - 4°P
 
 Colaboradores 👇 <br>
   Matheus Ribeiro dos Santos <br>
