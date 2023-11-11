@@ -8,5 +8,5 @@ Colaboradores 👇 <br>
         Vinícius Roberto Figueiredo
 
 <ul>
-  <li><a href="[[https://[youtu.be](https://www.youtube.com/watch?v=4qoiUC45ytQ&feature=youtu.be)/PdSESARkmcI](https://www.youtube.com/watch?v=4qoiUC45ytQ&feature=youtu.be)](https://www.youtube.com/watch?v=4qoiUC45ytQ&feature=youtu.be)https://www.youtube.com/watch?v=4qoiUC45ytQ&feature=youtu.be">Video Showcase</a></li>
+  <li><a href="https://www.youtube.com/watch?v=4qoiUC45ytQ&feature=youtu.be">Video Showcase</a></li>
 </ul>
